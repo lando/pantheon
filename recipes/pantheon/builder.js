@@ -25,7 +25,7 @@ const setTooling = (options, tokens) => {
   const metaToken = _.get(
     options,
     '_app.meta.token',
-    null
+    null,
   );
   const tokenEnv = metaToken !== null ?
     {LANDO_TERMINUS_TOKEN: metaToken}
