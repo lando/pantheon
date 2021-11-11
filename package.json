@@ -41,9 +41,13 @@
     "test": "yarn lint && yarn test:unit"
   },
   "dependencies": {
+    "axios": "^0.24.0",
+    "bluebird": "^3.7.2",
+    "dayjs": "^1.10.7",
     "js-yaml": "^3.4.6",
     "lodash": "^4.17.21",
-    "tar": "^6.1.11"
+    "tar": "^6.1.11",
+    "winston": "2.4.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.0",
