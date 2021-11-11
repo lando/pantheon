@@ -57,7 +57,7 @@ lando composer --version | grep Composer | grep 2.
 
 # Should be logged in
 cd drupal7
-lando terminus auth:whoami | grep landobot@devwithlando.io
+lando terminus auth:whoami | grep droid@lando.dev
 
 # Should have a binding.pem in all the right places
 cd drupal7
@@ -85,7 +85,7 @@ lando ssh -c "env" | grep php_version | grep "7.2"
 lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal7
-lando ssh -c "env" | grep TERMINUS_USER | grep landobot@devwithlando.io
+lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should not set any 8983 perms
 cd drupal7
