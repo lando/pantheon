@@ -1,7 +1,9 @@
 #!/bin/bash
-HOSTNAME="$1"
 
-for KEY in $(terminus ssh-key:list --fields=Description,ID 2>/dev/null | grep "$HOSTNAME" | sort -r | sed -e 's/ *[^ ]* *//'); do
-  echo "Trying to remove key $KEY"
-  terminus ssh-key:remove $KEY
-done
+# Get our fingerprint from this test instance.
+GET_KEY=$(ssh-keygen -E md5 -lf /lando/keys/pantheon.lando.id_rsa);
+FINGERPRINT=$(grep -oP '(?<=MD5:).*?(?=\s)' <<< "$GET_KEY")
+
+# Delete that key
+echo "Trying to remove key $FINGERPRINT"
+terminus ssh-key:remove $FINGERPRINT

@@ -144,7 +144,7 @@ Run the following commands to trash this app like nothing ever happened.
 # Should be able to remove our pantheon ssh keys
 cp -r remove-keys.sh drupal7/remove-keys.sh
 cd drupal7
-lando ssh -s appserver -c "/app/remove-keys.sh $(hostname)"
+lando ssh -s appserver -c "/app/remove-keys.sh"
 cd ..
 rm -rf drupal7/remove-keys.sh
 
