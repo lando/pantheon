@@ -1,4 +1,4 @@
-Pantheon WordPress Network DomainExample
+Pantheon WordPress Network Domain Example
 ==========================
 
 This example exists primarily to test the following documentation:
@@ -53,7 +53,7 @@ lando terminus -V
 
 # Should be logged in
 cd wordpress
-lando terminus auth:whoami | grep landobot@devwithlando.io
+lando terminus auth:whoami | grep droid@lando.dev
 
 # Should use custom php version if set in pantheon.yml
 cd wordpress
@@ -65,12 +65,12 @@ lando ssh -c "env" | grep FRAMEWORK | grep wordpress_network
 lando ssh -c "env" | grep FILEMOUNT | grep "wp-content/uploads"
 
 # Should disable edge, index or cache containers and tools when specified
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_appserver_nginx_1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_appserver_1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_database_1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_cache_1 || echo $? | grep 1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_index_1 || echo $? | grep 1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_edge_1 || echo $? | grep 1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_appserver_nginx_1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_appserver_1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_database_1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_cache_1 || echo $? | grep 1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_index_1 || echo $? | grep 1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_edge_1 || echo $? | grep 1
 
 # Should serve proxy from nginx
 cd wordpress
@@ -89,7 +89,7 @@ Run the following commands to trash this app like nothing ever happened.
 # Should be able to remove our pantheon ssh keys
 cp -r remove-keys.sh wordpress/remove-keys.sh
 cd wordpress
-lando ssh -s appserver -c "/app/remove-keys.sh $(hostname)"
+lando ssh -s appserver -c "/app/remove-keys.sh"
 rm -rf wordpress/remove-keys.sh
 
 # Should be able to destroy our wordpress site with success

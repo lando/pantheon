@@ -63,7 +63,7 @@ lando composer --version | grep Composer | grep 1.10.1
 
 # Should be logged in
 cd wordpress
-lando terminus auth:whoami | grep landobot@devwithlando.io
+lando terminus auth:whoami | grep droid@lando.dev
 
 # Should use custom php version if set in pantheon.yml
 cd wordpress
@@ -84,17 +84,13 @@ docker ps --filter label=com.docker.compose.project=landobotwordpress | grep lan
 
 # Should still be logged in even after a rebuild
 cd wordpress
-lando terminus auth:whoami | grep landobot@devwithlando.io
+lando terminus auth:whoami | grep droid@lando.dev
 lando rebuild -y
-lando terminus auth:whoami | grep landobot@devwithlando.io
+lando terminus auth:whoami | grep droid@lando.dev
 
 # Should serve proxy from nginx
 cd wordpress
 curl -LI http://landobot-wordress.lndo.site | grep Via || echo $? | grep 1
-
-# Should have phantomjs 2.1.1 installed at /srv/bin/phantomjs-2.1.1
-cd wordpress
-lando ssh -s appserver -c "/srv/bin/phantomjs-2.1.1 --version" | grep "2.1.1"
 
 # Should have phantomjs 1.7.0 installed at /srv/bin/phantomjs
 cd wordpress
@@ -130,7 +126,7 @@ Run the following commands to trash this app like nothing ever happened.
 # Should be able to remove our pantheon ssh keys
 cp -r remove-keys.sh wordpress/remove-keys.sh
 cd wordpress
-lando ssh -s appserver -c "/app/remove-keys.sh $(hostname)"
+lando ssh -s appserver -c "/app/remove-keys.sh"
 rm -rf wordpress/remove-keys.sh
 
 # Should be able to destroy our wordpress site with success

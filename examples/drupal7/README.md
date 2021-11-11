@@ -57,7 +57,7 @@ lando composer --version | grep Composer | grep 2.
 
 # Should be logged in
 cd drupal7
-lando terminus auth:whoami | grep landobot@devwithlando.io
+lando terminus auth:whoami | grep droid@lando.dev
 
 # Should have a binding.pem in all the right places
 cd drupal7
@@ -85,7 +85,7 @@ lando ssh -c "env" | grep php_version | grep "7.2"
 lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal7
-lando ssh -c "env" | grep TERMINUS_USER | grep landobot@devwithlando.io
+lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should not set any 8983 perms
 cd drupal7
@@ -113,10 +113,6 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal7 | grep lando
 # Should not have xdebug enabled by defaults
 cd drupal7
 lando php -m | grep xdebug || echo $? | grep 1
-
-# Should be serving via varnish on the proxy
-cd drupal7
-curl -LI http://landobot-drupal7.lndo.site | grep Via | grep varnish-v4
 
 # Should be running nginx 1.16
 cd drupal7
@@ -148,7 +144,7 @@ Run the following commands to trash this app like nothing ever happened.
 # Should be able to remove our pantheon ssh keys
 cp -r remove-keys.sh drupal7/remove-keys.sh
 cd drupal7
-lando ssh -s appserver -c "/app/remove-keys.sh $(hostname)"
+lando ssh -s appserver -c "/app/remove-keys.sh"
 cd ..
 rm -rf drupal7/remove-keys.sh
 

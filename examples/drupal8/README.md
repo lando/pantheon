@@ -49,7 +49,7 @@ lando terminus -V
 
 # Should be logged in
 cd drupal8
-lando terminus auth:whoami | grep landobot@devwithlando.io
+lando terminus auth:whoami | grep droid@lando.dev
 
 # Should have a binding.pem in all the right places
 cd drupal8
@@ -77,7 +77,7 @@ lando ssh -c "env" | grep php_version | grep "7.3"
 lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal8
-lando ssh -c "env" | grep TERMINUS_USER | grep landobot@devwithlando.io
+lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should use php version in pantheon.upstream.yml
 cd drupal8
@@ -114,7 +114,7 @@ Run the following commands to trash this app like nothing ever happened.
 # Should be able to remove our pantheon ssh keys
 cp -r remove-keys.sh drupal8/remove-keys.sh
 cd drupal8
-lando ssh -s appserver -c "/app/remove-keys.sh $(hostname)"
+lando ssh -s appserver -c "/app/remove-keys.sh"
 cd ..
 rm -rf drupal8/remove-keys.sh
 
