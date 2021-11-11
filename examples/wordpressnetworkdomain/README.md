@@ -1,4 +1,4 @@
-Pantheon WordPress Network DomainExample
+Pantheon WordPress Network Domain Example
 ==========================
 
 This example exists primarily to test the following documentation:
@@ -65,12 +65,12 @@ lando ssh -c "env" | grep FRAMEWORK | grep wordpress_network
 lando ssh -c "env" | grep FILEMOUNT | grep "wp-content/uploads"
 
 # Should disable edge, index or cache containers and tools when specified
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_appserver_nginx_1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_appserver_1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_database_1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_cache_1 || echo $? | grep 1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_index_1 || echo $? | grep 1
-docker ps --filter label=com.docker.compose.project=landobotwordpress | grep landobotwordpress_edge_1 || echo $? | grep 1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_appserver_nginx_1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_appserver_1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_database_1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_cache_1 || echo $? | grep 1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_index_1 || echo $? | grep 1
+docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_edge_1 || echo $? | grep 1
 
 # Should serve proxy from nginx
 cd wordpress
