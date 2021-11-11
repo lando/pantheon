@@ -1,4 +1,4 @@
-name: Drupal 7 Tests
+name: WordPress Tests
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         leia-tests:
-          - examples/drupal7
+          - examples/wordpress
         lando-versions:
           - edge
         os:
