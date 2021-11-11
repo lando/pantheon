@@ -114,10 +114,6 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal7 | grep lando
 cd drupal7
 lando php -m | grep xdebug || echo $? | grep 1
 
-# Should be serving via varnish on the proxy
-# cd drupal7
-# curl -LI http://landobot-drupal7.lndo.site | grep Via | grep varnish-v4
-
 # Should be running nginx 1.16
 cd drupal7
 lando ssh -s appserver_nginx -c "/opt/bitnami/nginx/sbin/nginx -v 2>&1 | grep 1.16"
@@ -148,7 +144,7 @@ Run the following commands to trash this app like nothing ever happened.
 # Should be able to remove our pantheon ssh keys
 cp -r remove-keys.sh drupal7/remove-keys.sh
 cd drupal7
-lando ssh -s appserver -c "/app/remove-keys.sh $(hostname)"
+lando ssh -s appserver -c "/app/remove-keys.sh lando@"
 cd ..
 rm -rf drupal7/remove-keys.sh
 
