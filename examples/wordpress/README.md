@@ -92,10 +92,6 @@ lando terminus auth:whoami | grep droid@lando.dev
 cd wordpress
 curl -LI http://landobot-wordress.lndo.site | grep Via || echo $? | grep 1
 
-# Should have phantomjs 2.1.1 installed at /srv/bin/phantomjs-2.1.1
-cd wordpress
-lando ssh -s appserver -c "/srv/bin/phantomjs-2.1.1 --version" | grep "2.1.1"
-
 # Should have phantomjs 1.7.0 installed at /srv/bin/phantomjs
 cd wordpress
 lando ssh -s appserver -c "/srv/bin/phantomjs --version" | grep "1.7.0"

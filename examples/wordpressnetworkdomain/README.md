@@ -53,7 +53,7 @@ lando terminus -V
 
 # Should be logged in
 cd wordpress
-lando terminus auth:whoami | grep landobot@devwithlando.io
+lando terminus auth:whoami | grep droid@lando.dev
 
 # Should use custom php version if set in pantheon.yml
 cd wordpress
