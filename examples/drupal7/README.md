@@ -19,6 +19,7 @@ lando poweroff
 # Should initialize the lando pantheon test drupal7 site
 rm -rf drupal7 && mkdir -p drupal7 && cd drupal7
 lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal7
+echo -e "\nplugins:\n  \"@lando/pantheon/\": ./../../" >> .lando.yml
 
 # Should start up our drupal7 site successfully
 cd drupal7
@@ -115,8 +116,8 @@ cd drupal7
 lando php -m | grep xdebug || echo $? | grep 1
 
 # Should be serving via varnish on the proxy
-cd drupal7
-curl -LI http://landobot-drupal7.lndo.site | grep Via | grep varnish-v4
+# cd drupal7
+# curl -LI http://landobot-drupal7.lndo.site | grep Via | grep varnish-v4
 
 # Should be running nginx 1.16
 cd drupal7
