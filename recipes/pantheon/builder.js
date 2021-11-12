@@ -7,6 +7,7 @@ const path = require('path');
 const pull = require('./../../lib/pull');
 const push = require('./../../lib/push');
 const change = require('./../../lib/switch');
+const mysql = require('./../../lib/mysql');
 const utils = require('./../../lib/utils');
 
 const overrideAppserver = options => {
@@ -34,6 +35,7 @@ const setTooling = (options, tokens) => {
   options.tooling.pull = pull.getPantheonPull(options, tokens);
   options.tooling.push = push.getPantheonPush(options, tokens);
   options.tooling.switch = change.getPantheonSwitch(options, tokens);
+  options.tooling.mysql = mysql.getPantheonMySql;
   // Add in the framework-correct tooling
   options.tooling = _.merge({}, options.tooling, utils.getPantheonTooling(options.framework));
   // Inject token into the environment for all relevant tooling defined by recipe.
@@ -119,7 +121,7 @@ module.exports = {
       options.via = 'nginx:1.16';
       // Pantheon has begun specifying the database version in the pantheon.yml via this key.
       const dbVersion = _.get(options, 'database.version', '10.1');
-      options.database = `mariadb:${dbVersion}`;
+      options.database = `pantheon-mariadb:${dbVersion}`;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
       options = overrideAppserver(options);
