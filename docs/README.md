@@ -34,7 +34,7 @@ docker run --rm -it -v ${HOME}/.lando/plugins:/plugins -w /tmp node:14-alpine sh
 lando --clear
 ```
 
-You should be able to verify the plugin is installed by running `lando config --path plugins` and checking for `@lando/Pantheon`. This command will also show you _where_ the plugin is being loaded from.
+You should be able to verify the plugin is installed by running `lando config --path plugins` and checking for `@lando/pantheon`. This command will also show you _where_ the plugin is being loaded from.
 
 ## Basic Usage
 
