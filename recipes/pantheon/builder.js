@@ -120,7 +120,7 @@ module.exports = {
       // Enforce certain options for pantheon parity
       options.via = 'nginx:1.16';
       // Pantheon has begun specifying the database version in the pantheon.yml via this key.
-      const dbVersion = _.get(options, 'database.version', '10.1');
+      const dbVersion = _.get(options, 'database.version', '10.3');
       options.database = `pantheon-mariadb:${dbVersion}`;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;

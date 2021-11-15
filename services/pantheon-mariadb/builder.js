@@ -9,6 +9,7 @@ module.exports = {
   config: {
     version: '10.3', // @todo: this will probably be 10.3, check D6 support.
     supported: ['10.4', '10.3', '10.1'],
+    legacy: ['10.1'],
     pinPairs: {
       '10.4': 'mariadb:10.4.21',
       '10.3': 'mariadb:10.3.31',
@@ -43,6 +44,7 @@ module.exports = {
         command: 'docker-entrypoint.sh mysqld',
         environment: {
           MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes',
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes',
           // MARIADB_EXTRA_FLAGS for things like coallation?
           MARIADB_DATABASE: options.creds.database,
           // Duplicated to help sql-export.sh know which DB to pull.
