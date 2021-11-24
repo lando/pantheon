@@ -6,7 +6,7 @@ FROM devwithlando/php:8.0-fpm-3
 ENV WKHTMLTOPDF_VERSION 0.12.6
 ENV PHANTOMJS_VERSION 2.1.1
 ENV PHANTOMJS_OLD_VERSION 1.7.0
-ENV LANDO_TERMINUS_VERSION 2.6.2
+ENV LANDO_TERMINUS_VERSION 3.0.0-beta1
 ENV TIKA_VERSION 1.18
 
 # Install the additional things that make the pantheon
@@ -20,7 +20,7 @@ RUN mkdir -p /usr/share/man/man1 \
   && mkdir -p /var/www/.drupal \
   && mkdir -p /srv/bin \
   && chown -R www-data:www-data /var/www /srv/bin \
-  && wget "https://github.com/pantheon-systems/terminus/releases/download/${LANDO_TERMINUS_VERSION}/terminus.phar" -O /usr/local/bin/terminus \
+  && wget "https://github.com/pantheon-systems/terminus/releases/download/${LANDO_TERMINUS_VERSION}/terminus" -O /usr/local/bin/terminus \
   && chmod +x /usr/local/bin/terminus \
   && uname -m \
   && cd /tmp && wget "https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-1/wkhtmltox_${WKHTMLTOPDF_VERSION}-1.buster_amd64.deb" \
