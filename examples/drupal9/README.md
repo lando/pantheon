@@ -1,9 +1,9 @@
-Pantheon Drupal 8 Example
+Pantheon Drupal 9 Example
 =========================
 
 This example exists primarily to test the following:
 
-* [Pantheon Recipe - Drupal 8](https://docs.devwithlando.io/tutorials/pantheon.html)
+* [Pantheon Recipe - Drupal 9](https://docs.devwithlando.io/tutorials/pantheon.html)
 
 **Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN` and `--pantheon-site` to values that make sense for you.**
 

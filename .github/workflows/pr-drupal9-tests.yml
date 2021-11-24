@@ -1,4 +1,4 @@
-name: Drupal 8 Tests
+name: Drupal 9 Tests
 
 on:
   pull_request:
