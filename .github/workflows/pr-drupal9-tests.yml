@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         leia-tests:
-          - examples/drupal8
+          - examples/drupal9
         lando-versions:
           - edge
         os:
