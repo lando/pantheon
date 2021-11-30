@@ -25,6 +25,7 @@ RUN mkdir -p /usr/share/man/man1 \
   && cd /var/www/.terminus && wget https://github.com/pantheon-systems/terminus/archive/refs/tags/${LANDO_TERMINUS_VERSION}.tar.gz \
   && tar xzf ${LANDO_TERMINUS_VERSION}.tar.gz \
   && mv terminus-${LANDO_TERMINUS_VERSION} terminus \
+  && cd terminus && composer install --no-interaction \
   && chown -R www-data:www-data /var/www /srv/bin \
   && chmod +x /var/www/.terminus/terminus/bin/terminus \
   && ln -s /var/www/.terminus/terminus/bin/terminus /usr/local/bin/terminus \
