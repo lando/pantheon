@@ -13,15 +13,21 @@ ENV TIKA_VERSION 1.18
 RUN mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
     openjdk-11-jdk \
+  && pecl install pcov \
+  && docker-php-ext-enable pcov \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
   && mkdir -p /var/www/.drush \
   && mkdir -p /var/www/.backdrush \
   && mkdir -p /var/www/.composer \
   && mkdir -p /var/www/.drupal \
+  && mkdir -p /var/www/.terminus \
   && mkdir -p /srv/bin \
+  && cd /var/www/.terminus && wget https://github.com/pantheon-systems/terminus/archive/refs/tags/${LANDO_TERMINUS_VERSION}.tar.gz \
+  && tar xzf ${LANDO_TERMINUS_VERSION}.tar.gz \
+  && mv terminus-${LANDO_TERMINUS_VERSION} terminus \
   && chown -R www-data:www-data /var/www /srv/bin \
-  && wget "https://github.com/pantheon-systems/terminus/releases/download/${LANDO_TERMINUS_VERSION}/terminus" -O /usr/local/bin/terminus \
-  && chmod +x /usr/local/bin/terminus \
+  && chmod +x /var/www/.terminus/terminus/bin/terminus \
+  && ln -s /var/www/.terminus/terminus/bin/terminus /usr/local/bin/terminus \
   && uname -m \
   && cd /tmp && wget "https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-1/wkhtmltox_${WKHTMLTOPDF_VERSION}-1.buster_amd64.deb" \
   && cd /tmp && wget "https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-1/wkhtmltox_${WKHTMLTOPDF_VERSION}-1.buster_arm64.deb" \
