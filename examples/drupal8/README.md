@@ -73,7 +73,7 @@ lando ssh -c "env" | grep PANTHEON_INDEX_HOST | grep index
 lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 449
 lando ssh -c "env" | grep PANTHEON_SITE | grep 0831109d-10e9-426a-845a-e8396554acfa
 lando ssh -c "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal8
-lando ssh -c "env" | grep php_version | grep "7.3"
+lando ssh -c "env" | grep php_version | grep "7.4"
 lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal8
@@ -81,7 +81,7 @@ lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should use php version in pantheon.upstream.yml
 cd drupal8
-lando php -v | grep "PHP 7.3"
+lando php -v | grep "PHP 7.4"
 
 # Should have all pantheon services running and their tooling enabled by defaults
 docker ps --filter label=com.docker.compose.project=landobotdrupal8 | grep landobotdrupal8_appserver_nginx_1
