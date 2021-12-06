@@ -12,7 +12,7 @@ ENV TIKA_VERSION 1.18
 # Install the additional things that make the pantheon
 RUN mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
-    openjdk-11-jdk \
+    openjdk-11-jdk gdebi \
   && pecl install pcov \
   && docker-php-ext-enable pcov \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
