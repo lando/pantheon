@@ -27,7 +27,7 @@ RUN mkdir -p /usr/share/man/man1 \
   && git checkout 3.x \
   && curl https://gist.githubusercontent.com/labboy0276/c1e92e049ab392c7fe1c39187dac7716/raw/80bc1aedd3c1aa0cd4f448498409803da68a0aaf/terminus3-fatal-error-fix.patch | patch -p1 \
   && rm -rf .git \
-  && mkdir ./termimus \
+  && mkdir ./terminus \
   && composer install --no-interaction --prefer-dist \
   && uname -m \
   && cd /tmp && wget "https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-1/wkhtmltox_${WKHTMLTOPDF_VERSION}-1.buster_amd64.deb" \
