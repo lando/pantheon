@@ -66,14 +66,14 @@ lando ssh -c "env" | grep DB_PORT | grep 3306
 lando ssh -c "env" | grep DB_USER | grep pantheon
 lando ssh -c "env" | grep DB_PASSWORD | grep pantheon
 lando ssh -c "env" | grep DB_NAME | grep pantheon
-lando ssh -c "env" | grep FRAMEWORK | grep drupal9
+lando ssh -c "env" | grep FRAMEWORK | grep drupal8
 lando ssh -c "env" | grep FILEMOUNT | grep "sites/default/files"
 lando ssh -c "env" | grep PANTHEON_ENVIRONMENT | grep lando
 lando ssh -c "env" | grep PANTHEON_INDEX_HOST | grep index
 lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 449
 lando ssh -c "env" | grep PANTHEON_SITE | grep 3a225571-2a52-4ae9-84e7-ef54037ac66c
 lando ssh -c "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal9
-lando ssh -c "env" | grep php_version | grep "8.0"
+lando ssh -c "env" | grep php_version | grep "8"
 lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal9
@@ -103,6 +103,9 @@ lando push --code dev --database none --files none --message "Testing commit $(g
 cd drupal9
 lando pull --code test --database none --files none
 lando pull --code live --database none --files none
+
+# Should switch to multidev environment
+lando switch -e tester
 ```
 
 Destroy tests
