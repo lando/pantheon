@@ -25,7 +25,7 @@ RUN mkdir -p /usr/share/man/man1 \
   && cd /tmp && git clone https://github.com/pantheon-systems/terminus.git \
   && cd terminus && git fetch --all \
   && git checkout 3.x \
-  && curl https://gist.githubusercontent.com/labboy0276/c1e92e049ab392c7fe1c39187dac7716/raw/80bc1aedd3c1aa0cd4f448498409803da68a0aaf/terminus3-fatal-error-fix.patch | patch -p1 \
+  && curl https://gist.githubusercontent.com/labboy0276/c1e92e049ab392c7fe1c39187dac7716/raw/f64afd49b7ce269e53bc0f8cba3f0974ad680a62/terminus3-fatal-error-fix.patch | patch -p1 \
   && rm -rf .git \
   && composer install --no-interaction --prefer-dist \
   && composer phar:update \
