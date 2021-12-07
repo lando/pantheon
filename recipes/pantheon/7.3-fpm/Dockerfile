@@ -1,6 +1,6 @@
-# docker build -t devwithlando/pantheon-appserver:7.3-3 .
+# docker build -t devwithlando/pantheon-appserver:7.3-4 .
 
-FROM devwithlando/php:7.3-fpm-3
+FROM devwithlando/php:7.3-fpm-4
 
 # Version information
 ENV WKHTMLTOPDF_VERSION 0.12.6
