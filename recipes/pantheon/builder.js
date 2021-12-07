@@ -101,8 +101,9 @@ module.exports = {
       // Get the armed status
       const isArmed = _.get(options, '_app._config.isArmed', false);
 
-      // Normalize because 7.0 right away gets handled strangely by js-yaml
+      // Normalize because 7.0/8.0 right away gets handled strangely by js-yaml
       if (options.php === '7' || options.php === 7) options.php = '7.0';
+      if (options.php === '8' || options.php === 8) options.php = '8.0';
 
       // Bump the tags if we are ARMed and on an approved version
       if (isArmed) options.solrTag = '3.6-3';
