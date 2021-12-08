@@ -103,13 +103,15 @@ lando push --code dev --database none --files none --message "Testing commit $(g
 cd drupal8
 lando pull --code test --database none --files none
 lando pull --code live --database none --files none
+
+# Should switch to multidev environment
+lando switch -e testing
 ```
 
 Destroy tests
 -------------
 
 Run the following commands to trash this app like nothing ever happened.
-
 ```bash
 # Should be able to remove our pantheon ssh keys
 cp -r remove-keys.sh drupal8/remove-keys.sh
