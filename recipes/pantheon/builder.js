@@ -86,6 +86,8 @@ module.exports = {
     tooling: {terminus: {
       service: 'appserver',
     }},
+    gen3: ['7.2', '7.1', '7.0', '5.6'],
+    gen4: ['8.1', '8.0', '7.4', '7.3'],
     unarmedVersions: ['5.3', '5.5'],
     xdebug: false,
     webroot: '.',
@@ -107,7 +109,8 @@ module.exports = {
 
       // Bump the tags if we are ARMed and on an approved version
       if (isArmed) options.solrTag = '3.6-3';
-      if (!_.includes(options.unarmedVersions, options.php)) options.tag = '3';
+      if (_.includes(options.gen3, options.php)) options.tag = '3';
+      if (_.includes(options.gen4, options.php)) options.tag = '4';
 
       // Reset the drush version if we have a composer.json entry
       const composerFile = path.join(options.root, 'composer.json');
