@@ -1,5 +1,11 @@
 ## IN DEVELOPMENT
 
+## v0.5.5 - [December 10, 2021](https://github.com/lando/pantheon/releases/tag/v0.5.5)
+
+Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
+
+* Empty release to rebuild on npm
+
 ## v0.5.4 - [December 9, 2021](https://github.com/lando/pantheon/releases/tag/v0.5.4)
 
 Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
