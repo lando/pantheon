@@ -47,6 +47,14 @@ lando ssh -s appserver -c "stat sites/default/files/field/image/Lando-Calrissian
 cd drupal7
 lando drush version
 
+# Should use MariaDB 10.3
+cd drupal7
+lando ssh -s database -c "mysql -V" | grep 10.3.
+
+# Should be able to export DB
+cd drupal7
+lando db-export | grep Success
+
 # Should have terminus
 cd drupal7
 lando terminus -V

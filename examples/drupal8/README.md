@@ -43,6 +43,14 @@ lando drush status | grep "Connected"
 cd drupal8
 lando drush version | grep 10.
 
+# Should use MariaDB 10.3
+cd drupal8
+lando ssh -s database -c "mysql -V" | grep 10.3.
+
+# Should be able to export DB
+cd drupal8
+lando db-export | grep Success
+
 # Should have terminus
 cd drupal8
 lando terminus -V

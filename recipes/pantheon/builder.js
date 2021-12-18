@@ -7,6 +7,7 @@ const path = require('path');
 const pull = require('./../../lib/pull');
 const push = require('./../../lib/push');
 const change = require('./../../lib/switch');
+const mysql = require('./../../lib/mysql');
 const utils = require('./../../lib/utils');
 
 const overrideAppserver = options => {
@@ -34,6 +35,7 @@ const setTooling = (options, tokens) => {
   options.tooling.pull = pull.getPantheonPull(options, tokens);
   options.tooling.push = push.getPantheonPush(options, tokens);
   options.tooling.switch = change.getPantheonSwitch(options, tokens);
+  options.tooling.mysql = mysql.getPantheonMySql;
   // Add in the framework-correct tooling
   options.tooling = _.merge({}, options.tooling, utils.getPantheonTooling(options.framework));
   // Inject token into the environment for all relevant tooling defined by recipe.
@@ -86,6 +88,8 @@ module.exports = {
     tooling: {terminus: {
       service: 'appserver',
     }},
+    gen3: ['7.2', '7.1', '7.0', '5.6'],
+    gen4: ['8.1', '8.0', '7.4', '7.3'],
     unarmedVersions: ['5.3', '5.5'],
     xdebug: false,
     webroot: '.',
@@ -107,7 +111,8 @@ module.exports = {
 
       // Bump the tags if we are ARMed and on an approved version
       if (isArmed) options.solrTag = '3.6-3';
-      if (!_.includes(options.unarmedVersions, options.php)) options.tag = '3';
+      if (_.includes(options.gen3, options.php)) options.tag = '3';
+      if (_.includes(options.gen4, options.php)) options.tag = '4';
 
       // Reset the drush version if we have a composer.json entry
       const composerFile = path.join(options.root, 'composer.json');
@@ -119,8 +124,9 @@ module.exports = {
       // Enforce certain options for pantheon parity
       options.via = 'nginx:1.16';
       // Pantheon has begun specifying the database version in the pantheon.yml via this key.
-      const dbVersion = _.get(options, 'database.version', '10.1');
-      options.database = `mariadb:${dbVersion}`;
+      const dbVersion = _.get(options, 'database.version', '10.3');
+      const dbService = isArmed ? 'pantheon-mariadb' : 'mariadb';
+      options.database = `${dbService}:${dbVersion}`;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
       options = overrideAppserver(options);
