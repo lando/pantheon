@@ -19,7 +19,6 @@ RUN mkdir -p /usr/share/man/man1 \
   && mkdir -p /var/www/.composer \
   && mkdir -p /var/www/.drupal \
   && mkdir -p /srv/bin \
-  && mkdir -p /var/www/.terminus/cache/tokens/session \
   && chown -R www-data:www-data /var/www /srv/bin \
   && wget "https://github.com/pantheon-systems/terminus/releases/download/${LANDO_TERMINUS_VERSION}/terminus.phar" -O /usr/local/bin/terminus \
   && chmod +x /usr/local/bin/terminus \
