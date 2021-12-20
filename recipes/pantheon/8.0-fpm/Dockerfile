@@ -12,13 +12,14 @@ ENV TIKA_VERSION 1.18
 # Install the additional things that make the pantheon
 RUN mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
-    openjdk-11-jdk gdebi \
+    openjdk-11-jdk \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
   && mkdir -p /var/www/.drush \
   && mkdir -p /var/www/.backdrush \
   && mkdir -p /var/www/.composer \
   && mkdir -p /var/www/.drupal \
   && mkdir -p /srv/bin \
+  && mkdir -p /var/www/.terminus/cache/tokens/session \
   && chown -R www-data:www-data /var/www /srv/bin \
   && wget "https://github.com/pantheon-systems/terminus/releases/download/${LANDO_TERMINUS_VERSION}/terminus.phar" -O /usr/local/bin/terminus \
   && chmod +x /usr/local/bin/terminus \
