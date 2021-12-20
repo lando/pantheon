@@ -5,7 +5,7 @@ This example exists primarily to test the following:
 
 * [Pantheon Recipe - Drupal 8](https://docs.devwithlando.io/tutorials/pantheon.html)
 
-**Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN` and `--pantheon-site` to values that make sense for you.**
+**Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN_2` and `--pantheon-site` to values that make sense for you.**
 
 Start up tests
 --------------
@@ -18,7 +18,7 @@ lando poweroff
 
 # Should initialize the lando pantheon test drupal8 site
 rm -rf drupal8 && mkdir -p drupal8 && cd drupal8
-lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal8 --option composer_version=1.10.1
+lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN_2" --pantheon-site landobot-drupal8 --option composer_version=1.10.1
 
 # Should start up our drupal8 site successfully
 cd drupal8

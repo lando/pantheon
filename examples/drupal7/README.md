@@ -5,7 +5,7 @@ This example exists primarily to test the following documentation:
 
 * [Pantheon Recipe - Drupal 7](https://docs.devwithlando.io/tutorials/pantheon.html)
 
-**Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN` and `--pantheon-site` to values that make sense for you.**
+**Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN_2` and `--pantheon-site` to values that make sense for you.**
 
 Start up tests
 --------------
@@ -18,7 +18,7 @@ lando poweroff
 
 # Should initialize the lando pantheon test drupal7 site
 rm -rf drupal7 && mkdir -p drupal7 && cd drupal7
-lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal7
+lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN_2" --pantheon-site landobot-drupal7
 
 # Should start up our drupal7 site successfully
 cd drupal7
