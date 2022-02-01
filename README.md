@@ -84,7 +84,7 @@ TBD
 
 ### Development
 
-This is going to be a lean and agile project where user feedback drives development. For example a user is going to try it out and say "cool, but what about solr", Amazee will add support for Solr to the relevant example repos, let us know, and then we will add support/tests for solr in Lando.
+This is going to be a lean and agile project where user feedback drives development. For example a user is going to try it out and say "cool, but what about solr", Pantheon will add support for Solr to the relevant example repos, let us know, and then we will add support/tests for solr in Lando.
 
 ## Testing
 
