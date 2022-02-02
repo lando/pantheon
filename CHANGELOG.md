@@ -1,5 +1,13 @@
 ## IN DEVELOPMENT
 
+## v0.5.6 - [December 10, 2021](https://github.com/lando/pantheon/releases/tag/v0.5.6)
+
+Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
+
+* Update terminus to 3.0.4 in php 8.0 image [PR #100](https://github.com/lando/pantheon/pull/100)
+* Fix typo in README [PR #99](https://github.com/lando/pantheon/pull/99)
+* Add the no-interaction flag to composer global require commands [PR #98](https://github.com/lando/pantheon/pull/98)
+
 ## v0.5.5 - [December 10, 2021](https://github.com/lando/pantheon/releases/tag/v0.5.5)
 
 Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
