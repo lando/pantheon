@@ -1,4 +1,4 @@
-name: Drupal 7 Tests
+name: Lando Init Tests
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         leia-tests:
-          - examples/drupal7
+          - examples/init
         lando-versions:
           - edge
         os:
@@ -62,6 +62,12 @@ jobs:
           sudo apt-get remove mysql-server --purge
           sudo apt-get install apparmor-profiles
           sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+      - name: Checkout Landobot 9 from GitHub
+        uses: actions/checkout@v2
+        with:
+          repository: lando/pantheon-gitpod
+          path: drupal9
+          ref: master
       - name: Run leia tests
         shell: bash
         run: yarn leia "./${{ matrix.leia-tests }}/README.md" -c 'Destroy tests' --stdin --shell bash
