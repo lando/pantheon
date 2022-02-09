@@ -135,44 +135,28 @@ module.exports = {
   build: (options, lando) => {
     const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
     const pubKey = path.join(lando.config.userConfRoot, 'keys', `${pantheonLandoKey}.pub`);
-    
-    // If we don't have the keys, then resend to be make sure they are there
-    if (!fs.existsSync(pubKey)) {
 
-    }
-
-    lando.engine.run({
-      id: 'generate-key', 
-      cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`,
-      compose: utils.generateComposeFiles(options, lando),
-      project: lando.config.landoFileConfig.project,
-      opts: {
-        mode: 'attach',
-        user: 'www-data',
-        services: ['init'],
-        autoRemove: false,
-      },
-    });
-
-    lando.engine.run({
-      id: 'post-key', 
-      func: (options, lando) => {
-        const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
-        const pubKey = path.join(lando.config.userConfRoot, 'keys', `${pantheonLandoKey}.pub`);
-        return api.auth().then(() => api.postKey(pubKey));
-      },
-      compose: utils.generateComposeFiles(options, lando),
-      project: lando.config.landoFileConfig.project,
-      opts: {
-        mode: 'attach',
-        user: 'www-data',
-        services: ['init'],
-        autoRemove: false,
-      },
-    });
-
+    return lando.Promise.try(() => {
+      // If we don't have the keys, then resend to be make sure they are there
+      if (!fs.existsSync(pubKey)) {
+        return lando.engine.run({
+          id: 'generate-key', 
+          cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`,
+          compose: utils.generateComposeFiles(options, lando),
+          project: lando.config.landoFileConfig.project,
+          opts: {
+            mode: 'attach',
+            services: ['init'],
+          },
+        });
+      }
+    })
+    .then(() => api.auth())
+    // Post our keys again.
+    .then(() => api.postKey(pubKey))
+    .then(() => api.auth())
     // Get our sites and user
-    return api.auth().then(() => Promise.all([api.getSites(), api.getUser()]))
+    .then(() => Promise.all([api.getSites(), api.getUser()]))
     // Parse the dataz and set the things
     .then(results => {
       // Get our site and email
