@@ -140,7 +140,7 @@ module.exports = {
       // If we don't have the keys, then resend to be make sure they are there
       if (!fs.existsSync(pubKey)) {
         return lando.engine.run({
-          id: 'generate-key', 
+          id: 'generate-key',
           cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`,
           compose: utils.generateComposeFiles(options, lando),
           project: lando.config.landoFileConfig.project,
