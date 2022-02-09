@@ -17,6 +17,7 @@ Run the following commands to get up and running with this example.
 lando poweroff
 
 # Should initialize the lando pantheon test drupal9 site
+rm -rf drupal9
 git clone https://github.com/lando/pantheon-gitpod.git drupal9
 cd drupal9
 lando init --source cwd --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal9
