@@ -1,6 +1,6 @@
 ## IN DEVELOPMENT
 
-## v0.5.7 - [TBA](https://github.com/lando/pantheon/releases/tag/v0.5.7)
+## v0.5.7 - [February 11, 2022](https://github.com/lando/pantheon/releases/tag/v0.5.7)
 
 Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
 
