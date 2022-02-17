@@ -1,5 +1,3 @@
-const {path} = require('@vuepress/utils');
-
 module.exports = {
   lang: 'en-US',
   title: 'Lando',
