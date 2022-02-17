@@ -34,22 +34,31 @@ module.exports = {
       '/config.md',
       '/tooling.md',
       '/sync.md',
-      '/caveats.md',
+      '/environment.md',
+      '/libraries.md',
       {
         text: 'Guides',
         collapsible: true,
         children: [
           {
-            text: 'Adding more tooling commands',
-            link: '/adding-more-tooling.md',
+            text: 'Connecting to your database',
+            link: '/connecting-database.md',
           },
           {
-            text: 'Externally accessing services',
-            link: '/external-access.md',
+            text: 'Working with Multidev',
+            link: '/working-multidev.md',
           },
           {
-            text: 'Manually importing databases',
-            link: '/manually-importing-databases.md',
+            text: 'Using Drush',
+            link: '/using-drush.md',
+          },
+          {
+            text: 'Using Terminus',
+            link: '/using-terminus.md',
+          },
+          {
+            text: 'Utilizing WordPress Site Network Support (Experimental)',
+            link: '/wordpress-site-network-support.md',
           },
         ],
       },
