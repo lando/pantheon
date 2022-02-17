@@ -42,6 +42,10 @@ module.exports = {
             text: 'Connecting to your database',
             link: '/connecting-database.md',
           },
+          {
+            text: 'Updating your Pantheon site from the latest DB backup',
+            link: '/updating-local-pantheon-environments.md',
+          },
         ],
       },
       '/support.md',
