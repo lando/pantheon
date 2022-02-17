@@ -42,22 +42,6 @@ module.exports = {
             text: 'Connecting to your database',
             link: '/connecting-database.md',
           },
-          {
-            text: 'Working with Multidev',
-            link: '/working-multidev.md',
-          },
-          {
-            text: 'Using Drush',
-            link: '/using-drush.md',
-          },
-          {
-            text: 'Using Terminus',
-            link: '/using-terminus.md',
-          },
-          {
-            text: 'Utilizing WordPress Site Network Support (Experimental)',
-            link: '/wordpress-site-network-support.md',
-          },
         ],
       },
       '/support.md',

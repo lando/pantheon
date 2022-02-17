@@ -11,11 +11,7 @@ With `lando pull` you can import data and download files from your remote Panthe
 
 Note that only database relationships are currently syncable.
 
-## Importing Your Database and Files
-
-Once you've started up your Pantheon, site you will need to pull in your database and files before you can really start to dev all the dev. There are two easy ways to do this as shown below:
-
-### 1. Using `lando pull`
+## Pulling
 
 Lando provides a command for Pantheon sites called `lando pull` to get your database and files.
 
@@ -63,7 +59,7 @@ lando pull --auth "$PANTHEON_MACHINE_TOKEN" --database=none --rsync
 
 Please consult the manual import documentation below if this command produces an error.
 
-### 2. Manually Importing Your DB and Files
+#### Manually Importing Your DB and Files
 
 You will want to the replace `MYSITE` and `MYENV` below with the Pantheon site and environment from which you want to import.
 
@@ -114,7 +110,7 @@ lando ssh -c "tar -xzvf /tmp/files.tar.gz -C /app/wp-content/uploads --strip-com
 
 You can alternatively download the backup and manually extract it to the correct location.
 
-## Pushing Your Changes
+## Pushing
 
 While a best practices workflow suggests you put all your changes in code and push those changes with `git`, Lando provides a utility command for `pantheon` recipes called `lando push` that pushes up any code, database or files changes you have made locally.
 
@@ -123,7 +119,7 @@ While a best practices workflow suggests you put all your changes in code and pu
 Note that if Lando cannot find a [Pantheon machine token](https://pantheon.io/docs/machine-tokens/) associated with your site, it will prompt you for one. You can also switch to a different machine token by using the  `--auth` option.
 
 
-### Usage
+#### Usage
 
 ```bash
 # Push the latest code, database and files
@@ -143,7 +139,7 @@ lando push
 lando push --auth "$PANTHEON_MACHINE_TOKEN" --database=none
 ```
 
-### Options
+#### Options
 
 ```bash
 --auth          Pantheon machine token
