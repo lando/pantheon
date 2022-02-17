@@ -1,6 +1,6 @@
 [build]
   base = "./"
-  publish = "_site"
+  publish = "docs/.vuepress/dist"
   command = "yarn docs:build"
   # This sort of lets us build only on tagged commits to prod
   # [context.production]
@@ -23,3 +23,13 @@
   for = "/images/*"
   [headers.values]
 	  Cache-Control = "public, max-age=31536000"
+
+# We need this so preview environments and the base site look ok on their own
+[[redirects]]
+  from = "/"
+  to = "/pantheon"
+  status = 200
+[[redirects]]
+  from = "/pantheon/*"
+  to = "/:splat"
+  status = 200
