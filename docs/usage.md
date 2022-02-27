@@ -619,5 +619,3 @@ Note that you have to re-add the default domain as well.
 A special note: WordPress site networks require you to pass a few special flags to pretty much all WP-CLI commands: `--url="http://urlofmainsiteindatabase" --network`
 
 it gets really annoying, and has even caused some workflows to fail on Pantheon in the past. See the troubleshooting and workflow sections from the Pantheon docs linked above for some examples of this. Lando tries to do this automatically for you when we run the pull command, but if you are having issues, you may need to manually run the wp-cli search-replace command with the network and url flags and closely inspect the output to troubleshoot.
-
-<RelatedGuides tag="Pantheon"/>
