@@ -1,6 +1,7 @@
 ---
 title: Pantheon Lando Plugin
 description: The best local development option for Drupal 7, Drupal 8/9 or WordPress sites running on Pantheon. Get Terminus and all the usual power tools plus awesome workflow automation.
+next: ./getting-started.html
 ---
 
 # Pantheon
