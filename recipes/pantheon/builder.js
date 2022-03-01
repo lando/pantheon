@@ -131,7 +131,7 @@ module.exports = {
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
       options = overrideAppserver(options);
       // Add in cache if applicable
-      if (options.cache) options = _.merge({}, options, utils.getPantheonCache());
+      if (options.cache) options = _.merge({}, options, utils.getPantheonCache(isArmed));
       // Add in edge if applicable
       if (options.edge) options = _.merge({}, options, utils.getPantheonEdge(options));
       // Add in index if applicable
