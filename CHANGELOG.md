@@ -1,5 +1,13 @@
 ## IN DEVELOPMENT
 
+## v0.5.8 - [???, 2022](https://github.com/lando/pantheon/releases/tag/v0.5.8)
+
+Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
+
+* Update Redis config to use redis:6 for M1 Mac users. [PR #108](https://github.com/lando/pantheon/pull/108)
+
+## RELEASED
+
 ## v0.5.7 - [February 11, 2022](https://github.com/lando/pantheon/releases/tag/v0.5.7)
 
 Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
