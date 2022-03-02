@@ -51,6 +51,10 @@ lando ssh -s database -c "mysql -V" | grep 10.3.
 cd drupal8
 lando db-export | grep Success
 
+# Should use redis 2.8
+cd drupal8
+lando redis-cli --version | grep 2.8
+
 # Should have terminus
 cd drupal8
 lando terminus -V
