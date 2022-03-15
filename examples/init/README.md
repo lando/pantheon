@@ -80,10 +80,14 @@ lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal9
 lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
+lando ssh -c "env" | grep PANTHEON_EDGE_HTTP_RESP_HDR_LEN | grep '25k'
 
 # Should use php version in pantheon.upstream.yml
 cd drupal9
 lando php -v | grep "PHP 8.0"
+
+# Should use a varnish http_resp_hdr_len setting of 25k
+lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
 
 # Should have all pantheon services running and their tooling enabled by defaults
 docker ps --filter label=com.docker.compose.project=landobotdrupal9 | grep landobotdrupal9_appserver_nginx_1
