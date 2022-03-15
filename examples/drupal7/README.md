@@ -130,6 +130,9 @@ lando ssh -s appserver_nginx -c "/opt/bitnami/nginx/sbin/nginx -v 2>&1 | grep 1.
 cd drupal7
 lando ssh -s appserver -c "curl https://index:449/sites/self/environments/lando/index/admin/"
 
+# Should use a varnish http_resp_hdr_len setting of 25k
+lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
+
 # Should be able to push commits to pantheon
 cd drupal7
 lando pull --code dev --database none --files none

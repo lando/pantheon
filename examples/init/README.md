@@ -80,7 +80,6 @@ lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal9
 lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
-lando ssh -c "env" | grep PANTHEON_EDGE_HTTP_RESP_HDR_LEN | grep '25k'
 
 # Should use php version in pantheon.upstream.yml
 cd drupal9
