@@ -131,7 +131,8 @@ cd drupal7
 lando ssh -s appserver -c "curl https://index:449/sites/self/environments/lando/index/admin/"
 
 # Should use a varnish http_resp_hdr_len setting of 25k
-lando varnishadm param.show http_resp_hdr_len 2>&1 | grep 'Value is: 25k'
+cd drupal7
+lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
 
 # Should be able to push commits to pantheon
 cd drupal7

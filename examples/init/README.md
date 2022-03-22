@@ -86,7 +86,8 @@ cd drupal9
 lando php -v | grep "PHP 8.0"
 
 # Should use a varnish http_resp_hdr_len setting of 25k
-lando varnishadm param.show http_resp_hdr_len 2>&1 | grep 'Value is: 25k'
+cd drupal9
+lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
 
 # Should have all pantheon services running and their tooling enabled by defaults
 docker ps --filter label=com.docker.compose.project=landobotdrupal9 | grep landobotdrupal9_appserver_nginx_1
