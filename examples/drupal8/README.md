@@ -95,6 +95,10 @@ lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
 cd drupal8
 lando php -v | grep "PHP 7.4"
 
+# Should use a varnish http_resp_hdr_len setting of 25k
+cd drupal8
+lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
+
 # Should have all pantheon services running and their tooling enabled by defaults
 docker ps --filter label=com.docker.compose.project=landobotdrupal8 | grep landobotdrupal8_appserver_nginx_1
 docker ps --filter label=com.docker.compose.project=landobotdrupal8 | grep landobotdrupal8_appserver_1
