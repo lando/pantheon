@@ -102,7 +102,7 @@ Lando will look for a [`pantheon.yml`](https://pantheon.io/docs/pantheon-yml/) (
 
 If this has not been specified then we will globally install the [latest version of Drush 8](http://docs.drush.org/en/8.x/install/) unless you are running on `php 5.3` in which case we will install the [latest version of Drush 7](http://docs.drush.org/en/7.x/install/). For Backdrop sites, we will also install the latest version of [Backdrop Drush](https://github.com/backdrop-contrib/drush).
 
-This means that you should be able to use `lando drush` out of the box. That said, you can [easily change](#configuration) the Drush installation behavior if you so desire.
+This means that you should be able to use `lando drush` out of the box. That said, you can [easily change](https://docs.lando.dev/pantheon/config.html) the Drush installation behavior if you so desire.
 
 If you decide to list `drush` as a dependency in your project's `composer.json` then Lando will use that one instead. You should be careful if you use Drush 9 as this is not currently *officially* supported by Pantheon.
 
