@@ -19,7 +19,7 @@ config:
   index: true
   edge: true
   cache: true
-  composer_version: "2.0.7"
+  composer_version: "2.2.12"
 ```
 
 If you do not already have a [Landofile](https://docs.lando.dev/config/lando.html) for your Pantheon site, we highly recommend you use [`lando init`](https://docs.lando.dev/basics/init.html) to get one as that will automatically populate the `framework`, `id` and `site` for you. Manually creating a Landofile with these things set correctly can be difficult and is *highly discouraged.*
