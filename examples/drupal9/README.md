@@ -83,6 +83,10 @@ lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
 cd drupal9
 lando php -v | grep "PHP 8.0"
 
+# Should use the database version in pantheon.yml
+cd drupal9
+lando ssh -s database -c "mysql -V" | grep 10.6. 
+
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal9
 lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
