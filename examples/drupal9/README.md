@@ -81,7 +81,7 @@ lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should use php version in pantheon.upstream.yml
 cd drupal9
-lando php -v | grep "PHP 8.0"
+lando php -v | grep "PHP 8.1"
 
 # Should use the database version in pantheon.yml
 cd drupal9
