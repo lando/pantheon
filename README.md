@@ -1,6 +1,6 @@
 # Pantheon Lando Plugin
 
-This is the _official_ [Lando](https://lando.dev) plugin for [Pantheon](https://pantheon.io). When installed it...
+Lhis is the _official_ [Lando](https://lando.dev) plugin for [Pantheon](https://pantheon.io). When installed it...
 
 * Closely mimics Pantheon's [stack, versions](https://pantheon.io/docs/platform/) and [environment](https://pantheon.io/docs/read-environment-config/) locally
 * Allows you to easily `pull` your Pantheon site down locally
