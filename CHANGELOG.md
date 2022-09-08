@@ -1,4 +1,6 @@
-## IN DEVELOPMENT
+## v0.6.0 - [September 7, 2022](https://github.com/lando/pantheon/releases/tag/v0.6.0)
+
+* HYPERDRIVED
 
 ## v0.5.9 - [April 21, 2022](https://github.com/lando/pantheon/releases/tag/v0.5.9)
 
@@ -19,7 +21,7 @@ Lando is **free** and **open source** software that relies on contributions from
 
 Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
 
-* Adjust functionality for pushing keys on various sources for lando init 
+* Adjust functionality for pushing keys on various sources for lando init
 
 ## v0.5.6 - [February 2, 2022](https://github.com/lando/pantheon/releases/tag/v0.5.6)
 
