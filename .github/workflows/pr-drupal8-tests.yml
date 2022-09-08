@@ -16,9 +16,9 @@ jobs:
         lando-versions:
           - edge
         os:
-          - ubuntu-20.04
+          - ubuntu-22.04
         node-version:
-          - '14'
+          - '16'
 
     steps:
       # Install deps and cache

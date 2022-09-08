@@ -2,7 +2,7 @@
   "name": "@lando/pantheon",
   "description": "A Lando plugin that provides a tight integration with Pantheon.",
   "version": "0.5.10",
-  "author": "John Ouellet @labboy0276",
+  "author": "Mike Pirog @pirog",
   "license": "GPL-3.0",
   "repository": "lando/pantheon",
   "bugs": "https://github.com/lando/pantheon/issues/new/choose",
@@ -10,11 +10,15 @@
   "keywords": [
     "lando",
     "lando-plugin",
+    "lando-recipe",
+    "lando-hosting-integration",
     "pantheon"
   ],
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
+  "bundledDependencies": true,
+  "lando": {},
   "main": "index.js",
   "nyc": {
     "include": [
@@ -46,7 +50,6 @@
     "dayjs": "^1.10.7",
     "js-yaml": "^3.4.6",
     "lodash": "^4.17.21",
-    "tar": "^6.1.11",
     "winston": "2.4.5"
   },
   "devDependencies": {
