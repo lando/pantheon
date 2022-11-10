@@ -90,7 +90,10 @@ if (
    * Issue: https://github.com/pantheon-systems/drops-8/issues/139
    *
    */
-  if ((gettype($dbh->exec("SELECT count(*) FROM users")) == 'integer') != 1) {
+  if ($dbh->exec("SHOW TABLES LIKE 'users'") !== 'users') {
+    $_SERVER['PANTHEON_DATABASE_STATE'] = 'empty';
+  }
+  elseif ((gettype($dbh->exec("SELECT count(*) FROM users")) == 'integer') != 1) {
     $_SERVER['PANTHEON_DATABASE_STATE'] = 'empty';
   }
 
