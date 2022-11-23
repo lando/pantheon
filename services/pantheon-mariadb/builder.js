@@ -61,7 +61,7 @@ module.exports = {
         volumes: [
           `${options.confDest}/launch.sh:/launch.sh`,
           `${options.confDest}/${options.defaultFiles.database}:${options.remoteFiles.database}`,
-          `${options.data}:/var/lib/mariadb`,
+          `${options.data}:/var/lib/mysql`,
         ],
       };
       // Send it downstream
