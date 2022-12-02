@@ -19,6 +19,9 @@ const overrideAppserver = options => {
   options.services.appserver.overrides.volumes.push(`${options.confDest}/prepend.php:/srv/includes/prepend.php`);
   // Add in our environment
   options.services.appserver.overrides.environment = utils.getPantheonEnvironment(options);
+
+  // Override the Solr8 service.
+  options.services.index.overrides.volumes.push(`${options.confDest}/jetty.xml:/opt/solr-8.11.2/server/etc/jetty.xml`);
   return options;
 };
 
@@ -81,9 +84,10 @@ module.exports = {
     framework: 'drupal',
     index: true,
     solrTag: 'latest',
-    services: {appserver: {overrides: {
-      volumes: [],
-    }}},
+    services: {
+      appserver: {overrides: {volumes: [],}},
+      index: {overrides: {volumes: [],}}
+    },
     tag: '2',
     tooling: {terminus: {
       service: 'appserver',
