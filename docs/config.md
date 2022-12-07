@@ -26,11 +26,11 @@ If you do not already have a [Landofile](https://docs.lando.dev/config/lando.htm
 
 Note that if the above config options are not enough, all Lando recipes can be further [extended and overriden](https://docs.lando.dev/config/recipes.html#extending-and-overriding-recipes).
 
-## Choosing PHP/database/Solr versions
+## Choosing service versions
 
 Lando will look for a [`pantheon.yml`](https://pantheon.io/docs/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and use the values you've set for `php_version`, `database`, and `search` you've specified there.
 
-This means that **you can not configure the php version directly in your Landofile for this recipe.**
+This means that **you can not configure php, mysql, or solr versions directly in your Landofile for this recipe.**
 
 If you change this version, make sure you [`lando rebuild`](https://docs.lando.dev/cli/rebuild.html) for the changes to apply.
 

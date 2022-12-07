@@ -21,7 +21,11 @@ const overrideAppserver = options => {
   options.services.appserver.overrides.environment = utils.getPantheonEnvironment(options);
 
   // Override the Solr8 service.
-  options.services.index.overrides.volumes.push(`${options.confDest}/jetty.xml:/opt/solr-8.11.2/server/etc/jetty.xml`);
+  if (options.solrTag === '8') {
+    options.services.index.overrides.volumes
+      .push(`${options.confDest}/jetty.xml:/opt/solr-8.11.2/server/etc/jetty.xml`);
+  }
+
   return options;
 };
 
