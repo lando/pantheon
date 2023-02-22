@@ -83,7 +83,7 @@ module.exports = {
     index: true,
     solrTag: 'latest',
     services: {
-      appserver: {overrides: {volumes: []}}
+      appserver: {overrides: {volumes: []}},
     },
     tag: '2',
     tooling: {terminus: {
