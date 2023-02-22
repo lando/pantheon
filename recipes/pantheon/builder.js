@@ -20,12 +20,6 @@ const overrideAppserver = options => {
   // Add in our environment
   options.services.appserver.overrides.environment = utils.getPantheonEnvironment(options);
 
-  // Override the Solr8 service.
-  if (options.solrTag === '8') {
-    options.services.index.overrides.volumes
-      .push(`${options.confDest}/jetty.xml:/opt/solr-8.11.2/server/etc/jetty.xml`);
-  }
-
   return options;
 };
 
@@ -89,8 +83,7 @@ module.exports = {
     index: true,
     solrTag: 'latest',
     services: {
-      appserver: {overrides: {volumes: []}},
-      index: {overrides: {volumes: []}},
+      appserver: {overrides: {volumes: []}}
     },
     tag: '2',
     tooling: {terminus: {
@@ -147,7 +140,7 @@ module.exports = {
       // Add in edge if applicable
       if (options.edge) options = _.merge({}, options, utils.getPantheonEdge(options));
       // Add in index if applicable
-      if (options.index) options = _.merge({}, options, utils.getPantheonIndex(options.solrTag));
+      if (options.index) options = _.merge({}, options, utils.getPantheonIndex(options));
 
       // Handle other stuff
       const tokens = utils.sortTokens(options._app.pantheonTokens, options._app.terminusTokens);
