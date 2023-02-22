@@ -85,11 +85,15 @@ lando php -v | grep "PHP 8.1"
 
 # Should use the database version in pantheon.yml
 cd drupal9
-lando ssh -s database -c "mysql -V" | grep 10.6. 
+lando ssh -s database -c "mysql -V" | grep 10.6.
 
 # Should use the solr version in pantheon.yml
 cd drupal9
 lando ssh -c "curl http://index:8983/solr/admin/info/system" | grep "\"solr-spec-version\":\"8.11.2\""
+
+# Jetty redirects should work for Pantheon Search
+cd drupal9
+lando ssh -c "curl http://index:8983/lando/v1/lando/admin/system" | grep "\"solr-spec-version\":\"8.11.2\""
 
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal9
