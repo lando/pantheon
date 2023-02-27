@@ -69,8 +69,11 @@ lando ssh -c "env" | grep DB_NAME | grep pantheon
 lando ssh -c "env" | grep FRAMEWORK | grep drupal8
 lando ssh -c "env" | grep FILEMOUNT | grep "sites/default/files"
 lando ssh -c "env" | grep PANTHEON_ENVIRONMENT | grep lando
+lando ssh -c "env" | grep PANTHEON_INDEX_CORE | grep "\/lando"
 lando ssh -c "env" | grep PANTHEON_INDEX_HOST | grep index
 lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 8983
+lando ssh -c "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
+lando ssh -c "env" | grep PANTHEON_INDEX_SCHEME | grep http
 lando ssh -c "env" | grep PANTHEON_SITE | grep 3a225571-2a52-4ae9-84e7-ef54037ac66c
 lando ssh -c "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal9
 lando ssh -c "env" | grep php_version | grep "8"
