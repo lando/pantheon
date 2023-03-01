@@ -19,6 +19,7 @@ const overrideAppserver = options => {
   options.services.appserver.overrides.volumes.push(`${options.confDest}/prepend.php:/srv/includes/prepend.php`);
   // Add in our environment
   options.services.appserver.overrides.environment = utils.getPantheonEnvironment(options);
+
   return options;
 };
 
@@ -81,9 +82,9 @@ module.exports = {
     framework: 'drupal',
     index: true,
     solrTag: 'latest',
-    services: {appserver: {overrides: {
-      volumes: [],
-    }}},
+    services: {
+      appserver: {overrides: {volumes: []}},
+    },
     tag: '2',
     tooling: {terminus: {
       service: 'appserver',
@@ -126,6 +127,10 @@ module.exports = {
       // Pantheon has begun specifying the database version in the pantheon.yml via this key.
       const dbVersion = _.get(options, 'database.version', '10.3');
       const dbService = isArmed ? 'pantheon-mariadb' : 'mariadb';
+      // Set the search version
+      const searchVersion = _.toString(_.get(options, 'search.version', '3'));
+      // Set solrtag if search is set to solr8.
+      if (searchVersion === '8') options.solrTag = searchVersion;
       options.database = `${dbService}:${dbVersion}`;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
@@ -135,7 +140,7 @@ module.exports = {
       // Add in edge if applicable
       if (options.edge) options = _.merge({}, options, utils.getPantheonEdge(options));
       // Add in index if applicable
-      if (options.index) options = _.merge({}, options, utils.getPantheonIndex(options.solrTag));
+      if (options.index) options = _.merge({}, options, utils.getPantheonIndex(options));
 
       // Handle other stuff
       const tokens = utils.sortTokens(options._app.pantheonTokens, options._app.terminusTokens);
