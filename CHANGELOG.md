@@ -1,11 +1,16 @@
+## v0.8.1 - [March 1, 2023](https://github.com/lando/pantheon/releases/tag/v0.8.1)
+
+  * Added support for `solr8` [#15](https://github.com/lando/pantheon/issues/15)
+  * Fixed bug causing `Fatal error: Uncaught PDOException` in `prepend.php`[#139](https://github.com/lando/pantheon/issues/139)
+  * Fixed bug where database did not persist on `lando rebuild` for Apple Silicon users. [#148](https://github.com/lando/pantheon/pull/148)
+
 ## v0.8.0 - [February 28, 2023](https://github.com/lando/pantheon/releases/tag/v0.8.0)
-Lando is **free** and **open source** software that relies on contributions from developers like you! If you like Lando then help us spend more time making, updating and supporting it by [contributing](https://github.com/sponsors/lando).
 
   * Database persistence for Apple Silicon users. [PR #148](https://github.com/lando/pantheon/pull/148)
   * Solr8 compatibility [#15](https://github.com/lando/pantheon/issues/15)
 
-
 ## v0.7.0 - [December 12, 2022](https://github.com/lando/pantheon/releases/tag/v0.7.0)
+
   * Added bundle-dependencies to release process.
   * Fixed bug in plugin dogfooding test.
 
