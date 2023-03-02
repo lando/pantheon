@@ -1,5 +1,6 @@
 ## v0.8.1 - [March 1, 2023](https://github.com/lando/pantheon/releases/tag/v0.8.1)
 
+  * Added support for `php` `8.1` [#132](https://github.com/lando/pantheon/issues/132)
   * Added support for `solr8` [#15](https://github.com/lando/pantheon/issues/15)
   * Fixed bug causing `Fatal error: Uncaught PDOException` in `prepend.php`[#139](https://github.com/lando/pantheon/issues/139)
   * Fixed bug where database did not persist on `lando rebuild` for Apple Silicon users. [#148](https://github.com/lando/pantheon/pull/148)
