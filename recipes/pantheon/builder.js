@@ -90,7 +90,7 @@ module.exports = {
       service: 'appserver',
     }},
     gen3: ['7.2', '7.1', '7.0', '5.6'],
-    gen4: ['8.1', '8.0', '7.4', '7.3'],
+    gen4: ['8.2', '8.1', '8.0', '7.4', '7.3'],
     unarmedVersions: ['5.3', '5.5'],
     xdebug: false,
     webroot: '.',
