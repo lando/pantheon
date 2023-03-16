@@ -19,6 +19,9 @@ jobs:
             tag: 3.6-3
             context: recipes/pantheon/3.6-solr
           - image: pantheon-appserver
+            tag: 8.2-4
+            context: recipes/pantheon/8.2-fpm
+          - image: pantheon-appserver
             tag: 8.1-4
             context: recipes/pantheon/8.1-fpm
           - image: pantheon-appserver
