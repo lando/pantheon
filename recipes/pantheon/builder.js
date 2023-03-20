@@ -130,7 +130,7 @@ module.exports = {
       // Set the search version
       const searchVersion = _.toString(_.get(options, 'search.version', '3'));
       // Set solrtag if search is set to solr8.
-      if (searchVersion === '8') options.solrTag = searchVersion;
+      if (searchVersion === '8') options.solrTag = '8.8-4';
       options.database = `${dbService}:${dbVersion}`;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
