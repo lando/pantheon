@@ -1,3 +1,7 @@
+## v0.10.0 - [TBD](https://github.com/lando/pantheon/releases/tag/v0.10.0)
+
+  * Added support for `php` `8.2` [#159](https://github.com/lando/pantheon/issues/159)
+
 ## v0.9.0 - [March 1, 2023](https://github.com/lando/pantheon/releases/tag/v0.9.0)
 
   * Added support for `php` `8.1` [#132](https://github.com/lando/pantheon/issues/132)
