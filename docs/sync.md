@@ -57,6 +57,15 @@ lando pull --auth "$PANTHEON_MACHINE_TOKEN" --database=none --rsync
 --verbose, -v   Runs with extra verbosity
 ```
 
+::: warning Table Prefixes? Pantheon explicitly does not support table prefixes for [Drupal](https://docs.pantheon.io/guides/php/settings-php#are-table-prefixes-supported) or [Wordpress](https://docs.pantheon.io/wordpress-known-issues#table-prefixes). If you've ended up with table prefixes (you scoundrel), `lando pull` will produce an error because it will not be able to detect your users table for the post-pull health check. The pull will appear to have failed, but your data will be in the database. If you want the command to succeed cleanly, you'll need to set `LANDO_DB_USER_TABLE` to the correct user table name in your env. For example, for prefix `xyz_`:
+```yml
+tooling:
+  pull:
+    env:
+      LANDO_DB_USER_TABLE: xyz_users
+```
+:::
+
 Please consult the manual import documentation below if this command produces an error.
 
 #### Manually Importing Your DB and Files
