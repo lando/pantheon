@@ -1,6 +1,6 @@
 # docker build -t devwithlando/pantheon-index:3.6-4 .
 
-FROM debian:stretch-slim
+FROM debian:stretch
 
 # Versions
 ENV SOLR_VERSION 3.6.2
