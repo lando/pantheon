@@ -37,7 +37,7 @@ jobs:
         run: |
           docker --version | grep "20.10."
           docker-compose --version | grep "1.29."
-      - name: Grab latest ${{ matrix.lando-versions }} Lando CLI
+      - name: Grab latest edge Lando CLI
         run: |
           sudo curl -fsSL -o /usr/local/bin/lando "https://files.lando.dev/cli/lando-linux-x64-${{ matrix.lando-versions }}"
           sudo chmod +x /usr/local/bin/lando
@@ -65,5 +65,5 @@ jobs:
           sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
       - name: Run leia tests
         shell: bash
-        run: yarn leia "./${{ matrix.leia-tests }}/README.md" -c 'Destroy tests' --stdin --shell bash
+        run: yarn leia "./${{ matrix.leia-tests }}/README.md" -c 'Destroy tests' --stdin --shell bash --retry 3
 
