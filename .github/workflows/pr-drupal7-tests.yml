@@ -14,7 +14,7 @@ jobs:
         leia-tests:
           - examples/drupal7
         lando-versions:
-          - edge
+          - stable
         os:
           - ubuntu-22.04
         node-version:
