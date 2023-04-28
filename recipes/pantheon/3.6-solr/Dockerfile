@@ -7,7 +7,7 @@ ENV SOLR_VERSION 3.6.2
 
 # Build out solr on tomcat8
 RUN \
-  echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list \
+  echo "deb http://archive.debian.org/debian stretch main non-free contrib" > /etc/apt/sources.list \
   apt-get update && apt-get -y install \
     curl \
     incron \

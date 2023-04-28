@@ -11,7 +11,7 @@ ENV TIKA_VERSION 1.18
 
 # Install the additional things that make the pantheon
 RUN \
-  && echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list \
+  echo "deb http://archive.debian.org/debian stretch main non-free contrib" > /etc/apt/sources.list \
   && mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
     openjdk-8-jdk \
