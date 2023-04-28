@@ -1,6 +1,6 @@
 # docker build -t devwithlando/pantheon-index:3.6-4 .
 
-FROM debian:stretch
+FROM debian:stretch-slim
 
 # Versions
 ENV SOLR_VERSION 3.6.2
@@ -8,7 +8,10 @@ ENV SOLR_VERSION 3.6.2
 # Build out solr on tomcat8
 RUN \
   echo "deb http://archive.debian.org/debian stretch main non-free contrib" > /etc/apt/sources.list \
-  apt-get update && apt-get -y install \
+  && echo "deb http://archive.debian.org/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list \
+  && echo "deb http://archive.debian.org/debian/ stretch-backports-sloppy main non-free contrib" >> /etc/apt/sources.list \
+  && echo "deb-src http://archive.debian.org/debian/ stretch main non-free contrib" >> /etc/apt/sources.list \
+  && apt-get update && apt-get -y install \
     curl \
     incron \
     tomcat8 \
