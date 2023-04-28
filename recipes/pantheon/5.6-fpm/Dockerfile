@@ -10,7 +10,9 @@ ENV LANDO_TERMINUS_VERSION 2.5.0
 ENV TIKA_VERSION 1.18
 
 # Install the additional things that make the pantheon
-RUN mkdir -p /usr/share/man/man1 \
+RUN \
+  && echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list \
+  && mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
     openjdk-8-jdk \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
