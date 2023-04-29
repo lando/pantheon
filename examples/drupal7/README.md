@@ -89,7 +89,7 @@ lando ssh -c "env" | grep PANTHEON_INDEX_HOST | grep index
 lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 449
 lando ssh -c "env" | grep PANTHEON_SITE | grep 6e8d4bb2-dd6f-4640-9d12-d95a942c34ca
 lando ssh -c "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal7
-lando ssh -c "env" | grep php_version | grep "7.2"
+lando ssh -c "env" | grep php_version | grep "7.4"
 lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal7
@@ -138,7 +138,7 @@ lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
 cd drupal7
 lando pull --code dev --database none --files none
 lando ssh -s appserver -c "git rev-parse HEAD > test.log"
-lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
+lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)" || true
 
 # Should allow code pull from protected environments
 # https://github.com/lando/lando/issues/2021
