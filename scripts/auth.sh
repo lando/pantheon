@@ -13,6 +13,12 @@ AUTH=${1:-${LANDO_TERMINUS_TOKEN}}
 SITE=${2:-${PANTHEON_SITE}}
 ENV=${3:-${TERMINUS_ENV}}
 
+# skip auth if we are already logged in
+if terminus auth:whoami | grep "$TERMINUS_USER" 1>/dev/null; then
+  lando_green "Already logged in as `terminus auth:whoami`"
+  exit 0
+fi
+
 # Attempting various logins
 if [ ! -z "$AUTH" ]; then
   lando_pink "Attempting to login via terminus..."

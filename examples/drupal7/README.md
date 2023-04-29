@@ -105,9 +105,9 @@ lando ssh -s appserver -c "curl -kL https://edge_ssl" | grep "Drupal 7 for Lando
 lando ssh -s appserver -c "curl -L http://edge" | grep "Drupal 7 for Lando"
 lando ssh -s appserver -c "env" | grep "LANDO_WEBROOT=/app"
 
-# Should use php version 7.2 by default for drupal7 sites
+# Should use php version 7.4 by default for drupal7 sites
 cd drupal7
-lando php -v | grep "PHP 7.2"
+lando php -v | grep "PHP 7.4"
 
 # Should have all pantheon services running and their tooling enabled by defaults
 docker ps --filter label=com.docker.compose.project=landobotdrupal7 | grep landobotdrupal7_appserver_nginx_1
