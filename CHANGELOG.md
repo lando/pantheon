@@ -1,3 +1,7 @@
+## v0.10.1 - [May 1, 2023](https://github.com/lando/pantheon/releases/tag/v0.10.1)
+
+  * Improved post `pull|push|switch` token re-auth so it only happens when needed
+
 ## v0.10.0 - [March 20, 2023](https://github.com/lando/pantheon/releases/tag/v0.10.0)
 
   * Added support for `php` `8.2` [#159](https://github.com/lando/pantheon/issues/159)
