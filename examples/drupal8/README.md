@@ -45,7 +45,7 @@ lando drush version | grep 10.
 
 # Should use MariaDB 10.3
 cd drupal8
-lando ssh -s database -c "mysql -V" | grep 10.3.
+lando ssh -s database -c "mysql -V" | grep 10.4.
 
 # Should be able to export DB
 cd drupal8
