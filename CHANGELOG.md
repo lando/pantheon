@@ -1,3 +1,6 @@
+## v0.11.0 - [May 26, 2023](https://github.com/lando/pantheon/releases/tag/v0.11.0)
+* Set default redis to v6 and added default password. [#147](https://github.com/lando/pantheon/issues/147)
+
 ## v0.10.1 - [May 1, 2023](https://github.com/lando/pantheon/releases/tag/v0.10.1)
 
   * Improved post `pull|push|switch` token re-auth so it only happens when needed
