@@ -1,3 +1,8 @@
+## v0.12.0 - [July 3, 2023](https://github.com/lando/pantheon/releases/tag/v0.12.0)
+  * Removed bundle-dependencies and version-bump-prompt from plugin.
+  * Updated package to use prepare-release-action.
+  * Updated documentation to reflect new release process.
+
 ## v0.11.0 - [May 26, 2023](https://github.com/lando/pantheon/releases/tag/v0.11.0)
 * Set default redis to v6 and added default password. [#147](https://github.com/lando/pantheon/issues/147)
 
