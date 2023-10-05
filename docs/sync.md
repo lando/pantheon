@@ -57,6 +57,17 @@ lando pull --auth "$PANTHEON_MACHINE_TOKEN" --database=none --rsync
 --verbose, -v   Runs with extra verbosity
 ```
 
+::: warning Table Prefixes
+Pantheon explicitly does not support table prefixes for [Drupal](https://docs.pantheon.io/guides/php/settings-php#are-table-prefixes-supported) or [Wordpress](https://docs.pantheon.io/wordpress-known-issues#table-prefixes). If you've ended up with table prefixes (you scoundrel), `lando pull` will fail with the error `Couldn't find expected tables (<table name>)` because it will not be able to detect your users table for the post-pull health check. The database contents will have been transferred, but things that should happen after that ("the ole post-migration search-replace on WordPress", pulling files) will not happen. To fix this, set `LANDO_DB_USER_TABLE` to the correct user table name in your env. For example, for prefix `xyz_`:
+```yml
+tooling:
+  pull:
+    env:
+      LANDO_DB_USER_TABLE: xyz_users
+```
+:::
+
+
 Please consult the manual import documentation below if this command produces an error.
 
 #### Manually Importing Your DB and Files

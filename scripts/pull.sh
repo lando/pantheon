@@ -163,7 +163,7 @@ EOF
   PULL_DB_CHECK_TABLE=${LANDO_DB_USER_TABLE:-users}
   lando_pink "Checking db pull for expected tables..."
   if ! mysql --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 -e "SHOW TABLES;" | grep $PULL_DB_CHECK_TABLE; then
-    lando_red "Database pull failed... "
+    lando_red "Couldn't find expected tables ($PULL_DB_CHECK_TABLE)"
     exit 1
   fi
 
