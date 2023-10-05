@@ -1,3 +1,8 @@
+## v0.13.0 - [October 5, 2023](https://github.com/lando/pantheon/releases/tag/v0.13.0)
+* Updated path to error log. [#190](https://github.com/lando/pantheon/pull/190)
+* Added script to make sure user is loaded before repo clone. [#198](https://github.com/lando/pantheon/pull/198)
+* Added warning/documentation regarding table prefixes on import. [#171](https://github.com/lando/pantheon/pull/171)
+
 ## v0.12.0 - [July 3, 2023](https://github.com/lando/pantheon/releases/tag/v0.12.0)
   * Removed bundle-dependencies and version-bump-prompt from plugin.
   * Updated package to use prepare-release-action.
