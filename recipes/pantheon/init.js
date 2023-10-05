@@ -129,6 +129,7 @@ module.exports = {
         });
       }},
       {name: 'reload-keys', cmd: '/helpers/load-keys.sh --silent', user: 'root'},
+      {name: 'wait-for-user', cmd: '/helpers/pantheon-wait-for-user.sh'},
       {name: 'clone-repo', cmd: options => `/helpers/get-remote-url.sh ${options['pantheon-git-url']}`, remove: 'true'},
     ]),
   }],
