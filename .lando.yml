@@ -1,7 +1,14 @@
 name: lando-pantheon-plugin
 services:
-  node:
-    type: node:14
+  cli:
+    api: 3
+    type: lando
+    services:
+      image: node:18s
+      command: sleep infinity
+      working_dir: /app
+      ports:
+        - 8080:8080
     build:
       - yarn install
     scanner: false
@@ -9,6 +16,8 @@ services:
     sslExpose: false
 tooling:
   node:
-    service: node
+    service: cli
+  vuepress:
+    service: cli
   yarn:
-    service: node
+    service: cli
