@@ -39,11 +39,6 @@ jobs:
             setup.skipCommonPlugins=true
             setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
           telemetry: false
-      - name: Install Yarn dependencies
-        run: |
-          lando config
-          lando init --help
-
       - name: Run Leia Tests
         uses: lando/run-leia-action@v2
         with:
