@@ -4,7 +4,7 @@ services:
     api: 3
     type: lando
     services:
-      image: node:18s
+      image: node:18
       command: sleep infinity
       working_dir: /app
       ports:
