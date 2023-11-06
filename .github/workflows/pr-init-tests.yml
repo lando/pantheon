@@ -38,10 +38,14 @@ jobs:
           config: |
             plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
           telemetry: false
-      - name: Verify Lando works and we are dogfooding this plugin for tests
-        run: |
-          lando version
-          lando config --path plugins | grep pantheon | grep /home/runner/work/pantheon/pantheon || (echo "::error:: Not dogfooding this plugin correctly! " && exit 1)
+      - name: Setup lando ${{ matrix.lando-version }}
+        uses: lando/setup-lando@v2
+        with:
+          lando-version: ${{ matrix.lando-version }}
+          config: |
+            setup.skipCommonPlugins=true
+            setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
+          telemetry: false
       - name: Run Leia Tests
         uses: lando/run-leia-action@v2
         with:
