@@ -1,41 +1,48 @@
+## v0.13.1 - [November 6, 2023](https://github.com/lando/pantheon/releases/tag/v0.13.1)
+
+* Fixed broken `mkdirp` module usage
+
 ## v0.13.0 - [October 5, 2023](https://github.com/lando/pantheon/releases/tag/v0.13.0)
+
 * Updated path to error log. [#190](https://github.com/lando/pantheon/pull/190)
 * Added script to make sure user is loaded before repo clone. [#198](https://github.com/lando/pantheon/pull/198)
 * Added warning/documentation regarding table prefixes on import. [#171](https://github.com/lando/pantheon/pull/171)
 
 ## v0.12.0 - [July 3, 2023](https://github.com/lando/pantheon/releases/tag/v0.12.0)
-  * Removed bundle-dependencies and version-bump-prompt from plugin.
-  * Updated package to use prepare-release-action.
-  * Updated documentation to reflect new release process.
+
+* Removed bundle-dependencies and version-bump-prompt from plugin.
+* Updated package to use prepare-release-action.
+* Updated documentation to reflect new release process.
 
 ## v0.11.0 - [May 26, 2023](https://github.com/lando/pantheon/releases/tag/v0.11.0)
+
 * Set default redis to v6 and added default password. [#147](https://github.com/lando/pantheon/issues/147)
 
 ## v0.10.1 - [May 1, 2023](https://github.com/lando/pantheon/releases/tag/v0.10.1)
 
-  * Improved post `pull|push|switch` token re-auth so it only happens when needed
+* Improved post `pull|push|switch` token re-auth so it only happens when needed
 
 ## v0.10.0 - [March 20, 2023](https://github.com/lando/pantheon/releases/tag/v0.10.0)
 
-  * Added support for `php` `8.2` [#159](https://github.com/lando/pantheon/issues/159)
-  * Added correct configset for `solr8` [#15](https://github.com/lando/pantheon/issues/15)
+* Added support for `php` `8.2` [#159](https://github.com/lando/pantheon/issues/159)
+* Added correct configset for `solr8` [#15](https://github.com/lando/pantheon/issues/15)
 
 ## v0.9.0 - [March 1, 2023](https://github.com/lando/pantheon/releases/tag/v0.9.0)
 
-  * Added support for `php` `8.1` [#132](https://github.com/lando/pantheon/issues/132)
-  * Added support for `solr8` [#15](https://github.com/lando/pantheon/issues/15)
-  * Fixed bug causing `Fatal error: Uncaught PDOException` in `prepend.php`[#139](https://github.com/lando/pantheon/issues/139)
-  * Fixed bug where database did not persist on `lando rebuild` for Apple Silicon users. [#148](https://github.com/lando/pantheon/pull/148)
+* Added support for `php` `8.1` [#132](https://github.com/lando/pantheon/issues/132)
+* Added support for `solr8` [#15](https://github.com/lando/pantheon/issues/15)
+* Fixed bug causing `Fatal error: Uncaught PDOException` in `prepend.php`[#139](https://github.com/lando/pantheon/issues/139)
+* Fixed bug where database did not persist on `lando rebuild` for Apple Silicon users. [#148](https://github.com/lando/pantheon/pull/148)
 
 ## v0.8.0 - [February 28, 2023](https://github.com/lando/pantheon/releases/tag/v0.8.0)
 
-  * Database persistence for Apple Silicon users. [PR #148](https://github.com/lando/pantheon/pull/148)
-  * Solr8 compatibility [#15](https://github.com/lando/pantheon/issues/15)
+* Database persistence for Apple Silicon users. [PR #148](https://github.com/lando/pantheon/pull/148)
+* Solr8 compatibility [#15](https://github.com/lando/pantheon/issues/15)
 
 ## v0.7.0 - [December 12, 2022](https://github.com/lando/pantheon/releases/tag/v0.7.0)
 
-  * Added bundle-dependencies to release process.
-  * Fixed bug in plugin dogfooding test.
+* Added bundle-dependencies to release process.
+* Fixed bug in plugin dogfooding test.
 
 ## v0.6.0 - [September 7, 2022](https://github.com/lando/pantheon/releases/tag/v0.6.0)
 
