@@ -9,7 +9,7 @@ id="${2:-$LANDO_HOST_UID}"
 # retry settings
 attempt=0
 delay=2
-retry=25
+retry=100
 
 until [ "$attempt" -ge "$retry" ]
 do
