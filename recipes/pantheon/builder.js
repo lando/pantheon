@@ -9,6 +9,7 @@ const push = require('./../../lib/push');
 const change = require('./../../lib/switch');
 const mysql = require('./../../lib/mysql');
 const utils = require('./../../lib/utils');
+const PantheonLamp = require('../../builders/pantheon-lamp.js');
 
 const overrideAppserver = options => {
   // Use our custom pantheon images
@@ -65,7 +66,7 @@ const setBuildSteps = options => {
  */
 module.exports = {
   name: 'pantheon',
-  parent: '_lamp',
+  parent: '_recipe',
   config: {
     build: [],
     build_root: [],
@@ -95,8 +96,10 @@ module.exports = {
     xdebug: false,
     webroot: '.',
   },
-  builder: (parent, config) => class LandoPantheon extends parent {
+  builder: (parent, config) => class LandoPantheon extends PantheonLamp.builder(parent, PantheonLamp.config) {
     constructor(id, options = {}) {
+      const lando = _.get(options, '_app._lando');
+
       // Merge in pantheon ymlz
       options = _.merge({}, config, options, utils.getPantheonConfig([
         path.join(options.root, 'pantheon.upstream.yml'),

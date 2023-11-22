@@ -2,6 +2,7 @@
 
 // Modules
 const _ = require('lodash');
+const path = require('path');
 
 // Builder
 module.exports = {
@@ -17,7 +18,7 @@ module.exports = {
       '10.1': 'mariadb:10.1.48',
     },
     patchesSupported: true,
-    confSrc: __dirname,
+    confSrc: path.resolve(__dirname, '..', 'config'),
     creds: {
       database: 'pantheon',
       password: 'pantheon',
