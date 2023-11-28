@@ -8,8 +8,8 @@ module.exports = {
   name: 'pantheon-varnish',
   parent: '_lando',
   builder: (parent, config) => class PantheonVarnish extends LandoVarnish.builder(parent, LandoVarnish.config) {
-    constructor(id, options = {}) {
-      super(id, options, {services: _.set({}, options.name)});
+    constructor(id, options = {}, factory) {
+      super(id, options, factory);
     };
   },
 };

@@ -9,20 +9,6 @@ const push = require('./../../lib/push');
 const change = require('./../../lib/switch');
 const mysql = require('./../../lib/mysql');
 const utils = require('./../../lib/utils');
-const PantheonLamp = require('../../builders/pantheon-lamp.js');
-
-const overrideAppserver = options => {
-  // Use our custom pantheon images
-  options.services.appserver.overrides.image = `devwithlando/pantheon-appserver:${options.php}-${options.tag}`;
-  // Add in the prepend.php
-  // @TODO: this throws a weird DeprecationWarning: 'root' is deprecated, use 'global' for reasons not immediately clear
-  // So we are doing this a little weirdly to avoid hat until we can track things down better
-  options.services.appserver.overrides.volumes.push(`${options.confDest}/prepend.php:/srv/includes/prepend.php`);
-  // Add in our environment
-  options.services.appserver.overrides.environment = utils.getPantheonEnvironment(options);
-
-  return options;
-};
 
 const setTooling = (options, tokens) => {
   const metaToken = _.get(
@@ -62,6 +48,64 @@ const setBuildSteps = options => {
 };
 
 /*
+ * Helper to get services
+ */
+const getServices = options => ({
+  appserver: {
+    build_as_root_internal: options.build_root,
+    build_internal: options.build,
+    composer: options.composer,
+    composer_version: options.composer_version,
+    config: getServiceConfig(options),
+    run_as_root_internal: options.run_root,
+    ssl: true,
+    type: `pantheon-php:${options.php}`,
+    xdebug: options.xdebug,
+    webroot: options.webroot,
+    solrTag: options.solrTag,
+    php: options.php,
+    php_version: options.php_version,
+    tag: options.tag,
+    id: options.id,
+    site: options.site,
+    framework: options.framework,
+    drush_version: options.drush_version,
+    root: options.root,
+  },
+  database: {
+    type: options.database,
+  },
+});
+
+const getServiceConfig = (options, types = ['php', 'server', 'vhosts']) => {
+  const config = {};
+  _.forEach(types, type => {
+    if (_.has(options, `config.${type}`)) {
+      config[type] = options.config[type];
+    } else if (!_.has(options, `config.${type}`) && _.has(options, `defaultFiles.${type}`)) {
+      if (_.has(options, 'confDest')) {
+        config[type] = path.join(options.confDest, options.defaultFiles[type]);
+      }
+    }
+  });
+  return config;
+};
+
+  // options.services.appserver.volumes = [];
+  // options.services.appserver.type = 'pantheon-php';
+  // options.services.appserver.via = 'nginx:1.16';
+  // options.services.appserver.confDest = options.confDest;
+  // options.services.appserver.framework = options.framework;
+  // options.services.appserver.drush_version = options.drush_version;
+  // options.services.appserver.php = options.php;
+  // options.services.appserver.app = options.app;
+  // options.services.appserver.root = options.root;
+  // options.services.appserver.id = options.id;
+  // options.services.appserver.site = options.site;
+  // options.services.appserver.php_version = options.php_version;
+  // options.services.appserver.solrTag = options.solrTag;
+
+/*
  * Build Drupal 7
  */
 module.exports = {
@@ -72,7 +116,7 @@ module.exports = {
     build_root: [],
     run_root: [],
     cache: true,
-    confSrc: __dirname,
+    confSrc: path.resolve(__dirname, '..', 'config'),
     defaultFiles: {
       php: 'php.ini',
       database: 'mysql.cnf',
@@ -84,7 +128,7 @@ module.exports = {
     index: true,
     solrTag: 'latest',
     services: {
-      appserver: {overrides: {volumes: []}},
+      appserver: {volumes: []},
     },
     tag: '2',
     tooling: {terminus: {
@@ -96,10 +140,8 @@ module.exports = {
     xdebug: false,
     webroot: '.',
   },
-  builder: (parent, config) => class LandoPantheon extends PantheonLamp.builder(parent, PantheonLamp.config) {
+  builder: (parent, config) => class LandoPantheon extends parent {
     constructor(id, options = {}) {
-      const lando = _.get(options, '_app._lando');
-
       // Merge in pantheon ymlz
       options = _.merge({}, config, options, utils.getPantheonConfig([
         path.join(options.root, 'pantheon.upstream.yml'),
@@ -108,10 +150,6 @@ module.exports = {
 
       // Get the armed status
       const isArmed = _.get(options, '_app._config.isArmed', false);
-
-      // Normalize because 7.0/8.0 right away gets handled strangely by js-yaml
-      if (options.php === '7' || options.php === 7) options.php = '7.0';
-      if (options.php === '8' || options.php === 8) options.php = '8.0';
 
       // Bump the tags if we are ARMed and on an approved version
       if (isArmed) options.solrTag = '3.6-3';
@@ -125,11 +163,9 @@ module.exports = {
         options.drush_version = _.get(composerConfig, `require['drush/drush']`, options.drush);
       }
 
-      // Enforce certain options for pantheon parity
-      options.via = 'nginx:1.16';
       // Pantheon has begun specifying the database version in the pantheon.yml via this key.
       const dbVersion = _.get(options, 'database.version', '10.3');
-      const dbService = isArmed ? 'pantheon-mariadb' : 'mariadb';
+      const dbService = isArmed ? 'pantheon-mariadb-arm' : 'pantheon-mariadb';
       // Set the search version
       const searchVersion = _.toString(_.get(options, 'search.version', '3'));
       // Set solrtag if search is set to solr8.
@@ -137,13 +173,19 @@ module.exports = {
       options.database = `${dbService}:${dbVersion}`;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
-      options = overrideAppserver(options);
+      
       // Add in cache if applicable
       if (options.cache) options = _.merge({}, options, utils.getPantheonCache);
       // Add in edge if applicable
       if (options.edge) options = _.merge({}, options, utils.getPantheonEdge(options));
       // Add in index if applicable
       if (options.index) options = _.merge({}, options, utils.getPantheonIndex(options));
+
+      // Add in appserver. 
+      //options.services.appserver = _.merge({}, options.services.appserver, options); 
+
+
+      options.services = _.merge({}, getServices(options), options.services);
 
       // Handle other stuff
       const tokens = utils.sortTokens(options._app.pantheonTokens, options._app.terminusTokens);
