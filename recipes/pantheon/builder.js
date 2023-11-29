@@ -4,6 +4,7 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
+const php = require('./../../lib/php');
 const pull = require('./../../lib/pull');
 const push = require('./../../lib/push');
 const change = require('./../../lib/switch');
@@ -24,6 +25,9 @@ const setTooling = (options, tokens) => {
   options.tooling.push = push.getPantheonPush(options, tokens);
   options.tooling.switch = change.getPantheonSwitch(options, tokens);
   options.tooling.mysql = mysql.getPantheonMySql;
+  options.tooling.php = php.getPantheonPhp;
+  options.tooling.composer = php.getPantheonComposer;
+
   // Add in the framework-correct tooling
   options.tooling = _.merge({}, options.tooling, utils.getPantheonTooling(options.framework));
   // Inject token into the environment for all relevant tooling defined by recipe.
@@ -181,12 +185,12 @@ module.exports = {
       // Add in index if applicable
       if (options.index) options = _.merge({}, options, utils.getPantheonIndex(options));
 
-      options.services = _.merge({}, getServices(options), options.services);
-
       // Handle other stuff
       const tokens = utils.sortTokens(options._app.pantheonTokens, options._app.terminusTokens);
       options = setTooling(options, tokens);
       options = setBuildSteps(options);
+
+      options.services = _.merge({}, getServices(options), options.services);
 
       // Send downstream
       super(id, options);

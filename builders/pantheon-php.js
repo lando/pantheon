@@ -40,7 +40,6 @@ module.exports = {
       options.environment = utils.getPantheonEnvironment(options);
       options.confSrc = path.resolve(__dirname, '..', 'config');
       options.nginxServiceType = 'pantheon-nginx';
-
       loadScripts(options);
       super(id, options, factory);
     };
