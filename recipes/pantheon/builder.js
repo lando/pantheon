@@ -173,17 +173,13 @@ module.exports = {
       options.database = `${dbService}:${dbVersion}`;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
-      
+
       // Add in cache if applicable
       if (options.cache) options = _.merge({}, options, utils.getPantheonCache);
       // Add in edge if applicable
       if (options.edge) options = _.merge({}, options, utils.getPantheonEdge(options));
       // Add in index if applicable
       if (options.index) options = _.merge({}, options, utils.getPantheonIndex(options));
-
-      // Add in appserver. 
-      //options.services.appserver = _.merge({}, options.services.appserver, options); 
-
 
       options.services = _.merge({}, getServices(options), options.services);
 

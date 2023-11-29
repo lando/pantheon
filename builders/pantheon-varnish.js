@@ -1,6 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
 const LandoVarnish = require('./../node_modules/@lando/varnish/builders/varnish.js');
 
 // Builder

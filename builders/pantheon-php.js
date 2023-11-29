@@ -6,7 +6,6 @@ const path = require('path');
 const landoPhpPath = path.join(__dirname, '../node_modules/@lando/php');
 const LandoPhp = require(`${landoPhpPath}/builders/php.js`);
 const utils = require('./../lib/utils.js');
-const { load } = require('js-yaml');
 
 const loadScripts = options => {
   const lando = _.get(options, '_app._lando');
@@ -26,14 +25,13 @@ module.exports = {
   parent: '_appserver',
   builder: (parent, config) => class PantheonPhp extends LandoPhp.builder(parent, LandoPhp.config) {
     constructor(id, options = {}, factory) {
-
       // Normalize because 7.0/8.0 right away gets handled strangely by js-yaml
       if (options.php === '7' || options.php === 7) options.php = '7.0';
       if (options.php === '8' || options.php === 8) options.php = '8.0';
-     
+
       options.image = `devwithlando/pantheon-appserver:${options.php}-${options.tag}`;
       options.via = 'nginx:1.16';
-      
+
       // Add in the prepend.php
       // @TODO: this throws a weird DeprecationWarning: 'root' is deprecated, use 'global' for reasons not immediately clear
       // So we are doing this a little weirdly to avoid hat until we can track things down better
