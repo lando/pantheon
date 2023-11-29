@@ -456,15 +456,15 @@
   resolved "https://registry.yarnpkg.com/@lando/argv/-/argv-1.1.2.tgz#e0abe88428ebbdba01eddce84f9fc3f72157e81d"
   integrity sha512-b3d4zF1QBrFgUCFxEb48b0hse98wRhfnnydFsKXTcQc4aogfCBZc9wbgktLrs6TUtLKvU57YtlfNU4ack1ll7w==
 
-"@lando/lamp@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@lando/lamp/-/lamp-0.10.0.tgz#6253defe652e9d7901d4c55501b5c3af53549421"
-  integrity sha512-Pf0Ld9JgSx8Iu01HRG46yLvdPh4OvodgY9HtpiGmHTGU7xIMuv1w1mkmramWaeaOnUHZpmvuIc+rifmCjjzZbA==
+"@lando/lamp@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@lando/lamp/-/lamp-0.10.1.tgz#6113d1cdef237f1e9ea16a2850c79130f854da3a"
+  integrity sha512-97OgwJ9x3TJlYqPM2eMyy+l/ky0crsnO8XJxAo6y4Uc9QCrsazVLcjUpsyex9A143+8Rlw/Rxb2CkTqgrxFMEA==
   dependencies:
     "@lando/mariadb" "^0.9.0"
     "@lando/mongo" "^0.9.0"
     "@lando/mysql" "^0.9.0"
-    "@lando/php" "^0.10.0"
+    "@lando/php" "0.10.1"
     "@lando/postgres" "^0.10.0"
     lodash "^4.17.21"
 
@@ -520,10 +520,19 @@
   dependencies:
     lodash "^4.17.21"
 
-"@lando/php@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@lando/php/-/php-0.10.0.tgz#b7761cd97a6172b6ee9f857a5a52febb8363bf42"
-  integrity sha512-q2VLBXHzuuozVTckGzEi7o6d+LBRbo/wBoxsl7YnGHLOevtJZDMgKjj6hF2QSiDj0Yg5vAwvUiY+Yj8WPubUCQ==
+"@lando/php@0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@lando/php/-/php-0.10.1.tgz#744e4ddaea46aab1ae3a6fd0afdc742bbe7e4a28"
+  integrity sha512-8mhCKLikESCAr3PWKNbxq3RIaJprxc28Yr3oCxwNlWngkEC57yUh2q4wIClCTiAWtAYy0MVvsEGhP2gQ95hXMQ==
+  dependencies:
+    "@lando/nginx" "0.10.0"
+    lodash "^4.17.21"
+    semver "^7.3.7"
+
+"@lando/php@0.10.2":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@lando/php/-/php-0.10.2.tgz#7ddada02ce92864da7db31c9fe4f171c02f54626"
+  integrity sha512-5RB2OIQ1WuaKl/uKJGIrUY5tadsNDxVjrCZoFv+SD4HpRrSO6ioWDikAMkhZBuqtJH0qMoyyFLYeQy8q6ukbyQ==
   dependencies:
     "@lando/nginx" "0.10.0"
     lodash "^4.17.21"
