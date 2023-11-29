@@ -31,7 +31,6 @@ module.exports = {
       if (options.php === '7' || options.php === 7) options.php = '7.0';
       if (options.php === '8' || options.php === 8) options.php = '8.0';
      
-      console.log(options.php); 
       options.image = `devwithlando/pantheon-appserver:${options.php}-${options.tag}`;
       options.via = 'nginx:1.16';
       
@@ -42,6 +41,7 @@ module.exports = {
       // Add in our environment
       options.environment = utils.getPantheonEnvironment(options);
       options.confSrc = path.resolve(__dirname, '..', 'config');
+      options.nginxServiceType = 'pantheon-nginx';
 
       loadScripts(options);
       super(id, options, factory);
