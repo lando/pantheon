@@ -69,6 +69,7 @@ const getServices = options => ({
     solrTag: options.solrTag,
     php: options.php,
     php_version: options.php_version,
+    version: options.php,
     tag: options.tag,
     id: options.id,
     site: options.site,

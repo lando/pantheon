@@ -3,19 +3,19 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
-const landoPhpPath = path.join(__dirname, '../node_modules/@lando/php');
-const LandoPhp = require(`${landoPhpPath}/builders/php.js`);
+const LandoPhp = require('@lando/php/builders/php.js');
 const utils = require('./../lib/utils.js');
 
 const loadScripts = options => {
   const lando = _.get(options, '_app._lando');
+  const landoPhpScriptsPath = path.join(path.dirname(require.resolve('@lando/php/package.json')), 'scripts');
   // Move the script to the confDir and make executable.
-  if (fs.existsSync(path.join(landoPhpPath, 'scripts'))) {
+  if (fs.existsSync(landoPhpScriptsPath)) {
     const confDir = path.join(lando.config.userConfRoot, 'scripts');
-    const dest = lando.utils.moveConfig(path.join(landoPhpPath, 'scripts'), confDir);
+    const dest = lando.utils.moveConfig(landoPhpScriptsPath, confDir);
     lando.utils.makeExecutable(fs.readdirSync(dest), dest);
     lando.log.debug('automoved scripts from %s to %s and set to mode 755',
-      path.join(landoPhpPath, 'scripts'), confDir);
+      landoPhpScriptsPath, confDir);
   }
 };
 
@@ -29,6 +29,7 @@ module.exports = {
       if (options.php === '7' || options.php === 7) options.php = '7.0';
       if (options.php === '8' || options.php === 8) options.php = '8.0';
 
+      options.version = options.php;
       options.image = `devwithlando/pantheon-appserver:${options.php}-${options.tag}`;
       options.via = 'nginx:1.16';
 
