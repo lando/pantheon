@@ -36,7 +36,8 @@ jobs:
         with:
           lando-version: ${{ matrix.lando-version }}
           config: |
-            plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
+            setup.skipCommonPlugins=true
+            setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
           telemetry: false
       - name: Setup lando ${{ matrix.lando-version }}
         uses: lando/setup-lando@v2
