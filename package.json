@@ -18,6 +18,11 @@
     "node": ">=18.0.0"
   },
   "bundledDependencies": [
+    "@lando/mariadb",
+    "@lando/php",
+    "@lando/redis",
+    "@lando/solr",
+    "@lando/varnish",
     "axios",
     "bluebird",
     "dayjs",
@@ -51,7 +56,7 @@
     "test": "yarn lint && yarn test:unit"
   },
   "dependencies": {
-    "@lando/lamp": "^0.10.1",
+    "@lando/mariadb": "0.9.0",
     "@lando/php": "0.10.2",
     "@lando/redis": "^0.11.0",
     "@lando/solr": "0.9.0",

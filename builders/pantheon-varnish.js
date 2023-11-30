@@ -1,6 +1,6 @@
 'use strict';
 
-const LandoVarnish = require('./../node_modules/@lando/varnish/builders/varnish.js');
+const LandoVarnish = require('@lando/varnish/builders/varnish.js');
 
 // Builder
 module.exports = {
