@@ -70,7 +70,6 @@ const getServices = options => ({
     php: options.php,
     php_version: options.php_version,
     version: options.php,
-    tag: options.tag,
     id: options.id,
     site: options.site,
     framework: options.framework,
@@ -146,8 +145,6 @@ module.exports = {
     tooling: {terminus: {
       service: 'appserver',
     }},
-    gen3: ['7.2', '7.1', '7.0', '5.6'],
-    gen4: ['8.2', '8.1', '8.0', '7.4', '7.3'],
     unarmedVersions: ['5.3', '5.5'],
     xdebug: false,
     webroot: '.',
@@ -165,8 +162,7 @@ module.exports = {
 
       // Bump the tags if we are ARMed and on an approved version
       if (isArmed) options.solrTag = '3.6-3';
-      if (_.includes(options.gen3, options.php)) options.tag = '3';
-      if (_.includes(options.gen4, options.php)) options.tag = '4';
+
 
       // Reset the drush version if we have a composer.json entry
       const composerFile = path.join(options.root, 'composer.json');
@@ -198,6 +194,7 @@ module.exports = {
       options = setTooling(options, tokens);
       options = setBuildSteps(options);
 
+      // Add appserver and database services.
       options.services = _.merge({}, getServices(options), options.services);
 
       // Send downstream
