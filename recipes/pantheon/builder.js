@@ -79,6 +79,13 @@ const getServices = options => ({
   },
   database: {
     type: options.database,
+    config: {
+      creds: {
+        database: 'pantheon',
+        password: 'pantheon',
+        user: 'pantheon',
+      },
+    },
   },
 });
 
