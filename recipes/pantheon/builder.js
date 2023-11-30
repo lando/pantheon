@@ -121,7 +121,7 @@ module.exports = {
     build_root: [],
     run_root: [],
     cache: true,
-    confSrc: path.resolve(__dirname, '..', 'config'),
+    confSrc: path.resolve(__dirname, '../..', 'config'),
     defaultFiles: {
       php: 'php.ini',
       database: 'mysql.cnf',
