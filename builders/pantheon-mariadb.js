@@ -11,6 +11,7 @@ module.exports = {
   config: dbConfig,
   builder: (parent, config) => class PantheonMariadb extends LandoMariadb.builder(parent, LandoMariadb.config) {
     constructor(id, options = {}) {
+      options = _.merge({}, config, options);
       super(id, options, {services: _.set({}, options.name)});
     };
   },
