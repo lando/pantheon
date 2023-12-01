@@ -27,6 +27,8 @@ const setTooling = (options, tokens) => {
   options.tooling.mysql = mysql.getPantheonMySql;
   options.tooling.php = php.getPantheonPhp;
   options.tooling.composer = php.getPantheonComposer;
+  options.tooling['db-export [file]'] = mysql.getPantheonDbExport;
+  options.tooling['db-import <file>'] = mysql.getPantheonDbImport;
 
   // Add in the framework-correct tooling
   options.tooling = _.merge({}, options.tooling, utils.getPantheonTooling(options.framework));
