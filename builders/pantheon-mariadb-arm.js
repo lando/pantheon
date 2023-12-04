@@ -2,10 +2,11 @@
 
 // Modules
 const _ = require('lodash');
+const path = require('path');
 
 // Builder
 module.exports = {
-  name: 'pantheon-mariadb',
+  name: 'pantheon-mariadb-arm',
   config: {
     version: '10.3', // @todo: this will probably be 10.3, check D6 support.
     supported: ['10.6', '10.4', '10.3', '10.1'],
@@ -17,7 +18,7 @@ module.exports = {
       '10.1': 'mariadb:10.1.48',
     },
     patchesSupported: true,
-    confSrc: __dirname,
+    confSrc: path.resolve(__dirname, '..', 'config'),
     creds: {
       database: 'pantheon',
       password: 'pantheon',
@@ -33,7 +34,7 @@ module.exports = {
     },
   },
   parent: '_service',
-  builder: (parent, config) => class PantheonMariaDb extends parent {
+  builder: (parent, config) => class PantheonMariaDbArm extends parent {
     constructor(id, options = {}) {
       options = _.merge({}, config, options);
 

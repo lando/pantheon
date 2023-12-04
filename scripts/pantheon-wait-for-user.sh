@@ -8,12 +8,13 @@ id="${2:-$LANDO_HOST_UID}"
 
 # retry settings
 attempt=0
-delay=1
-retry=5
+delay=2
+retry=100
 
 until [ "$attempt" -ge "$retry" ]
 do
-  id "$user"| grep uid | grep "$id" &>/dev/null && break
+  echo "Waiting for user $user with id $id to be created..."
+  id -u "$user" | grep "$id" &>/dev/null && break
   attempt=$((attempt+1))
   sleep "$delay"
 done
