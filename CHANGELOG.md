@@ -1,6 +1,8 @@
-## v0.13.1 - [November 6, 2023](https://github.com/lando/pantheon/releases/tag/v0.13.1)
+## v0.14.0 - [December 4, 2023](https://github.com/lando/pantheon/releases/tag/v0.13.1)
 
-* Fixed broken `mkdirp` module usage
+* Fixed broken `mkdirp` module usage. [#202](https://github.com/lando/pantheon/pull/202)
+* Isolated plugin. [#202](https://github.com/lando/pantheon/pull/202)
+* Extended wait time for user. [#202](https://github.com/lando/pantheon/pull/202)
 
 ## v0.13.0 - [October 5, 2023](https://github.com/lando/pantheon/releases/tag/v0.13.0)
 
