@@ -114,6 +114,7 @@ module.exports = {
       },
     },
     build: (options, lando) => ([
+      {name: 'wait-for-user', cmd: '/helpers/pantheon-wait-for-user.sh'},
       {name: 'generate-key', cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`},
       {name: 'post-key', func: (options, lando) => {
         const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
@@ -129,7 +130,6 @@ module.exports = {
         });
       }},
       {name: 'reload-keys', cmd: '/helpers/load-keys.sh --silent', user: 'root'},
-      {name: 'wait-for-user', cmd: '/helpers/pantheon-wait-for-user.sh'},
       {name: 'clone-repo', cmd: options => `/helpers/get-remote-url.sh ${options['pantheon-git-url']}`, remove: 'true'},
     ]),
   }],
