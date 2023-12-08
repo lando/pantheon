@@ -77,7 +77,6 @@ const getServices = options => ({
     framework: options.framework,
     drush_version: options.drush_version,
     root: options.root,
-    via: 'nginx:25',
   },
   database: {
     type: options.database,

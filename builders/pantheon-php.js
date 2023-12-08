@@ -38,7 +38,7 @@ module.exports = {
 
       options.version = options.php;
       options.image = `devwithlando/pantheon-appserver:${options.php}-${options.tag}`;
-      options.via = 'nginx:1.16';
+      options.via = 'nginx:1.25';
 
       // Add in the prepend.php
       // @TODO: this throws a weird DeprecationWarning: 'root' is deprecated, use 'global' for reasons not immediately clear
