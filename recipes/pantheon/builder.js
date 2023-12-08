@@ -77,6 +77,7 @@ const getServices = options => ({
     framework: options.framework,
     drush_version: options.drush_version,
     root: options.root,
+    via: 'nginx:25',
   },
   database: {
     type: options.database,
@@ -103,20 +104,6 @@ const getServiceConfig = (options, types = ['php', 'server', 'vhosts']) => {
   });
   return config;
 };
-
-  // options.services.appserver.volumes = [];
-  // options.services.appserver.type = 'pantheon-php';
-  // options.services.appserver.via = 'nginx:1.16';
-  // options.services.appserver.confDest = options.confDest;
-  // options.services.appserver.framework = options.framework;
-  // options.services.appserver.drush_version = options.drush_version;
-  // options.services.appserver.php = options.php;
-  // options.services.appserver.app = options.app;
-  // options.services.appserver.root = options.root;
-  // options.services.appserver.id = options.id;
-  // options.services.appserver.site = options.site;
-  // options.services.appserver.php_version = options.php_version;
-  // options.services.appserver.solrTag = options.solrTag;
 
 /*
  * Build Drupal 7
