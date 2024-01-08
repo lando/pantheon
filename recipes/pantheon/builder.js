@@ -136,6 +136,7 @@ module.exports = {
     unarmedVersions: ['5.3', '5.5'],
     xdebug: false,
     webroot: '.',
+    proxy: {},
   },
   builder: (parent, config) => class LandoPantheon extends parent {
     constructor(id, options = {}) {
@@ -150,7 +151,6 @@ module.exports = {
 
       // Bump the tags if we are ARMed and on an approved version
       if (isArmed) options.solrTag = '3.6-3';
-
 
       // Reset the drush version if we have a composer.json entry
       const composerFile = path.join(options.root, 'composer.json');
@@ -176,6 +176,11 @@ module.exports = {
       if (options.edge) options = _.merge({}, options, utils.getPantheonEdge(options));
       // Add in index if applicable
       if (options.index) options = _.merge({}, options, utils.getPantheonIndex(options));
+
+      if (!_.has(options, 'proxyService')) {
+        options.proxyService = 'appserver_nginx';
+      }
+      options.proxy = _.set(options.proxy, options.proxyService, [`${options.app}.${options._app._config.domain}`]);
 
       // Handle other stuff
       const tokens = utils.sortTokens(options._app.pantheonTokens, options._app.terminusTokens);
