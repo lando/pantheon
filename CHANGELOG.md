@@ -1,5 +1,10 @@
+## v1.0.1 - [January 8, 2024](https://github.com/lando/pantheon/releases/tag/v1.0.1)
+
+* Fixed missing proxy configuration.
+
 ## v1.0.0 - [December 7, 2023](https://github.com/lando/pantheon/releases/tag/v1.0.0)
-    * Dialed fully for `lando update`
+
+* Dialed fully for `lando update`
 
 ## v0.14.0 - [December 4, 2023](https://github.com/lando/pantheon/releases/tag/v0.14.0)
 

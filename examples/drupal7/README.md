@@ -122,9 +122,9 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal7 | grep lando
 cd drupal7
 lando php -m | grep xdebug || echo $? | grep 1
 
-# Should be running nginx 1.16
+# Should be running nginx 1.25
 cd drupal7
-lando ssh -s appserver_nginx -c "/opt/bitnami/nginx/sbin/nginx -v 2>&1 | grep 1.16"
+lando ssh -s appserver_nginx -c "/opt/bitnami/nginx/sbin/nginx -v 2>&1 | grep 1.25"
 
 # Should have a running solr instance
 cd drupal7
