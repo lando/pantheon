@@ -24,7 +24,6 @@ module.exports = {
       password: 'pantheon',
       user: 'pantheon',
     },
-    healthcheck: 'mysql -uroot --silent --execute "SHOW DATABASES;"',
     port: '3306',
     defaultFiles: {
       database: 'my_custom.cnf',
@@ -40,6 +39,8 @@ module.exports = {
 
       // Change the me user
       options.meUser = 'mysql';
+
+      if (!options.healthcheck) options.healthcheck = require('../utils/get-mariadb-healthcheck')(options);
 
       const mariadb = {
         image: `mariadb:${options.version}`,
