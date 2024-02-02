@@ -17,6 +17,6 @@ Lando provides a snazzy integration that:
 
 However, in order to profit, **you must** have an account and a site on Pantheon to be able to use this recipe. If you don't, you can sign up [here](https://pantheon.io/register).
 
-You should also check out Pantheon's [local dev](https://docs.pantheon.io/local-development/) docs.
+You should also check out Pantheon's [local dev](https://docs.pantheon.io/guides/local-development/) docs.
 
 

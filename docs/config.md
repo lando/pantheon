@@ -70,7 +70,7 @@ By default, Lando will spin up a **very close** approximation of the Pantheon st
 * [solr index](https://docs.pantheon.io/solr/)
 * [varnish edge](https://docs.pantheon.io/caching-advanced-topics/)
 
-Please review the docs to get a better handle on [how Pantheon works](https://pantheon.io/how-it-works) below:
+Please review the docs to get a better handle on [how Pantheon works](https://pantheon.io/about/how-it-works) below:
 
 *   [Pantheon Edge and Varnish](https://docs.pantheon.io/varnish/)
 *   [Pantheon Index and Solr](https://docs.pantheon.io/solr/)
