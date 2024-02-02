@@ -5,7 +5,7 @@ description: Learn how to develop and contribute to the Lando Pantheon service
 
 # Development
 
-This guide contains information to help onboard developers to work on the [pantheon](https://pantheon.microsoft.com/en-us/) integration, hereafter referred to as *the plugin*.
+This guide contains information to help onboard developers to work on the [pantheon](https://pantheon.io/) integration, hereafter referred to as *the plugin*.
 
 ## Requirements
 
