@@ -9,6 +9,8 @@ mailchimp:
   button: Sign me up!
 ---
 
+# Connecting to Your Database
+
 Just like Pantheon, Lando will automatically configure your application to connect to its local database.
 
 You can also check out the environment variable called [`LANDO INFO`](https://docs.lando.dev/guides/lando-info.html) as it contains useful information about how your application can access other Lando services.

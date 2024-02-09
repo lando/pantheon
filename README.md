@@ -2,7 +2,7 @@
 
 This is the _official_ [Lando](https://lando.dev) plugin for [Pantheon](https://pantheon.io). When installed it...
 
-* Closely mimics Pantheon's [stack, versions](https://pantheon.io/docs/platform/) and [environment](https://pantheon.io/docs/read-environment-config/) locally
+* Closely mimics Pantheon's [stack, versions](https://docs.pantheon.io/platform/) and [environment](https://docs.pantheon.io/read-environment-config/) locally
 * Allows you to easily `pull` your Pantheon site down locally
 * Allows you to easily `push` your changes back to Pantheon
 * Installs `drush`, `terminus` and other power tools.

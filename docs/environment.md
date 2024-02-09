@@ -7,7 +7,7 @@ description: Learn how to work with Environment variables within the Lando Panth
 
 ## Environment Variables
 
-Like Pantheon, Lando will also [inject variables](https://pantheon.io/docs/read-environment-config/) into your runtime container so that you have useful information stored about your app. These are stored directly in the environment (e.g. accessible via [`getenv()`](http://php.net/manual/en/function.getenv.php)), `$_ENV`, `$_SERVER` or as defined `php` constants.
+Like Pantheon, Lando will also [inject variables](https://docs.pantheon.io/read-environment-config/) into your runtime container so that you have useful information stored about your app. These are stored directly in the environment (e.g. accessible via [`getenv()`](https://www.php.net/manual/en/function.getenv.php)), `$_ENV`, `$_SERVER` or as defined `php` constants.
 
 A non-exhaustive list of some of the most commonly used config is shown below:
 
@@ -55,6 +55,6 @@ PRESSFLOW_SETTINGS: JSON object of Drupal config and settings.
 DRUPAL_HASH_SALT: Needed for Drupal8. We set this automatically.
 ```
 
-These are in addition to the [default variables](https://docs.lando.dev/config/env.html#default-environment-variables) that we inject into every container.
+These are in addition to the [default variables](https://docs.lando.dev/core/v3/env.html#default-environment-variables) that we inject into every container.
 
 **NOTE:** These can vary based on the choices you make in your recipe config.

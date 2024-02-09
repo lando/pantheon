@@ -5,9 +5,9 @@ description: Learn how to configure the Lando Pantheon recipe.
 
 # Configuration
 
-While Lando [recipes](https://docs.lando.dev/config/recipes.html) set sane defaults so they work out of the box, they are also [configurable](https://docs.lando.dev/config/recipes.html#config).
+While Lando [recipes](https://docs.lando.dev/core/v3/recipes.html) set sane defaults so they work out of the box, they are also [configurable](https://docs.lando.dev/core/v3/recipes.html#config).
 
-Here are the configuration options, set to the default values, for this recipe. If you are unsure about where this goes or what this means we *highly recommend* scanning the [recipes documentation](https://docs.lando.dev/config/recipes.html) to get a good handle on how the magicks work.
+Here are the configuration options, set to the default values, for this recipe. If you are unsure about where this goes or what this means we *highly recommend* scanning the [recipes documentation](https://docs.lando.dev/core/v3/recipes.html) to get a good handle on how the magicks work.
 
 ```yaml
 recipe: pantheon
@@ -22,13 +22,13 @@ config:
   composer_version: "2.2.12"
 ```
 
-If you do not already have a [Landofile](https://docs.lando.dev/config/lando.html) for your Pantheon site, we highly recommend you use [`lando init`](https://docs.lando.dev/basics/init.html) to get one as that will automatically populate the `framework`, `id` and `site` for you. Manually creating a Landofile with these things set correctly can be difficult and is *highly discouraged.*
+If you do not already have a [Landofile](https://docs.lando.dev/core/v3) for your Pantheon site, we highly recommend you use [`lando init`](https://docs.lando.dev/cli/init.html) to get one as that will automatically populate the `framework`, `id` and `site` for you. Manually creating a Landofile with these things set correctly can be difficult and is *highly discouraged.*
 
-Note that if the above config options are not enough, all Lando recipes can be further [extended and overriden](https://docs.lando.dev/config/recipes.html#extending-and-overriding-recipes).
+Note that if the above config options are not enough, all Lando recipes can be further [extended and overriden](https://docs.lando.dev/core/v3/recipes.html#extending-and-overriding-recipes).
 
 ## Choosing service versions
 
-Lando will look for a [`pantheon.yml`](https://pantheon.io/docs/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and use the values you've set for `php_version`, `database`, and `search` you've specified there.
+Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and use the values you've set for `php_version`, `database`, and `search` you've specified there.
 
 This means that **you can not configure php, mysql, or solr versions directly in your Landofile for this recipe.**
 
@@ -47,7 +47,7 @@ search:
 
 ## Choosing a nested webroot
 
-Lando will look for a [`pantheon.yml`](https://pantheon.io/docs/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and use whatever `web_docroot` you've specified there.
+Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and use whatever `web_docroot` you've specified there.
 
 This means that **you cannot configure the webroot directly in your Landofile for this recipe.**
 
@@ -64,17 +64,17 @@ web_docroot: true
 
 By default, Lando will spin up a **very close** approximation of the Pantheon stack:
 
-* [php appserver served by nginx](https://pantheon.io/docs/application-containers/)
+* [php appserver served by nginx](https://docs.pantheon.io/application-containers/)
 * [mariadb database](https://pantheon.io/blog/using-mariadb-mysql-replacement)
-* [redis cache](https://pantheon.io/docs/redis/)
-* [solr index](https://pantheon.io/docs/solr/)
-* [varnish edge](https://pantheon.io/docs/caching-advanced-topics/)
+* [redis cache](https://docs.pantheon.io/redis/)
+* [solr index](https://docs.pantheon.io/solr/)
+* [varnish edge](https://docs.pantheon.io/caching-advanced-topics/)
 
-Please review the docs to get a better handle on [how Pantheon works](https://pantheon.io/how-it-works) below:
+Please review the docs to get a better handle on [how Pantheon works](https://pantheon.io/about/how-it-works) below:
 
-*   [Pantheon Edge and Varnish](https://pantheon.io/docs/varnish/)
-*   [Pantheon Index and Solr](https://pantheon.io/docs/solr/)
-*   [Pantheon Caching and Redis](https://pantheon.io/docs/redis/)
+*   [Pantheon Edge and Varnish](https://docs.pantheon.io/varnish/)
+*   [Pantheon Index and Solr](https://docs.pantheon.io/solr/)
+*   [Pantheon Caching and Redis](https://docs.pantheon.io/redis/)
 
 What works on Pantheon **should** also work on Lando but recognize that the Pantheon platform is changing all the time and Lando is necessarily reactive.
 
@@ -110,7 +110,7 @@ However, for more information, we recommend you consult the [php service documen
 
 ## Working With Multidev
 
-Pantheon [multidev](https://pantheon.io/docs/multidev/) is a great (and easy) way to kick-start an advanced dev workflow for teams. By default, `lando` will pull down your `dev` environment but you can use `lando switch <env>` to switch your local copy over to a Pantheon multidev environment.
+Pantheon [multidev](https://docs.pantheon.io/multidev/) is a great (and easy) way to kick-start an advanced dev workflow for teams. By default, `lando` will pull down your `dev` environment but you can use `lando switch <env>` to switch your local copy over to a Pantheon multidev environment.
 
 ### Usage
 
@@ -134,7 +134,7 @@ lando switch feature-1 --no-db --no-files
 
 Lando supports WordPress site networks both in folder and sub-domain configuration. At this time, this feature is considered experimental, so there may be edge cases and Gremlins to shake out.
 
-Make sure to first read [Pantheon's site network documentation](https://pantheon.io/docs/guides/multisite) and then consider the following edits you probably need to make to your `wp-config.php`:
+Make sure to first read [Pantheon's site network documentation](https://docs.pantheon.io/guides/multisite) and then consider the following edits you probably need to make to your `wp-config.php`:
 
 ```php
 if ( ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {

@@ -45,7 +45,7 @@ lando drush dl webform
 
 ## Customizing Pantheon tooling
 
-If you would like to customize `lando pull`, `lando push` or `lando switch` you can do so using [tooling](https://docs.lando.dev/config/tooling.html#tooling) or [tooling overrides](https://docs.lando.dev/config/tooling.html#overriding) directly to achieve your specific use case. This should allow you to:
+If you would like to customize `lando pull`, `lando push` or `lando switch` you can do so using [tooling](https://docs.lando.dev/core/v3/tooling.html#tooling) or [tooling overrides](https://docs.lando.dev/core/v3/tooling.html#overriding) directly to achieve your specific use case. This should allow you to:
 
 * Disable Pantheon tooling
 * Provide additional `pull`, `push` or `switch` use cases
@@ -98,9 +98,9 @@ tooling:
 
 ## Using Drush
 
-Lando will look for a [`pantheon.yml`](https://pantheon.io/docs/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and will globally install whatever `drush_version` you've specified there. However, it will not go below Drush 8. This means that if you've specified Drush 5, Lando will still install Drush 8.
+Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and will globally install whatever `drush_version` you've specified there. However, it will not go below Drush 8. This means that if you've specified Drush 5, Lando will still install Drush 8.
 
-If this has not been specified then we will globally install the [latest version of Drush 8](http://docs.drush.org/en/8.x/install/) unless you are running on `php 5.3` in which case we will install the [latest version of Drush 7](http://docs.drush.org/en/7.x/install/). For Backdrop sites, we will also install the latest version of [Backdrop Drush](https://github.com/backdrop-contrib/drush).
+If this has not been specified then we will globally install the [latest version of Drush 8](http://docs.drush.org/en/8.x/install/) unless you are running on `php 5.3` in which case we will install the [latest version of Drush 7](http://docs.drush.org/en/7.x/install/). For Backdrop sites, we will also install the latest version of [Backdrop Drush](https://github.com/backdrop-contrib/backdrop-drush-extension).
 
 This means that you should be able to use `lando drush` out of the box. That said, you can [easily change](https://docs.lando.dev/pantheon/config.html) the Drush installation behavior if you so desire.
 
@@ -110,7 +110,7 @@ If you decide to list `drush` as a dependency in your project's `composer.json` 
 
 If you are using `web_docroot` in your `pantheon.yml`, you will need to remember to `cd` into that directory and run `lando drush` from there. This is because many site-specific `drush` commands will only run correctly if you run `drush` from a directory that also contains a Drupal site.
 
-If you are annoyed by having to `cd` into that directory every time you run a `drush` command, you can get around it by [overriding](https://docs.lando.dev/config/tooling.html#overriding) the `drush` tooling command in your [Landofile](https://docs.lando.dev/config/lando.html) so that Drush always runs from your `webroot`.
+If you are annoyed by having to `cd` into that directory every time you run a `drush` command, you can get around it by [overriding](https://docs.lando.dev/core/v3/tooling.html#overriding) the `drush` tooling command in your [Landofile](https://docs.lando.dev/core/v3) so that Drush always runs from your `webroot`.
 
 **Note that hard coding the `root` like this may have unforeseen and bad consequences for some `drush` commands such as `drush scr`.**
 
@@ -144,7 +144,7 @@ You should be able to use `terminus` commands in the exact same way by prefixing
 
 ### Terminus Plugins
 
-By default, Lando will only install `terminus` proper but you can add [Terminus Plugins](https://pantheon.io/docs/terminus/plugins/directory/) to your Landofile with a [build step](https://docs.lando.dev/config/services.html#build-steps).
+By default, Lando will only install `terminus` proper but you can add [Terminus Plugins](https://docs.pantheon.io/terminus/plugins/directory/) to your Landofile with a [build step](https://docs.lando.dev/core/v3/lando-service.html#build-steps).
 
 You will want to consult the relevant install instructions for each plugin but an example that installs the [Terminus Build Tools](https://github.com/pantheon-systems/terminus-build-tools-plugin) plugin is shown below:
 

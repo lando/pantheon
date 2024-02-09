@@ -19,7 +19,7 @@ Lando provides a command for Pantheon sites called `lando pull` to get your data
 
 On a database pull, Lando will attempt to clear the cache of the remote environment (unless it is the live environment) to minimize the size of the import.
 
-Note that if Lando cannot find a [Pantheon machine token](https://pantheon.io/docs/machine-tokens/) associated with your site, it will prompt you for one. You can also switch to a different machine token by using the  `--auth` option.
+Note that if Lando cannot find a [Pantheon machine token](https://docs.pantheon.io/machine-tokens/) associated with your site, it will prompt you for one. You can also switch to a different machine token by using the  `--auth` option.
 
 #### Usage
 
@@ -127,7 +127,7 @@ While a best practices workflow suggests you put all your changes in code and pu
 
 **By default, we set `--database` or `--files` to `none` since this is the suggested best practice**.
 
-Note that if Lando cannot find a [Pantheon machine token](https://pantheon.io/docs/machine-tokens/) associated with your site, it will prompt you for one. You can also switch to a different machine token by using the  `--auth` option.
+Note that if Lando cannot find a [Pantheon machine token](https://docs.pantheon.io/machine-tokens/) associated with your site, it will prompt you for one. You can also switch to a different machine token by using the  `--auth` option.
 
 
 #### Usage

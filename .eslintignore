@@ -1,7 +1,8 @@
-.temp
-.cache
+temp
+cache
 dist
 _site
 
 examples/*/drupal*
 examples/*/wordpress
+!.vitepress
