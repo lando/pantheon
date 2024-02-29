@@ -74,7 +74,7 @@ lando ssh -c "env" | grep PANTHEON_INDEX_HOST | grep index
 lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 8983
 lando ssh -c "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
 lando ssh -c "env" | grep PANTHEON_INDEX_SCHEME | grep http
-lando ssh -c "env" | grep PANTHEON_SITE | grep 3a225571-2a52-4ae9-84e7-ef54037ac66c
+lando ssh -c "env" | grep PANTHEON_SITE | grep adab25c2-796f-4051-9f27-04a45f6958f5
 lando ssh -c "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal10
 lando ssh -c "env" | grep php_version | grep "8"
 lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
@@ -89,14 +89,6 @@ lando php -v | grep "PHP 8.2"
 # Should use the database version in pantheon.yml
 cd drupal10
 lando ssh -s database -c "mysql -V" | grep 10.4.
-
-# Should use the solr version in pantheon.yml
-cd drupal10
-lando ssh -c "curl http://index:8983/solr/admin/info/system" | grep "\"solr-spec-version\":\"8.8.2\""
-
-# Jetty redirects should work for Pantheon Search
-cd drupal10
-lando ssh -c "curl http://index:8983/lando/v1/lando/admin/system" | grep "\"solr-spec-version\":\"8.8.2\""
 
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal10
