@@ -71,7 +71,7 @@ lando ssh -c "env" | grep FILEMOUNT | grep "sites/default/files"
 lando ssh -c "env" | grep PANTHEON_ENVIRONMENT | grep lando
 lando ssh -c "env" | grep PANTHEON_INDEX_CORE | grep "\/lando"
 lando ssh -c "env" | grep PANTHEON_INDEX_HOST | grep index
-lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 8983
+lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 449
 lando ssh -c "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
 lando ssh -c "env" | grep PANTHEON_INDEX_SCHEME | grep http
 lando ssh -c "env" | grep PANTHEON_SITE | grep adab25c2-796f-4051-9f27-04a45f6958f5
