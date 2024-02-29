@@ -1,3 +1,5 @@
+# LANDOPANTHEONDRUPALNGINXCONF
+
 # We use $http_user_agent_https to determine if the request arrived at the platform
 # as an http or an https request. Capture that here for use later. $client_scheme
 # will be appropriately set to either http or https.
