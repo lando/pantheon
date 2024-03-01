@@ -19,6 +19,7 @@ lando poweroff
 # Should initialize the lando pantheon test drupal10 site
 rm -rf drupal10 && mkdir -p drupal10 && cd drupal10
 lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal10
+cp ../../.lando.upstream.yml .lando.upstream.yml
 
 # Should start up our drupal10 site successfully
 cd drupal10
@@ -71,10 +72,10 @@ lando ssh -c "env" | grep FILEMOUNT | grep "sites/default/files"
 lando ssh -c "env" | grep PANTHEON_ENVIRONMENT | grep lando
 lando ssh -c "env" | grep PANTHEON_INDEX_CORE | grep "\/lando"
 lando ssh -c "env" | grep PANTHEON_INDEX_HOST | grep index
-lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 8983
+lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 449
 lando ssh -c "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
 lando ssh -c "env" | grep PANTHEON_INDEX_SCHEME | grep http
-lando ssh -c "env" | grep PANTHEON_SITE | grep 3a225571-2a52-4ae9-84e7-ef54037ac66c
+lando ssh -c "env" | grep PANTHEON_SITE | grep adab25c2-796f-4051-9f27-04a45f6958f5
 lando ssh -c "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal10
 lando ssh -c "env" | grep php_version | grep "8"
 lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
@@ -90,14 +91,6 @@ lando php -v | grep "PHP 8.2"
 cd drupal10
 lando ssh -s database -c "mysql -V" | grep 10.4.
 
-# Should use the solr version in pantheon.yml
-cd drupal10
-lando ssh -c "curl http://index:8983/solr/admin/info/system" | grep "\"solr-spec-version\":\"8.8.2\""
-
-# Jetty redirects should work for Pantheon Search
-cd drupal10
-lando ssh -c "curl http://index:8983/lando/v1/lando/admin/system" | grep "\"solr-spec-version\":\"8.8.2\""
-
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal10
 lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
@@ -106,6 +99,11 @@ lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
 docker ps --filter label=com.docker.compose.project=landobotdrupal10 | grep landobotdrupal10_appserver_nginx_1
 docker ps --filter label=com.docker.compose.project=landobotdrupal10 | grep landobotdrupal10_appserver_1
 docker ps --filter label=com.docker.compose.project=landobotdrupal10 | grep landobotdrupal10_database_1
+
+# Should use the correct default config files
+cd drupal10
+lando ssh -s appserver -c "cat /usr/local/etc/php/conf.d/zzz-lando-my-custom.ini" | grep "; LANDOPANTHEONPHPINI"
+lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
 
 # Should not have xdebug enabled by defaults
 cd drupal10

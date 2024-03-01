@@ -4,12 +4,12 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
-const php = require('./../../lib/php');
-const pull = require('./../../lib/pull');
-const push = require('./../../lib/push');
-const change = require('./../../lib/switch');
-const mysql = require('./../../lib/mysql');
-const utils = require('./../../lib/utils');
+const php = require('../lib/php');
+const pull = require('../lib/pull');
+const push = require('../lib/push');
+const change = require('../lib/switch');
+const mysql = require('../lib/mysql');
+const utils = require('../lib/utils');
 
 const setTooling = (options, tokens) => {
   const metaToken = _.get(
@@ -80,12 +80,11 @@ const getServices = options => ({
   },
   database: {
     type: options.database,
-    config: {
-      creds: {
+    config: getServiceConfig(options, ['database']),
+    creds: {
         database: 'pantheon',
         password: 'pantheon',
         user: 'pantheon',
-      },
     },
   },
 });
@@ -115,10 +114,10 @@ module.exports = {
     build_root: [],
     run_root: [],
     cache: true,
-    confSrc: path.resolve(__dirname, '../..', 'config'),
+    confSrc: path.resolve(__dirname, '..', 'config'),
     defaultFiles: {
       php: 'php.ini',
-      database: 'mysql.cnf',
+      database: 'my_custom.cnf',
       server: 'nginx.conf.tpl',
     },
     edge: true,
