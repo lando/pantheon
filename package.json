@@ -52,7 +52,7 @@
     "@lando/redis": "^1.0.0",
     "@lando/solr": "^1.0.0",
     "@lando/varnish": "^1.0.0",
-    "axios": "^0.24.0",
+    "axios": "^0.28.0",
     "bluebird": "^3.7.2",
     "dayjs": "^1.10.7",
     "js-yaml": "^3.4.6",
