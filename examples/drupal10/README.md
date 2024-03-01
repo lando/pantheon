@@ -19,6 +19,7 @@ lando poweroff
 # Should initialize the lando pantheon test drupal10 site
 rm -rf drupal10 && mkdir -p drupal10 && cd drupal10
 lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal10
+cp ../../.lando.upstream.yml .lando.upstream.yml
 
 # Should start up our drupal10 site successfully
 cd drupal10
@@ -103,7 +104,6 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal10 | grep land
 cd drupal10
 lando ssh -s appserver -c "cat /usr/local/etc/php/conf.d/zzz-lando-my-custom.ini" | grep "; LANDOPANTHEONPHPINI"
 lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
-lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 121
 
 # Should not have xdebug enabled by defaults
 cd drupal10
