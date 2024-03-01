@@ -102,7 +102,7 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal10 | grep land
 # Should use the correct default config files
 cd drupal10
 lando ssh -s appserver -c "cat /usr/local/etc/php/conf.d/zzz-lando-my-custom.ini" | grep "; LANDOPANTHEONPHPINI"
-lando ssh -s database -c "cat /opt/bitnami/mysql/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
+lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
 lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 121
 
 # Should not have xdebug enabled by defaults
