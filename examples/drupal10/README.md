@@ -100,6 +100,7 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal10 | grep land
 docker ps --filter label=com.docker.compose.project=landobotdrupal10 | grep landobotdrupal10_database_1
 
 # Should use the correct default config files
+cd drupal10
 lando ssh -s appserver -c "cat /usr/local/etc/php/conf.d/zzz-lando-my-custom.ini" | grep "; LANDOPANTHEONPHPINI"
 lando ssh -s database -c "cat /opt/bitnami/mysql/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
 lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 121
