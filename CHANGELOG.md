@@ -1,3 +1,9 @@
+## v1.0.2 - [March 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.0.2)
+
+### Fixes
+
+* Improved `database` selection for purposes of `config` loading, fixes some `database` bootup issues when the `database` type is overriden downstream
+
 ## v1.1.0 - [March 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.1.0)
 
 ### New Features
