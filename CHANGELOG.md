@@ -2,12 +2,18 @@
 
 ### New Features
 
-* Added support for `php:8.3` [#39](https://github.com/lando/wordpress/issues/39)
-* Added support for `php:8.2` [#39](https://github.com/lando/wordpress/issues/39)
+* Added support for `php:8.3`
+* Added support for `php:8.2`
+
+### Fixes
+
+* Fixed deprecation notices from Terminus for some versions of PHP [#168](https://github.com/lando/pantheon/issues/168)
 
 ### Internal
 
 * Updated to `@lando/php@1.2.0`
+* Updated config loading to respect Lando's config settings.
+* Added some config test coverage.
 
 ## v1.0.1 - [January 8, 2024](https://github.com/lando/pantheon/releases/tag/v1.0.1)
 
