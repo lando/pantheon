@@ -1,4 +1,4 @@
-## v1.1.0 - [February 29, 2024](https://github.com/lando/pantheon/releases/tag/v1.1.0)
+## v1.1.0 - [March 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.1.0)
 
 ### New Features
 
