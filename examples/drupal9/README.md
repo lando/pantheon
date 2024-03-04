@@ -18,6 +18,7 @@ lando poweroff
 
 # Should initialize the lando pantheon test drupal9 site
 rm -rf drupal9 && mkdir -p drupal9 && cd drupal9
+cp ../../.lando.upstream.yml .lando.upstream.yml
 lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal9
 
 # Should start up our drupal9 site successfully
