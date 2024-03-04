@@ -1,6 +1,5 @@
 'use strict';
 
-console.log('hello there');
 // Modules
 const _ = require('lodash');
 const os = require('os');

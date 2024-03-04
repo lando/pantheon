@@ -14,6 +14,7 @@
 * Updated to `@lando/php@1.2.0`
 * Updated config loading to respect Lando's config settings.
 * Added some config test coverage.
+* Added drupal10 test coverage.
 
 ## v1.0.1 - [January 8, 2024](https://github.com/lando/pantheon/releases/tag/v1.0.1)
 

@@ -25,7 +25,7 @@ module.exports = {
   parent: '_appserver',
   config: {
     gen3: ['7.2', '7.1', '7.0', '5.6'],
-    gen4: ['8.2', '8.1', '8.0', '7.4', '7.3'],
+    gen4: ['8.3', '8.2', '8.1', '8.0', '7.4', '7.3'],
   },
   builder: (parent, config) => class PantheonPhp extends LandoPhp.builder(parent, LandoPhp.config) {
     constructor(id, options = {}, factory) {
