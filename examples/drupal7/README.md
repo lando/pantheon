@@ -18,6 +18,7 @@ lando poweroff
 
 # Should initialize the lando pantheon test drupal7 site
 rm -rf drupal7 && mkdir -p drupal7 && cd drupal7
+cp ../../.lando.upstream.yml .lando.upstream.yml
 lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal7
 
 # Should start up our drupal7 site successfully

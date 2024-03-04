@@ -18,8 +18,8 @@ lando poweroff
 
 # Should initialize the lando pantheon test drupal10 site
 rm -rf drupal10 && mkdir -p drupal10 && cd drupal10
-lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal10
 cp ../../.lando.upstream.yml .lando.upstream.yml
+lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal10
 
 # Should start up our drupal10 site successfully
 cd drupal10
@@ -83,9 +83,9 @@ lando ssh -c "env" | grep TERMINUS_ENV | grep dev
 lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal10
 lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
 
-# Should use php version in pantheon.upstream.yml
+# Should use php version in pantheon.yml
 cd drupal10
-lando php -v | grep "PHP 8.2"
+lando php -v | grep "PHP 8.3"
 
 # Should use the database version in pantheon.yml
 cd drupal10

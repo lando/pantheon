@@ -4,8 +4,8 @@
 const _ = require('lodash');
 const os = require('os');
 const path = require('path');
-const PantheonApiClient = require('./../../lib/client');
-const utils = require('./../../lib/utils');
+const PantheonApiClient = require('./../lib/client');
+const utils = require('./../lib/utils');
 const url = require('url');
 const fs = require('fs');
 

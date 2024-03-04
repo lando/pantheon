@@ -18,37 +18,40 @@ jobs:
         include:
           - image: pantheon-index
             tag: 3.6-3
-            context: recipes/pantheon/3.6-solr
+            context: dockerfiles/3.6-solr
           - image: pantheon-index
             tag: 8.8-4
-            context: recipes/pantheon/8.8-solr
+            context: dockerfiles/8.8-solr
+          - image: pantheon-appserver
+            tag: 8.3-4
+            context: dockerfiles/8.3-fpm
           - image: pantheon-appserver
             tag: 8.2-4
-            context: recipes/pantheon/8.2-fpm
+            context: dockerfiles/8.2-fpm
           - image: pantheon-appserver
             tag: 8.1-4
-            context: recipes/pantheon/8.1-fpm
+            context: dockerfiles/8.1-fpm
           - image: pantheon-appserver
             tag: 8.0-4
-            context: recipes/pantheon/8.0-fpm
+            context: dockerfiles/8.0-fpm
           - image: pantheon-appserver
             tag: 7.4-4
-            context: recipes/pantheon/7.4-fpm
+            context: dockerfiles/7.4-fpm
           - image: pantheon-appserver
             tag: 7.3-4
-            context: recipes/pantheon/7.3-fpm
+            context: dockerfiles/7.3-fpm
           - image: pantheon-appserver
             tag: 7.2-3
-            context: recipes/pantheon/7.2-fpm
+            context: dockerfiles/7.2-fpm
           - image: pantheon-appserver
             tag: 7.1-3
-            context: recipes/pantheon/7.1-fpm
+            context: dockerfiles/7.1-fpm
           - image: pantheon-appserver
             tag: 7.0-3
-            context: recipes/pantheon/7.0-fpm
+            context: dockerfiles/7.0-fpm
           - image: pantheon-appserver
             tag: 5.6-3
-            context: recipes/pantheon/5.6-fpm
+            context: dockerfiles/5.6-fpm
 
     steps:
       - name: Checkout code
