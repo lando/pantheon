@@ -28,7 +28,7 @@ lando mysql -V | grep 8.0
 lando mysql -upantheon -ppantheon pantheon -e quit
 
 # Should use the defauly mysql8 config file
-lando ssh -s database -c "cat /opt/bitnami/mysql/conf/my_custom.cnf" | grep "LANDOLARAVELMYSQL8CNF"
+lando ssh -s database -c "cat /opt/bitnami/mysql/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQL8CNF"
 lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 127
 ```
 
