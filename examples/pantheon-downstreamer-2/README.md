@@ -25,7 +25,7 @@ Run the following commands to validate things are rolling as they should.
 lando ssh -s database -c "mysql -V" | grep 10.6.
 
 # Should use the default database connection info
-lando mysql --user pantheon --password pantheon pantheon -e quit
+lando mysql -upantheon -ppantheon pantheon -e quit
 
 # Should use the default mysql config file
 lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
