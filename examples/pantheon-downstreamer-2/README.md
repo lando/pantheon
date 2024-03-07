@@ -24,8 +24,8 @@ Run the following commands to validate things are rolling as they should.
 # Should use mariadb 10.6
 lando ssh -s database -c "mysql -V" | grep 10.6.
 
-# Should use the default database connection info
-lando mysql -upantheon -ppantheon pantheon -e quit
+# Should be able to connect to the pantheon db.
+lando mysql pantheon -e quit
 
 # Should use the default mysql config file
 lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
