@@ -3,9 +3,9 @@ recipe: pantheon
 
 services:
   database:
-    type: pantheon-mysql:8.0
+    type: pantheon-mariadb:10.6
 
 # do not remove this
 plugins:
   "@lando/pantheon": ../..
-  "@lando/mysql": ../../node_modules/@lando/mysql
+  "@lando/mariadb": ../../node_modules/@lando/mariadb

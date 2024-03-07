@@ -89,6 +89,13 @@ const getServices = options => ({
   },
 });
 
+/*
+ * Helper to get database type
+ */
+const getDatabaseType = options => {
+  return _.get(options, '_app.config.services.database.type', options.database) ?? 'mysql';
+};
+
 const getServiceConfig = (options, types = ['php', 'server', 'vhosts']) => {
   const config = {};
   _.forEach(types, type => {
@@ -117,7 +124,7 @@ module.exports = {
     confSrc: path.resolve(__dirname, '..', 'config'),
     defaultFiles: {
       php: 'php.ini',
-      database: 'my_custom.cnf',
+      database: 'mysql.cnf',
       server: 'nginx.conf.tpl',
     },
     edge: true,

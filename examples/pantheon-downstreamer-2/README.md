@@ -21,15 +21,15 @@ Verification commands
 Run the following commands to validate things are rolling as they should.
 
 ```bash
-# Should be using mysql8
-lando mysql -V | grep 8.0
+# Should use mariadb 10.6
+lando ssh -s database -c "mysql -V" | grep 10.6.
 
 # Should use the default database connection info
-lando mysql -upantheon -ppantheon pantheon -e quit
+lando mysql --user pantheon --password pantheon pantheon -e quit
 
-# Should use the defauly mysql8 config file
-lando ssh -s database -c "cat /opt/bitnami/mysql/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQL8CNF"
-lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 127
+# Should use the default mysql config file
+lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
+lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 121
 ```
 
 Destroy tests
