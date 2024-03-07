@@ -13,6 +13,8 @@ jobs:
       matrix:
         leia-test:
           - examples/init
+          - examples/pantheon-downstreamer-1
+          - examples/pantheon-downstreamer-2
         lando-version:
           - 3-dev-slim
         os:

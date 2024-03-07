@@ -1,0 +1,11 @@
+name: pantheon-downstreamer-1
+recipe: pantheon
+
+services:
+  database:
+    type: mariadb:10.6
+
+# do not remove this
+plugins:
+  "@lando/pantheon": ../..
+  "@lando/mariadb": ../../node_modules/@lando/mariadb

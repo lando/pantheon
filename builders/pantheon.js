@@ -117,7 +117,7 @@ module.exports = {
     confSrc: path.resolve(__dirname, '..', 'config'),
     defaultFiles: {
       php: 'php.ini',
-      database: 'my_custom.cnf',
+      database: 'mysql.cnf',
       server: 'nginx.conf.tpl',
     },
     edge: true,
