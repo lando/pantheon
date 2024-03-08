@@ -1,3 +1,6 @@
+## v1.2.0 - [March 8, 2024](https://github.com/lando/pantheon/releases/tag/v1.2.0)
+  * Updated to latest database services.
+
 ## v1.0.2 - [March 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.0.2)
 
 ### Fixes
