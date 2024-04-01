@@ -1,7 +1,14 @@
-## v1.2.0 - [March 8, 2024](https://github.com/lando/pantheon/releases/tag/v1.2.0)
-  * Updated to latest database services.
+## v1.4.0 - [April 1, 2024](https://github.com/lando/pantheon/releases/tag/v1.4.0)
 
-## v1.0.2 - [March 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.0.2)
+**CRITICAL FIX**
+
+* Addressed issue with legacy usage of the Pantheon Terminus API that has now been fully deprecated. Fixes issues with running `lando init`, `lando pull` and `lando push` in the Pantheon recipe. [#230](https://github.com/lando/pantheon/pull/230)
+
+## v1.3.0 - [March 8, 2024](https://github.com/lando/pantheon/releases/tag/v1.3.0)
+
+* Updated to latest database services.
+
+## v1.2.0 - [March 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.2.0)
 
 ### Fixes
 
