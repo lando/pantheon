@@ -22,6 +22,7 @@ MESSAGE="My Awesome Lando-based commit"
 CODE=${TERMINUS_ENV:-dev}
 DATABASE=${TERMINUS_ENV:-dev}
 FILES=${TERMINUS_ENV:-dev}
+VERBOSITY=""
 
 # Set helpers
 FRAMEWORK=${FRAMEWORK:-drupal}
@@ -79,6 +80,14 @@ while (( "$#" )); do
         shift 2
       fi
       ;;
+    -vv|--verbose)
+        VERBOSITY="-vv"
+        shift
+      ;;
+    -vvv)
+        VERBOSITY="-vvv"  
+        shift
+      ;;
     --)
       shift
       break
@@ -113,7 +122,7 @@ fi
 if [ "$CODE" != "none" ]; then
   # Validate before we begin
   lando_pink "Validating you can push code to $CODE..."
-  terminus env:info $SITE.$CODE
+  terminus env:info $VERBOSITY $SITE.$CODE
   lando_green "Confirmed!"
 
   # Get connection mode
@@ -129,7 +138,7 @@ if [ "$CODE" != "none" ]; then
       exit 5
     else
       lando_yellow "Changing connection mode to git for the pushy push"
-      terminus connection:set $SITE.$CODE git
+      terminus connection:set $VERBOSITY $SITE.$CODE git
     fi
   fi
   lando_green "Connected with git"
@@ -159,7 +168,7 @@ if [ "$CODE" != "none" ]; then
   # Set the mode back to what it was before because we are responsible denizens
   if [ "$CONNECTION_MODE" != "git" ]; then
     echo "Changing connection mode back to $CONNECTION_MODE"
-    terminus connection:set $SITE.$CODE $CONNECTION_MODE
+    terminus connection:set $VERBOSITY $SITE.$CODE $CONNECTION_MODE
   fi
 fi
 
@@ -167,12 +176,12 @@ fi
 if [ "$DATABASE" != "none" ]; then
   # Validate before we begin
   lando_pink "Validating you can push data to $DATABASE..."
-  terminus env:info $SITE.$DATABASE
+  terminus env:info $VERBOSITY $SITE.$DATABASE
   lando_green "Confirmed!"
 
   # Wake up the site so we can actually connect
   lando_pink "Making sure your database is awake!"
-  terminus env:wake $SITE.$DATABASE
+  terminus env:wake $VERBOSITY $SITE.$DATABASE
   lando_green "Awake!"
 
   # And push
@@ -186,7 +195,7 @@ fi
 if [ "$FILES" != "none" ]; then
   # Validate before we begin
   lando_pink "Validating you can push files to $FILES..."
-  terminus env:info $SITE.$FILES
+  terminus env:info $VERBOSITY $SITE.$FILES
   lando_green "Confirmed!"
 
   # Build the rsync command
