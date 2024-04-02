@@ -84,7 +84,7 @@ while (( "$#" )); do
         VERBOSITY="-vv"
         shift
       ;;
-    -vvv)
+    -vvv|--debug)
         VERBOSITY="-vvv"  
         shift
       ;;
