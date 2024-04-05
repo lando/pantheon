@@ -81,6 +81,7 @@ const getServices = options => ({
   database: {
     type: options.database,
     config: getServiceConfig(options, ['database']),
+    portforward: true,
     creds: {
         database: 'pantheon',
         password: 'pantheon',

@@ -17,7 +17,6 @@ module.exports = {
       '10.3': 'mariadb:10.3.31',
       '10.1': 'mariadb:10.1.48',
     },
-    portforward: true,
     patchesSupported: true,
     confSrc: path.resolve(__dirname, '..', 'config'),
     creds: {
