@@ -13,6 +13,7 @@ module.exports = {
       password: 'pantheon',
       user: 'pantheon',
     },
+    portforward: true,
   },
   builder: (parent, config) => class PantheonMariadb extends LandoMariadb.builder(parent, LandoMariadb.config) {
     constructor(id, options = {}) {

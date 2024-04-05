@@ -30,6 +30,15 @@ lando mysql pantheon -e quit
 # Should use the default mysql config file
 lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
 lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 121
+
+# Should portforward DB by default.
+lando info --filter service=database | grep -vq "port: 'not forwarded'"
+
+# Should portforward redis by default.
+lando info --filter service=cache | grep -vq "port: 'not forwarded'"
+
+# Should portforward solr by default.
+lando info --filter service=index | grep -vq "port: 'not forwarded'"
 ```
 
 Destroy tests
