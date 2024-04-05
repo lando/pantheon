@@ -1,3 +1,7 @@
+## v1.4.2 - [April 5, 2024](https://github.com/lando/pantheon/releases/tag/v1.4.2)
+
+* Fixed issue with the previous portforward fix. [#237](https://github.com/lando/pantheon/issues/237)
+
 ## v1.4.1 - [April 5, 2024](https://github.com/lando/pantheon/releases/tag/v1.4.1)
 
 * Fixed issue with portforwarding no longer being available on the `database` service. [#237](https://github.com/lando/pantheon/issues/237)
