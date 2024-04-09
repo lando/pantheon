@@ -63,6 +63,12 @@ We try to log all changes big and small in both [THE CHANGELOG](https://github.c
 
 If you're interested in working on this plugin then we recommend you check out the [development guide](https://github.com/lando/pantheon/blob/main/docs/development.md).
 
+
+## Maintainers
+
+* [@pirog](https://github.com/pirog)
+* [@reynoldsalec](https://github.com/reynoldsalec)
+
 ## Contributors
 
 <a href="https://github.com/lando/pantheon/graphs/contributors">
