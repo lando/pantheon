@@ -26,6 +26,10 @@ If you do not already have a [Landofile](https://docs.lando.dev/core/v3) for you
 
 Note that if the above config options are not enough, all Lando recipes can be further [extended and overriden](https://docs.lando.dev/core/v3/recipes.html#extending-and-overriding-recipes).
 
+::: warning
+It is inadvisable to modify the `type` attribute of Pantheon services, particularly `appserver`. A common error resulting from these modifications is `service "edge" depends on undefined service appserver_nginx: invalid compose project`.
+:::
+
 ## Choosing service versions
 
 Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and use the values you've set for `php_version`, `database`, and `search` you've specified there.
