@@ -144,7 +144,7 @@ You should be able to use `terminus` commands in the exact same way by prefixing
 
 ### Terminus Plugins
 
-By default, Lando will only install `terminus` proper but you can add [Terminus Plugins](https://docs.pantheon.io/terminus/plugins/directory/) to your Landofile with a [build step](https://docs.lando.dev/core/v3/lando-service.html#build-steps).
+By default, Lando will only install `terminus` proper but you can add [Terminus Plugins](https://docs.pantheon.io/terminus/plugins/directory/) to your Landofile with a [build step](https://docs.lando.dev/core/v3/services/lando.html#build-steps).
 
 You will want to consult the relevant install instructions for each plugin but an example that installs the [Terminus Build Tools](https://github.com/pantheon-systems/terminus-build-tools-plugin) plugin is shown below:
 
