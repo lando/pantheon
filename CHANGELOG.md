@@ -1,3 +1,7 @@
+## v1.5.0 - [April 30, 2024](https://github.com/lando/pantheon/releases/tag/v1.5.0)
+
+* Added Drupal10 config file to allow for a `framework: drupal10` value. [#242](https://github.com/lando/pantheon/issues/242)
+
 ## v1.4.2 - [April 5, 2024](https://github.com/lando/pantheon/releases/tag/v1.4.2)
 
 * Fixed issue with the previous portforward fix. [#237](https://github.com/lando/pantheon/issues/237)
