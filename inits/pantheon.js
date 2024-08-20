@@ -123,11 +123,10 @@ module.exports = {
       }},
       {name: 'get-git-url', func: (options, lando) => {
         const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
-        return api.auth().then(() => api.getSites())
-        .filter(site => site.name === options['pantheon-site'])
-        .then(site => {
-          options['pantheon-git-url'] = getGitUrl(site[0]);
-        });
+        return api.auth().then(() => api.getSites(options['pantheon-site'] || ''))
+          .then(site => {
+            options['pantheon-git-url'] = getGitUrl(site[0]);
+          });
       }},
       {name: 'reload-keys', cmd: '/helpers/load-keys.sh --silent', user: 'root'},
       {name: 'clone-repo', cmd: options => `/helpers/get-remote-url.sh ${options['pantheon-git-url']}`, remove: 'true'},
@@ -152,37 +151,39 @@ module.exports = {
         });
       }
     })
-    .then(() => api.auth())
-    // Post our keys again.
-    .then(() => api.postKey(pubKey))
-    .then(() => api.auth())
-    // Get our sites and user
-    .then(() => Promise.all([api.getSites(), api.getUser()]))
-    // Parse the dataz and set the things
-    .then(results => {
-      // Get our site and email
-      const site = _.head(_.filter(results[0], site => site.name === options['pantheon-site']));
-      const user = results[1];
+      .then(() => api.auth())
+      // Post our keys again.
+      .then(() => api.postKey(pubKey))
+      .then(() => api.auth())
+      // Get our sites and user
+      .then(() => {
+        return Promise.all([api.getSites(options['pantheon-site'] || ''), api.getUser()]);
+      })
+      // Parse the dataz and set the things
+      .then(results => {
+        // Get our site and email
+        const site = _.head(_.filter(results[0], site => site.name === options['pantheon-site']));
+        const user = results[1];
 
-      // Error if site doesn't exist
-      if (_.isEmpty(site)) throw Error(`${site} does not appear to be a Pantheon site!`);
+        // Error if site doesn't exist
+        if (_.isEmpty(site)) throw Error(`${site} does not appear to be a Pantheon site!`);
 
-      // This is a good token, lets update our cache
-      const cache = {token: options['pantheon-auth'], email: user.email, date: _.toInteger(_.now() / 1000)};
+        // This is a good token, lets update our cache
+        const cache = {token: options['pantheon-auth'], email: user.email, date: _.toInteger(_.now() / 1000)};
 
-      // Update lando's store of pantheon machine tokens
-      const tokens = lando.cache.get(pantheonTokenCache) || [];
-      lando.cache.set(pantheonTokenCache, utils.sortTokens(tokens, [cache]), {persist: true});
-      // Update app metdata
-      const metaData = lando.cache.get(`${options.name}.meta.cache`);
-      lando.cache.set(`${options.name}.meta.cache`, _.merge({}, metaData, cache), {persist: true});
+        // Update lando's store of pantheon machine tokens
+        const tokens = lando.cache.get(pantheonTokenCache) || [];
+        lando.cache.set(pantheonTokenCache, utils.sortTokens(tokens, [cache]), {persist: true});
+        // Update app metdata
+        const metaData = lando.cache.get(`${options.name}.meta.cache`);
+        lando.cache.set(`${options.name}.meta.cache`, _.merge({}, metaData, cache), {persist: true});
 
-      // Add some stuff to our landofile
-      return {config: {
-        framework: _.get(site, 'framework', 'drupal'),
-        site: _.get(site, 'name', options.name),
-        id: _.get(site, 'id', 'lando'),
-      }};
-    });
+        // Add some stuff to our landofile
+        return {config: {
+          framework: _.get(site, 'framework', 'drupal'),
+          site: _.get(site, 'name', options.name),
+          id: _.get(site, 'id', 'lando'),
+        }};
+      });
   },
 };
