@@ -10,11 +10,12 @@ jobs:
       TERM: xterm
       PANTHEON_MACHINE_TOKEN: ${{ secrets.PANTHEON_MACHINE_TOKEN }}
     strategy:
+      fail-fast: false
       matrix:
         leia-test:
           - examples/drupal7
           - examples/drupal8
-          - examples/drupal0
+          - examples/drupal9
           - examples/drupal10
           - examples/init
           - examples/pantheon-downstreamer-1
