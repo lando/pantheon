@@ -92,20 +92,17 @@ npm run test:unit
 We do end to end testing with our made-just-for-Lando testing framework [Leia](https://github.com/lando/leia). Leia allows us to define tests as a series of commented shell commands in human readable markdown files. Here is a simple example:
 
 ```md
-Start up tests
---------------
+## Start up tests
 
 # Should start up successfully
 lando start
 
-Verification commands
----------------------
+## Verification commands
 
 # Should be able to connect to all mariadb relationships
 lando mariadb main -e "show tables;"
 
-Destroy tests
--------------
+## Destroy tests
 
 # Should be able to destroy our app
 lando destroy -y
