@@ -123,10 +123,9 @@ module.exports = {
       }},
       {name: 'get-git-url', func: (options, lando) => {
         const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
-        return api.auth().then(() => api.getSites(options['pantheon-site'] || ''))
-          .then(site => {
-            options['pantheon-git-url'] = getGitUrl(site[0]);
-          });
+        return api.auth().then(() => api.getSite(options['pantheon-site'], false)).then(site => {
+          options['pantheon-git-url'] = getGitUrl(site);
+        });
       }},
       {name: 'reload-keys', cmd: '/helpers/load-keys.sh --silent', user: 'root'},
       {name: 'clone-repo', cmd: options => `/helpers/get-remote-url.sh ${options['pantheon-git-url']}`, remove: 'true'},
@@ -157,12 +156,12 @@ module.exports = {
       .then(() => api.auth())
       // Get our sites and user
       .then(() => {
-        return Promise.all([api.getSites(options['pantheon-site'] || ''), api.getUser()]);
+        return Promise.all([api.getSite(options['pantheon-site']), api.getUser()]);
       })
       // Parse the dataz and set the things
       .then(results => {
         // Get our site and email
-        const site = _.head(_.filter(results[0], site => site.name === options['pantheon-site']));
+        const site = results[0];
         const user = results[1];
 
         // Error if site doesn't exist

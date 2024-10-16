@@ -1,5 +1,4 @@
-Pantheon Drupal 9 Example
-=========================
+# Pantheon Drupal 9 Example
 
 This example exists primarily to test the following:
 
@@ -7,8 +6,7 @@ This example exists primarily to test the following:
 
 **Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN` and `--pantheon-site` to values that make sense for you.**
 
-Start up tests
---------------
+## Start up tests
 
 Run the following commands to get up and running with this example.
 
@@ -30,8 +28,7 @@ cd drupal9
 lando pull --code none --database dev --files dev --rsync
 ```
 
-Verification commands
----------------------
+## Verification commands
 
 Run the following commands to validate things are rolling as they should.
 
@@ -128,8 +125,7 @@ lando pull --code live --database none --files none
 lando switch -e tester
 ```
 
-Destroy tests
--------------
+## Destroy tests
 
 Run the following commands to trash this app like nothing ever happened.
 

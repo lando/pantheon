@@ -1,5 +1,4 @@
-Pantheon WordPress Network Folder Example
-==========================
+# Pantheon WordPress Network Folder Example
 
 This example exists primarily to test the following documentation:
 
@@ -7,8 +6,7 @@ This example exists primarily to test the following documentation:
 
 **Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN` and `--pantheon-site` to values that make sense for you.**
 
-Start up tests
---------------
+## Start up tests
 
 Run the following commands to get up and running with this example.
 
@@ -30,8 +28,7 @@ cd wordpress
 lando pull --code none --database dev --files dev
 ```
 
-Verification commands
----------------------
+## Verification commands
 
 Run the following commands to validate things are rolling as they should.
 
@@ -73,8 +70,7 @@ curl -LI http://landobot-network-folder.lndo.site | grep Via || echo $? | grep 1
 curl -L http://landobot-network-folder.lndo.site/site1 | grep site1 || echo $? | grep 1
 ```
 
-Destroy tests
--------------
+## Destroy tests
 
 Run the following commands to trash this app like nothing ever happened.
 

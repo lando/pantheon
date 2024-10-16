@@ -4,8 +4,7 @@ This example exists primarily to test the following documentation:
 
 * [Pantheon Recipe](https://docs.lando.dev/pantheon/config.html)
 
-Start up tests
---------------
+## Start up tests
 
 Run the following commands to get up and running with this example.
 
@@ -15,8 +14,7 @@ lando poweroff
 lando start
 ```
 
-Verification commands
----------------------
+## Verification commands
 
 Run the following commands to validate things are rolling as they should.
 
@@ -41,8 +39,7 @@ lando info --filter service=cache | grep -vq "port: 'not forwarded'"
 lando info --filter service=index | grep -vq "port: 'not forwarded'"
 ```
 
-Destroy tests
--------------
+## Destroy tests
 
 Run the following commands to trash this app like nothing ever happened.
 
