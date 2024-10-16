@@ -20,8 +20,8 @@ lando poweroff
 rm -rf drupal9
 git clone https://github.com/lando/pantheon-gitpod.git drupal9
 cd drupal9
-cp ../../.lando.upstream.yml .lando.upstream.yml
 lando init --source cwd --recipe pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal9
+cp ../../.lando.upstream.yml .lando.upstream.yml
 
 # Should start up our drupal9 site successfully
 cd drupal9

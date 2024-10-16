@@ -18,8 +18,8 @@ lando poweroff
 
 # Should initialize the lando pantheon test drupal10 site
 rm -rf drupal10 && mkdir -p drupal10 && cd drupal10
-cp ../../.lando.upstream.yml .lando.upstream.yml
 lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-drupal10
+cp ../../.lando.upstream.yml .lando.upstream.yml
 
 # Should start up our drupal10 site successfully
 cd drupal10

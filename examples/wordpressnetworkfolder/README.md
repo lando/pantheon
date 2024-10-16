@@ -18,8 +18,8 @@ lando poweroff
 
 # Should initialize the lando pantheon test wordpress site
 rm -rf wordpress && mkdir -p wordpress && cd wordpress
-cp ../../.lando.upstream.yml .lando.upstream.yml
 lando init --source pantheon --pantheon-auth "$PANTHEON_MACHINE_TOKEN" --pantheon-site landobot-network-folder
+cp ../../.lando.upstream.yml .lando.upstream.yml
 
 # Should start up our wordpress site successfully
 cd wordpress
