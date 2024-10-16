@@ -22,13 +22,13 @@ Run the following commands to validate things are rolling as they should.
 
 ```bash
 # Should use mariadb 10.6
-lando ssh -s database -c "mysql -V" | grep 10.6.
+lando exec database -- "mysql -V" | grep 10.6.
 
 # Should be able to connect to the pantheon db.
 lando mysql pantheon -e quit
 
 # Should use the default mysql config file
-lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
+lando exec database -- "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
 lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 121
 
 # Should portforward DB by default.

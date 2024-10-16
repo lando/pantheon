@@ -3,7 +3,7 @@
 FROM debian:stretch-slim
 
 # Versions
-ENV SOLR_VERSION 3.6.2
+ENV SOLR_VERSION=3.6.2
 
 # Build out solr on tomcat8
 RUN \

@@ -3,10 +3,10 @@
 FROM devwithlando/php:5.3-fpm-2
 
 # Version information
-ENV WKHTMLTOPDF_VERSION 0.12.2
-ENV PHANTOMJS_VERSION 2.1.1
-ENV PHANTOMJS_OLD_VERSION 1.7.0
-ENV MAVEN_VERSION 3.5.4
+ENV WKHTMLTOPDF_VERSION=0.12.2
+ENV PHANTOMJS_VERSION=2.1.1
+ENV PHANTOMJS_OLD_VERSION=1.7.0
+ENV MAVEN_VERSION=3.5.4
 
 # Install the additional things that make the pantheon
 RUN apt-get update && apt-get install -y \

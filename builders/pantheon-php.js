@@ -9,13 +9,13 @@ const utils = require('./../lib/utils.js');
 const loadScripts = options => {
   const lando = _.get(options, '_app._lando');
   const landoPhpScriptsPath = path.join(path.dirname(require.resolve('@lando/php/package.json')), 'scripts');
+
   // Move the script to the confDir and make executable.
   if (fs.existsSync(landoPhpScriptsPath)) {
     const confDir = path.join(lando.config.userConfRoot, 'scripts');
     const dest = lando.utils.moveConfig(landoPhpScriptsPath, confDir);
     lando.utils.makeExecutable(fs.readdirSync(dest), dest);
-    lando.log.debug('automoved scripts from %s to %s and set to mode 755',
-      landoPhpScriptsPath, confDir);
+    lando.log.debug('automoved scripts from %s to %s and set to mode 755', landoPhpScriptsPath, confDir);
   }
 };
 
@@ -49,6 +49,7 @@ module.exports = {
       options.confSrc = path.resolve(__dirname, '..', 'config');
       options.nginxServiceType = 'pantheon-nginx';
       loadScripts(options);
+
       super(id, options, factory);
     };
   },
