@@ -8,3 +8,4 @@ fi
 # We need this because windows runs FPM as root to handle file permission issues
 mkdir -p /root/certs
 ln -sfn /var/www/certs/binding.pem /root/certs/binding.pem
+ln -sfn /var/www/certs/binding.pem /certs/binding.pem

@@ -11,17 +11,21 @@ LANDO_MODULE="pantheon"
 # Kick it off
 lando_pink "Pantheon pre-run scripting"
 
-/helpers/add-cert.sh --silent
-
 # Set up some new dirs
+mkdir -p /certs
 mkdir -p /var/www/certs
 mkdir -p /srv/bindings
-chown -R www-data:www-data /var/www/certs /srv/bindings
+chown -R www-data:www-data /var/www/certs /srv/bindings /certs
+
+# copy over appservernginx certs to work around 3.22 cert changes
+cp -rf "/lando/certs/appserver_nginx.${LANDO_APP_PROJECT}.crt" /certs/cert.crt
+cp -rf "/lando/certs/appserver_nginx.${LANDO_APP_PROJECT}.key" /certs/cert.key
+
+# run through add cert
+/helpers/add-cert.sh --silent
 
 # Set up some symlnks
 ln -sfn /var/www /srv/bindings/lando
-ln -sfn /var/www/certs/binding.pem /certs/binding.pem
-
 ln -sfn /tmp /srv/bindings/lando/tmp
 ln -sfn /app /srv/bindings/lando/code
 ln -sfn /app /code
