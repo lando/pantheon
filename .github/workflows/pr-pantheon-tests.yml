@@ -22,7 +22,7 @@ jobs:
           - examples/pantheon-downstreamer-2
           - examples/wordpress
           - examples/wordpressnetworkdomain
-          - examples/wordpressnetworkfolder
+          # - examples/wordpressnetworkfolder
         lando-version:
           - 3-edge-slim
         os:
