@@ -54,34 +54,34 @@ lando terminus auth:whoami | grep droid@lando.dev
 
 # Should have a binding.pem in all the right places
 cd drupal10
-lando ssh -s appserver -c "stat /var/www/certs/binding.pem"
-lando ssh -s appserver -u root -c "stat /root/certs/binding.pem"
+lando exec appserver -- "stat /var/www/certs/binding.pem"
+lando exec appserver -u root -- "stat /root/certs/binding.pem"
 
 # Should set the correct pantheon environment
 cd drupal10
-lando ssh -c "env" | grep BACKDROP_SETTINGS | grep pantheon
-lando ssh -c "env" | grep CACHE_HOST | grep cache
-lando ssh -c "env" | grep CACHE_PORT | grep 6379
-lando ssh -c "env" | grep DB_HOST | grep database
-lando ssh -c "env" | grep DB_PORT | grep 3306
-lando ssh -c "env" | grep DB_USER | grep pantheon
-lando ssh -c "env" | grep DB_PASSWORD | grep pantheon
-lando ssh -c "env" | grep DB_NAME | grep pantheon
-lando ssh -c "env" | grep FRAMEWORK | grep drupal8
-lando ssh -c "env" | grep FILEMOUNT | grep "sites/default/files"
-lando ssh -c "env" | grep PANTHEON_ENVIRONMENT | grep lando
-lando ssh -c "env" | grep PANTHEON_INDEX_CORE | grep "\/lando"
-lando ssh -c "env" | grep PANTHEON_INDEX_HOST | grep index
-lando ssh -c "env" | grep PANTHEON_INDEX_PORT | grep 449
-lando ssh -c "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
-lando ssh -c "env" | grep PANTHEON_INDEX_SCHEME | grep http
-lando ssh -c "env" | grep PANTHEON_SITE | grep adab25c2-796f-4051-9f27-04a45f6958f5
-lando ssh -c "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal10
-lando ssh -c "env" | grep php_version | grep "8"
-lando ssh -c "env" | grep PRESSFLOW_SETTINGS | grep pantheon
-lando ssh -c "env" | grep TERMINUS_ENV | grep dev
-lando ssh -c "env" | grep TERMINUS_SITE | grep landobot-drupal10
-lando ssh -c "env" | grep TERMINUS_USER | grep droid@lando.dev
+lando exec appserver -- "env" | grep BACKDROP_SETTINGS | grep pantheon
+lando exec appserver -- "env" | grep CACHE_HOST | grep cache
+lando exec appserver -- "env" | grep CACHE_PORT | grep 6379
+lando exec appserver -- "env" | grep DB_HOST | grep database
+lando exec appserver -- "env" | grep DB_PORT | grep 3306
+lando exec appserver -- "env" | grep DB_USER | grep pantheon
+lando exec appserver -- "env" | grep DB_PASSWORD | grep pantheon
+lando exec appserver -- "env" | grep DB_NAME | grep pantheon
+lando exec appserver -- "env" | grep FRAMEWORK | grep drupal8
+lando exec appserver -- "env" | grep FILEMOUNT | grep "sites/default/files"
+lando exec appserver -- "env" | grep PANTHEON_ENVIRONMENT | grep lando
+lando exec appserver -- "env" | grep PANTHEON_INDEX_CORE | grep "\/lando"
+lando exec appserver -- "env" | grep PANTHEON_INDEX_HOST | grep index
+lando exec appserver -- "env" | grep PANTHEON_INDEX_PORT | grep 449
+lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
+lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEME | grep http
+lando exec appserver -- "env" | grep PANTHEON_SITE | grep adab25c2-796f-4051-9f27-04a45f6958f5
+lando exec appserver -- "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal10
+lando exec appserver -- "env" | grep php_version | grep "8"
+lando exec appserver -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
+lando exec appserver -- "env" | grep TERMINUS_ENV | grep dev
+lando exec appserver -- "env" | grep TERMINUS_SITE | grep landobot-drupal10
+lando exec appserver -- "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should use php version in pantheon.yml
 cd drupal10
@@ -89,7 +89,7 @@ lando php -v | grep "PHP 8.3"
 
 # Should use the database version in pantheon.yml
 cd drupal10
-lando ssh -s database -c "mysql -V" | grep 10.4.
+lando exec database -- "mysql -V" | grep 10.4.
 
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal10
@@ -102,8 +102,8 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal10 | grep land
 
 # Should use the correct default config files
 cd drupal10
-lando ssh -s appserver -c "cat /usr/local/etc/php/conf.d/zzz-lando-my-custom.ini" | grep "; LANDOPANTHEONPHPINI"
-lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
+lando exec appserver -- "cat /usr/local/etc/php/conf.d/zzz-lando-my-custom.ini" | grep "; LANDOPANTHEONPHPINI"
+lando exec database -- "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
 
 # Should not have xdebug enabled by defaults
 cd drupal10
@@ -112,7 +112,7 @@ lando php -m | grep xdebug || echo $? | grep 1
 # Should be able to push commits to pantheon
 cd drupal10
 lando pull --code dev --database none --files none
-lando ssh -s appserver -c "git rev-parse HEAD > test.log"
+lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
 
 # Should allow code pull from protected environments
@@ -134,7 +134,7 @@ Run the following commands to trash this app like nothing ever happened.
 # Should be able to remove our pantheon ssh keys
 cp -r remove-keys.sh drupal10/remove-keys.sh
 cd drupal10
-lando ssh -s appserver -c "/app/remove-keys.sh"
+lando exec appserver -- "/app/remove-keys.sh"
 cd ..
 rm -rf drupal10/remove-keys.sh
 

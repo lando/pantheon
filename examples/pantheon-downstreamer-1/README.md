@@ -28,7 +28,7 @@ lando ssh -s database -c "mysql -V" | grep 10.6.
 lando mysql pantheon -e quit
 
 # Should use the default mysql config file
-lando ssh -s database -c "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
+lando exec database -- "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
 lando mysql -u root -e "show variables;" | grep innodb_lock_wait_timeout | grep 121
 ```
 
