@@ -1,3 +1,8 @@
+## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
+
+* Fixed blocking `certs` issues [#261](https://github.com/lando/pantheon/issues/261) [#262](https://github.com/lando/pantheon/issues/262)
+* Improved perfomance during `lando init` when `--pantheon-site` is passed in [#254](https://github.com/lando/pantheon/issues/254)
+
 ## v1.5.0 - [April 30, 2024](https://github.com/lando/pantheon/releases/tag/v1.5.0)
 
 * Added Drupal10 config file to allow for a `framework: drupal10` value. [#242](https://github.com/lando/pantheon/issues/242)
