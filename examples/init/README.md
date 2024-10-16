@@ -61,26 +61,26 @@ lando exec appserver -u root -- "stat /root/certs/binding.pem"
 
 # Should set the correct pantheon environment
 cd drupal9
-lando exec -- "env" | grep BACKDROP_SETTINGS | grep pantheon
-lando exec -- "env" | grep CACHE_HOST | grep cache
-lando exec -- "env" | grep CACHE_PORT | grep 6379
-lando exec -- "env" | grep DB_HOST | grep database
-lando exec -- "env" | grep DB_PORT | grep 3306
-lando exec -- "env" | grep DB_USER | grep pantheon
-lando exec -- "env" | grep DB_PASSWORD | grep pantheon
-lando exec -- "env" | grep DB_NAME | grep pantheon
-lando exec -- "env" | grep FRAMEWORK | grep drupal8
-lando exec -- "env" | grep FILEMOUNT | grep "sites/default/files"
-lando exec -- "env" | grep PANTHEON_ENVIRONMENT | grep lando
-lando exec -- "env" | grep PANTHEON_INDEX_HOST | grep index
-lando exec -- "env" | grep PANTHEON_INDEX_PORT | grep 449
-lando exec -- "env" | grep PANTHEON_SITE | grep 3a225571-2a52-4ae9-84e7-ef54037ac66c
-lando exec -- "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal9
-lando exec -- "env" | grep php_version | grep "8"
-lando exec -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
-lando exec -- "env" | grep TERMINUS_ENV | grep dev
-lando exec -- "env" | grep TERMINUS_SITE | grep landobot-drupal9
-lando exec -- "env" | grep TERMINUS_USER | grep droid@lando.dev
+lando exec appserver -- "env" | grep BACKDROP_SETTINGS | grep pantheon
+lando exec appserver -- "env" | grep CACHE_HOST | grep cache
+lando exec appserver -- "env" | grep CACHE_PORT | grep 6379
+lando exec appserver -- "env" | grep DB_HOST | grep database
+lando exec appserver -- "env" | grep DB_PORT | grep 3306
+lando exec appserver -- "env" | grep DB_USER | grep pantheon
+lando exec appserver -- "env" | grep DB_PASSWORD | grep pantheon
+lando exec appserver -- "env" | grep DB_NAME | grep pantheon
+lando exec appserver -- "env" | grep FRAMEWORK | grep drupal8
+lando exec appserver -- "env" | grep FILEMOUNT | grep "sites/default/files"
+lando exec appserver -- "env" | grep PANTHEON_ENVIRONMENT | grep lando
+lando exec appserver -- "env" | grep PANTHEON_INDEX_HOST | grep index
+lando exec appserver -- "env" | grep PANTHEON_INDEX_PORT | grep 449
+lando exec appserver -- "env" | grep PANTHEON_SITE | grep 3a225571-2a52-4ae9-84e7-ef54037ac66c
+lando exec appserver -- "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal9
+lando exec appserver -- "env" | grep php_version | grep "8"
+lando exec appserver -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
+lando exec appserver -- "env" | grep TERMINUS_ENV | grep dev
+lando exec appserver -- "env" | grep TERMINUS_SITE | grep landobot-drupal9
+lando exec appserver -- "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should use php version in pantheon.upstream.yml
 cd drupal9

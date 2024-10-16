@@ -62,8 +62,8 @@ lando php -v | grep "PHP 7.3"
 
 # Should set the correct wordpress specific pantheon environment
 cd wordpress
-lando exec -- "env" | grep FRAMEWORK | grep wordpress_network
-lando exec -- "env" | grep FILEMOUNT | grep "wp-content/uploads"
+lando exec appserver -- "env" | grep FRAMEWORK | grep wordpress_network
+lando exec appserver -- "env" | grep FILEMOUNT | grep "wp-content/uploads"
 
 # Should disable edge, index or cache containers and tools when specified
 docker ps --filter label=com.docker.compose.project=landobotnetworkdomain | grep landobotnetworkdomain_appserver_nginx_1
