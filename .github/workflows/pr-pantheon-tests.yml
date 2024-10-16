@@ -1,4 +1,4 @@
-name: Lando Init Tests
+name: Pantheon Tests
 
 on:
   pull_request:
@@ -12,9 +12,16 @@ jobs:
     strategy:
       matrix:
         leia-test:
+          - examples/drupal7
+          - examples/drupal8
+          - examples/drupal0
+          - examples/drupal10
           - examples/init
           - examples/pantheon-downstreamer-1
           - examples/pantheon-downstreamer-2
+          - examples/wordpress
+          - examples/wordpressnetworkdomain
+          - examples/wordpressnetworkfolder
         lando-version:
           - 3-edge-slim
         os:
@@ -25,9 +32,9 @@ jobs:
     steps:
       # Install deps and cache
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install node ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm

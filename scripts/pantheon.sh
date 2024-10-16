@@ -21,8 +21,6 @@ chown -R www-data:www-data /var/www/certs /srv/bindings /certs
 cp -rf "/lando/certs/appserver_nginx.${LANDO_APP_PROJECT}.crt" /certs/cert.crt
 cp -rf "/lando/certs/appserver_nginx.${LANDO_APP_PROJECT}.key" /certs/cert.key
 
-ls -lsa /certs
-
 # run through add cert
 /helpers/add-cert.sh --silent
 
