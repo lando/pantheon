@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.6.0 - [October 16, 2024](https://github.com/lando/pantheon/releases/tag/v1.6.0)
+
 * Fixed blocking `certs` issues [#261](https://github.com/lando/pantheon/issues/261) [#262](https://github.com/lando/pantheon/issues/262)
 * Improved perfomance during `lando init` when `--pantheon-site` is passed in [#254](https://github.com/lando/pantheon/issues/254)
 
