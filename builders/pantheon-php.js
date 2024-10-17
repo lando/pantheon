@@ -23,21 +23,21 @@ const loadScripts = options => {
 module.exports = {
   name: 'pantheon-php',
   parent: '_appserver',
-  config: {
-    gen3: ['7.2', '7.1', '7.0', '5.6'],
-    gen4: ['8.3', '8.2', '8.1', '8.0', '7.4', '7.3'],
+  defaults: {
+    generation: '4',
   },
-  builder: (parent, config) => class PantheonPhp extends LandoPhp.builder(parent, LandoPhp.config) {
+  builder: (parent, defaults) => class PantheonPhp extends LandoPhp.builder(parent, LandoPhp.config) {
     constructor(id, options = {}, factory) {
+      // rebase option on defaults
+      options = _.merge({}, defaults, options);
+
       // Normalize because 7.0/8.0 right away gets handled strangely by js-yaml
       if (options.php === '7' || options.php === 7) options.php = '7.0';
       if (options.php === '8' || options.php === 8) options.php = '8.0';
 
-      if (_.includes(config.gen3, options.php)) options.tag = '3';
-      if (_.includes(config.gen4, options.php)) options.tag = '4';
-
+      // main event
       options.version = options.php;
-      options.image = `devwithlando/pantheon-appserver:${options.php}-${options.tag}`;
+      options.image = `devwithlando/pantheon-appserver:${options.php}-${options.generation}`;
       options.via = 'nginx:1.25';
 
       // Add in the prepend.php
