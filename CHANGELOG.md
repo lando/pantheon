@@ -1,6 +1,8 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
-* Updated all images to `gen4`
+* Updated all images to [gen4](https://hub.docker.com/repository/docker/devwithlando/pantheon-appserver/tags?name=-4)
+* Updated to [@lando/nginx@1.3.0](https://github.com/lando/nginx/releases/tag/v1.3.0)
+* Updated to [@lando/php@1.4.0](https://github.com/lando/php/releases/tag/v1.4.0)
 
 ## v1.6.0 - [October 16, 2024](https://github.com/lando/pantheon/releases/tag/v1.6.0)
 
