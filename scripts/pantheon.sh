@@ -17,10 +17,6 @@ mkdir -p /var/www/certs
 mkdir -p /srv/bindings
 chown -R www-data:www-data /var/www/certs /srv/bindings /certs
 
-# copy over appservernginx certs to work around 3.22 cert changes
-cp -rf "/lando/certs/appserver_nginx.${LANDO_APP_PROJECT}.crt" /certs/cert.crt
-cp -rf "/lando/certs/appserver_nginx.${LANDO_APP_PROJECT}.key" /certs/cert.key
-
 # run through add cert
 /helpers/add-cert.sh --silent
 
