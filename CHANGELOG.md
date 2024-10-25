@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Updated release process to generate an edge release when stable releases are created.
+
 ## v1.7.1 - [October 18, 2024](https://github.com/lando/pantheon/releases/tag/v1.7.1)
 
 * Updated to [@lando/php@1.5.0](https://github.com/lando/php/releases/tag/v1.5.0)
