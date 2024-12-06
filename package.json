@@ -1,7 +1,7 @@
 {
   "name": "@lando/pantheon",
   "description": "A Lando plugin that provides a tight integration with Pantheon.",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "author": "Mike Pirog @pirog",
   "license": "GPL-3.0",
   "repository": "lando/pantheon",
