@@ -113,7 +113,7 @@ module.exports = {
         },
       },
     },
-    build: (options, lando) => ([
+    build: () => ([
       {name: 'wait-for-user', cmd: '/helpers/pantheon-wait-for-user.sh'},
       {name: 'generate-key', cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`},
       {name: 'post-key', func: (options, lando) => {

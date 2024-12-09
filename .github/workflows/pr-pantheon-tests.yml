@@ -24,11 +24,11 @@ jobs:
           - examples/wordpressnetworkdomain
           # - examples/wordpressnetworkfolder
         lando-version:
-          - 3-edge-slim
+          - 3-edge
         os:
           - ubuntu-24.04
         node-version:
-          - '18'
+          - '20'
 
     steps:
       # Install deps and cache

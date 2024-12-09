@@ -1,5 +1,12 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Optimized for `midcore`
+* Removed unneeded dep `@lando/apache`
+* Updated to [@lando/mariadb@1.6.3](https://github.com/lando/mariadb/releases/tag/v1.6.3).
+* Updated to [@lando/php@1.6.3](https://github.com/lando/php/releases/tag/v1.6.3).
+* Updated to [@lando/redis@1.2.3](https://github.com/lando/redis/releases/tag/v1.2.3).
+* Updated to [@lando/solr@1.3.3](https://github.com/lando/redis/releases/tag/v1.3.3).
+
 ## v1.8.3 - [December 6, 2024](https://github.com/lando/pantheon/releases/tag/v1.8.3)
 
 * Updated the version index.md to get Docuverse page to build correctly.
