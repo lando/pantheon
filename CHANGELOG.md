@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.9.0 - [December 10, 2024](https://github.com/lando/pantheon/releases/tag/v1.9.0)
+
 * Optimized for `midcore`
 * Removed unneeded deps `bluebird`, `dayjs`, and `winston`
 * Removed unneeded plugins `@lando/mssql`, `@lando/mysql` and `@lando/postgres`
