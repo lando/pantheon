@@ -67,8 +67,11 @@ lando exec appserver -- "env" | grep DB_NAME | grep pantheon
 lando exec appserver -- "env" | grep FRAMEWORK | grep drupal8
 lando exec appserver -- "env" | grep FILEMOUNT | grep "sites/default/files"
 lando exec appserver -- "env" | grep PANTHEON_ENVIRONMENT | grep lando
+lando exec appserver -- "env" | grep PANTHEON_INDEX_CORE | grep "\/lando"
 lando exec appserver -- "env" | grep PANTHEON_INDEX_HOST | grep index
-lando exec appserver -- "env" | grep PANTHEON_INDEX_PORT | grep 449
+lando exec appserver -- "env" | grep PANTHEON_INDEX_PORT | grep 8983
+lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
+lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEME | grep http
 lando exec appserver -- "env" | grep PANTHEON_SITE | grep 3a225571-2a52-4ae9-84e7-ef54037ac66c
 lando exec appserver -- "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal9
 lando exec appserver -- "env" | grep php_version | grep "8"
@@ -79,7 +82,7 @@ lando exec appserver -- "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should use php version in pantheon.upstream.yml
 cd drupal9
-lando php -v | grep "PHP 8.0"
+lando php -v | grep "PHP 8.1"
 
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal9
