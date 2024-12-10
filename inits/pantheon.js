@@ -43,8 +43,9 @@ const getAutoCompleteSites = (answers, lando, input = null) => {
     return lando.Promise.resolve(pantheonSites).filter(site => _.startsWith(site.name, input));
   } else {
     const api = new PantheonApiClient(answers['pantheon-auth'], lando.log);
-    return api.auth().then(() => api.getSites().map(site => ({name: site.name, value: site.name}))).then(sites => {
-      pantheonSites = sites;
+    return api.auth().then(async () => {
+      const sites = await api.getSites();
+      pantheonSites = sites.map(site => ({name: site.name, value: site.name}));
       return pantheonSites;
     });
   }
@@ -83,8 +84,8 @@ module.exports = {
       interactive: {
         type: 'autocomplete',
         message: 'Which site?',
-        source: (answers, input) => {
-          return getAutoCompleteSites(answers, lando, input);
+        source: async (answers, input) => {
+          return await getAutoCompleteSites(answers, lando, input);
         },
         when: answers => answers.recipe === 'pantheon',
         weight: 530,
@@ -113,7 +114,7 @@ module.exports = {
         },
       },
     },
-    build: (options, lando) => ([
+    build: () => ([
       {name: 'wait-for-user', cmd: '/helpers/pantheon-wait-for-user.sh'},
       {name: 'generate-key', cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`},
       {name: 'post-key', func: (options, lando) => {

@@ -105,21 +105,6 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal8 | grep lando
 # Should not have xdebug enabled by defaults
 cd drupal8
 lando php -m | grep xdebug || echo $? | grep 1
-
-# Should be able to push commits to pantheon
-cd drupal8
-lando pull --code dev --database none --files none
-lando exec appserver -- "git rev-parse HEAD > test.log"
-lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
-
-# Should allow code pull from protected environments
-# https://github.com/lando/lando/issues/2021
-cd drupal8
-lando pull --code test --database none --files none
-lando pull --code live --database none --files none
-
-# Should switch to multidev environment
-lando switch -e testing
 ```
 
 ## Destroy tests

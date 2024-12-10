@@ -52,6 +52,6 @@ module.exports = {
       loadScripts(options);
 
       super(id, options, factory);
-    };
+    }
   },
 };
