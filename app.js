@@ -5,6 +5,14 @@ const _ = require('lodash');
 const PantheonApiClient = require('./lib/client');
 const utils = require('./lib/utils');
 
+/**
+ * Pantheon plugin for Lando that handles authentication and token management
+ * between Lando and Pantheon hosting platform.
+ *
+ * @param {Object} app - The Lando app object
+ * @param {Object} lando - The Lando config object
+ * @return {void}
+ */
 module.exports = (app, lando) => {
   // Add additional things to cleanse
   app.log.alsoSanitize('pantheon-auth');
@@ -13,6 +21,14 @@ module.exports = (app, lando) => {
   if (_.get(app, 'config.recipe') === 'pantheon') {
     // Set the app caches, validate tokens and update token cache
     _.forEach(['pull', 'push', 'switch'], command => {
+      /**
+       * Post-command handler for Pantheon authentication
+       * Validates and updates Pantheon machine tokens after certain commands
+       *
+       * @param {Object} config - Command configuration
+       * @param {Object} answers - User provided answers/input
+       * @return {Promise} Resolves when token validation and caching is complete
+       */
       app.events.on(`post-${command}`, (config, answers) => {
         // get existing token and email
         const {token, email} = lando.cache.get(app.metaCache);
@@ -38,7 +54,10 @@ module.exports = (app, lando) => {
       });
     });
 
-    // Load in other stuff like tokens and other meta at the most opportune moment
+    /**
+     * Pre-init handler to load Pantheon tokens and metadata
+     * Sets up token caches and loads existing tokens before landofile initialization
+     */
     app.events.on('pre-init', 1, () => {
       app.pantheonTokenCache = 'pantheon.tokens';
       app.pantheonTokens = lando.cache.get(app.pantheonTokenCache) || [];
