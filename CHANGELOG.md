@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.9.1 - [December 11, 2024](https://github.com/lando/pantheon/releases/tag/v1.9.1)
+
 * Fixed bug preventing `lando pull` and `lando push` from correctly surfacing available environments
 
 ## v1.9.0 - [December 10, 2024](https://github.com/lando/pantheon/releases/tag/v1.9.0)
