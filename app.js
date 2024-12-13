@@ -36,7 +36,8 @@ module.exports = (app, lando) => {
         // this allows these commands to all be overriden without causing a failure here
         if (answers.auth && (answers.auth !== token || !email)) {
          const api = new PantheonApiClient(answers.auth, app.log);
-          return api.auth().then(() => api.getUser().then(results => {
+          return api.auth().then(async () => {
+            const results = await api.getUser();
             const cache = {token: answers.auth, email: results.email, date: _.toInteger(_.now() / 1000)};
             // Reset this apps metacache
             lando.cache.set(app.metaCache, _.merge({}, app.meta, cache), {persist: true});
@@ -44,7 +45,7 @@ module.exports = (app, lando) => {
             lando.cache.set(app.pantheonTokenCache, utils.sortTokens(app.pantheonTokens, [cache]), {persist: true});
             // Wipe out the apps tooling cache to reset with the new MT
             lando.cache.remove(`${app.name}.tooling.cache`);
-          }))
+          })
           // Throw some sort of error
           // NOTE: this provides some error handling when we are completely non-interactive
           .catch(err => {
