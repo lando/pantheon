@@ -43,9 +43,14 @@ const getAutoCompleteSites = async (answers, lando, input = null) => {
     return pantheonSites.filter(site => _.startsWith(site.name, input));
   }
 
+  // get client
   const api = new PantheonApiClient(answers['pantheon-auth'], lando.log);
+  // auth it
   await api.auth();
+  // get sites
   const sites = await api.getSites();
+
+  // return them
   pantheonSites = sites.map(site => ({name: site.name, value: site.name}));
   return pantheonSites;
 };
@@ -117,15 +122,19 @@ module.exports = {
       {name: 'wait-for-user', cmd: '/helpers/pantheon-wait-for-user.sh'},
       {name: 'generate-key', cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`},
       {name: 'post-key', func: async (options, lando) => {
+        // key and client
         const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
         const pubKey = path.join(lando.config.userConfRoot, 'keys', `${pantheonLandoKey}.pub`);
+
         await api.auth();
-        return api.postKey(pubKey);
+        return await api.postKey(pubKey);
       }},
       {name: 'get-git-url', func: async (options, lando) => {
         const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
+
         await api.auth();
         const site = await api.getSite(options['pantheon-site'], false);
+
         options['pantheon-git-url'] = getGitUrl(site);
       }},
       {name: 'reload-keys', cmd: '/helpers/load-keys.sh --silent', user: 'root'},
@@ -153,7 +162,6 @@ module.exports = {
     // Authenticate and post keys
     await api.auth();
     await api.postKey(pubKey);
-    await api.auth();
 
     // Get site and user info
     const [site, user] = await Promise.all([
