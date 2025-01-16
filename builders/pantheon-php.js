@@ -1,7 +1,6 @@
 'use strict';
 
 const _ = require('lodash');
-const fs = require('fs');
 const path = require('path');
 const LandoPhp = require('@lando/php/builders/php.js');
 const utils = require('./../lib/utils.js');
