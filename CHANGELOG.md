@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Updated lando/php to v1.7.1.
+
 ## v1.9.2 - [December 13, 2024](https://github.com/lando/pantheon/releases/tag/v1.9.2)
 
 * Fixed bugs present in various interactions with the Pantheon API.
