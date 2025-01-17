@@ -1,6 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
-* Updated lando/php to v1.7.1.
+* Updated to [@lando/php@1.7.1](https://github.com/lando/php/releases/tag/v1.7.1).
+* Udpated to [@lando/varnish@1.3.0](https://github.com/lando/varnish/releases/tag/v1.3.0).
 
 ## v1.9.2 - [December 13, 2024](https://github.com/lando/pantheon/releases/tag/v1.9.2)
 
