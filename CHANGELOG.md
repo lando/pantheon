@@ -1,13 +1,16 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Updated `edge` service to use `varnish:6.0`
+* Updated to [@lando/varnish@1.3.0](https://github.com/lando/varnish/releases/tag/v1.3.1)
+
 ## v1.9.3 - [January 17, 2025](https://github.com/lando/pantheon/releases/tag/v1.9.3)
 
-* Updated to [@lando/php@1.7.1](https://github.com/lando/php/releases/tag/v1.7.1).
-* Updated to [@lando/varnish@1.3.0](https://github.com/lando/varnish/releases/tag/v1.3.0).
+* Updated to [@lando/php@1.7.1](https://github.com/lando/php/releases/tag/v1.7.1)
+* Updated to [@lando/varnish@1.3.0](https://github.com/lando/varnish/releases/tag/v1.3.0)
 
 ## v1.9.2 - [December 13, 2024](https://github.com/lando/pantheon/releases/tag/v1.9.2)
 
-* Fixed bugs present in various interactions with the Pantheon API.
+* Fixed bugs present in various interactions with the Pantheon API
 
 ## v1.9.1 - [December 11, 2024](https://github.com/lando/pantheon/releases/tag/v1.9.1)
 
@@ -19,28 +22,28 @@
 * Removed unneeded deps `bluebird`, `dayjs`, and `winston`
 * Removed unneeded plugins `@lando/mssql`, `@lando/mysql` and `@lando/postgres`
 * Simplified dependency chain
-* Updated to [@lando/mariadb@1.6.3](https://github.com/lando/mariadb/releases/tag/v1.6.3).
-* Updated to [@lando/php@1.6.3](https://github.com/lando/php/releases/tag/v1.6.3).
-* Updated to [@lando/redis@1.2.3](https://github.com/lando/redis/releases/tag/v1.2.3).
-* Updated to [@lando/solr@1.3.3](https://github.com/lando/solr/releases/tag/v1.3.3).
-* Updated to [@lando/varnish@1.2.3](https://github.com/lando/varnish/releases/tag/v1.2.3).
-* Updated to [js-yaml@^4.1.0](https://www.npmjs.com/package/js-yaml).
+* Updated to [@lando/mariadb@1.6.3](https://github.com/lando/mariadb/releases/tag/v1.6.3)
+* Updated to [@lando/php@1.6.3](https://github.com/lando/php/releases/tag/v1.6.3)
+* Updated to [@lando/redis@1.2.3](https://github.com/lando/redis/releases/tag/v1.2.3)
+* Updated to [@lando/solr@1.3.3](https://github.com/lando/solr/releases/tag/v1.3.3)
+* Updated to [@lando/varnish@1.2.3](https://github.com/lando/varnish/releases/tag/v1.2.3)
+* Updated to [js-yaml@^4.1.0](https://www.npmjs.com/package/js-yaml)
 
 ## v1.8.3 - [December 6, 2024](https://github.com/lando/pantheon/releases/tag/v1.8.3)
 
-* Updated the version index.md to get Docuverse page to build correctly.
+* Updated the version index.md to get Docuverse page to build correctly
 
 ## v1.8.2 - [December 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.8.2)
 
-* Updated to [@lando/vitepress-theme-default-plus@v1.1.0-beta.24](https://github.com/lando/vitepress-theme-default-plus/releases/tag/v1.1.0-beta.24).
+* Updated to [@lando/vitepress-theme-default-plus@v1.1.0-beta.24](https://github.com/lando/vitepress-theme-default-plus/releases/tag/v1.1.0-beta.24)
 
 ## v1.8.1 - [November 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.8.1)
 
-* Updated to [@lando/vitepress-theme-default-plus@v1.1.0-beta.18](https://github.com/lando/vitepress-theme-default-plus/releases/tag/v1.1.0-beta.18).
+* Updated to [@lando/vitepress-theme-default-plus@v1.1.0-beta.18](https://github.com/lando/vitepress-theme-default-plus/releases/tag/v1.1.0-beta.18)
 
 ## v1.8.0 - [October 25, 2024](https://github.com/lando/pantheon/releases/tag/v1.8.0)
 
-* Updated release process to generate an edge release when stable releases are created.
+* Updated release process to generate an edge release when stable releases are created
 
 ## v1.7.1 - [October 18, 2024](https://github.com/lando/pantheon/releases/tag/v1.7.1)
 
@@ -60,15 +63,15 @@
 
 ## v1.5.0 - [April 30, 2024](https://github.com/lando/pantheon/releases/tag/v1.5.0)
 
-* Added Drupal10 config file to allow for a `framework: drupal10` value. [#242](https://github.com/lando/pantheon/issues/242)
+* Added Drupal10 config file to allow for a `framework: drupal10` value [#242](https://github.com/lando/pantheon/issues/242)
 
 ## v1.4.2 - [April 5, 2024](https://github.com/lando/pantheon/releases/tag/v1.4.2)
 
-* Fixed issue with the previous portforward fix. [#237](https://github.com/lando/pantheon/issues/237)
+* Fixed issue with the previous portforward fix [#237](https://github.com/lando/pantheon/issues/237)
 
 ## v1.4.1 - [April 5, 2024](https://github.com/lando/pantheon/releases/tag/v1.4.1)
 
-* Fixed issue with portforwarding no longer being available on the `database` service. [#237](https://github.com/lando/pantheon/issues/237)
+* Fixed issue with portforwarding no longer being available on the `database` service [#237](https://github.com/lando/pantheon/issues/237)
 
 ## v1.4.0 - [April 1, 2024](https://github.com/lando/pantheon/releases/tag/v1.4.0)
 
@@ -78,7 +81,7 @@
 
 ## v1.3.0 - [March 8, 2024](https://github.com/lando/pantheon/releases/tag/v1.3.0)
 
-* Updated to latest database services.
+* Updated to latest database services
 
 ## v1.2.0 - [March 4, 2024](https://github.com/lando/pantheon/releases/tag/v1.2.0)
 
@@ -100,13 +103,13 @@
 ### Internal
 
 * Updated to `@lando/php@1.2.0`
-* Updated config loading to respect Lando's config settings.
-* Added some config test coverage.
-* Added drupal10 test coverage.
+* Updated config loading to respect Lando's config settings
+* Added some config test coverage
+* Added drupal10 test coverage
 
 ## v1.0.1 - [January 8, 2024](https://github.com/lando/pantheon/releases/tag/v1.0.1)
 
-* Fixed missing proxy configuration.
+* Fixed missing proxy configuration
 
 ## v1.0.0 - [December 7, 2023](https://github.com/lando/pantheon/releases/tag/v1.0.0)
 
@@ -114,25 +117,25 @@
 
 ## v0.14.0 - [December 4, 2023](https://github.com/lando/pantheon/releases/tag/v0.14.0)
 
-* Fixed broken `mkdirp` module usage. [#202](https://github.com/lando/pantheon/pull/202)
-* Isolated plugin. [#202](https://github.com/lando/pantheon/pull/202)
-* Extended wait time for user. [#202](https://github.com/lando/pantheon/pull/202)
+* Fixed broken `mkdirp` module usage [#202](https://github.com/lando/pantheon/pull/202)
+* Isolated plugin [#202](https://github.com/lando/pantheon/pull/202)
+* Extended wait time for user [#202](https://github.com/lando/pantheon/pull/202)
 
 ## v0.13.0 - [October 5, 2023](https://github.com/lando/pantheon/releases/tag/v0.13.0)
 
-* Updated path to error log. [#190](https://github.com/lando/pantheon/pull/190)
-* Added script to make sure user is loaded before repo clone. [#198](https://github.com/lando/pantheon/pull/198)
-* Added warning/documentation regarding table prefixes on import. [#171](https://github.com/lando/pantheon/pull/171)
+* Updated path to error log [#190](https://github.com/lando/pantheon/pull/190)
+* Added script to make sure user is loaded before repo clone [#198](https://github.com/lando/pantheon/pull/198)
+* Added warning/documentation regarding table prefixes on import [#171](https://github.com/lando/pantheon/pull/171)
 
 ## v0.12.0 - [July 3, 2023](https://github.com/lando/pantheon/releases/tag/v0.12.0)
 
-* Removed bundle-dependencies and version-bump-prompt from plugin.
-* Updated package to use prepare-release-action.
-* Updated documentation to reflect new release process.
+* Removed bundle-dependencies and version-bump-prompt from plugin
+* Updated package to use prepare-release-action
+* Updated documentation to reflect new release process
 
 ## v0.11.0 - [May 26, 2023](https://github.com/lando/pantheon/releases/tag/v0.11.0)
 
-* Set default redis to v6 and added default password. [#147](https://github.com/lando/pantheon/issues/147)
+* Set default redis to v6 and added default password [#147](https://github.com/lando/pantheon/issues/147)
 
 ## v0.10.1 - [May 1, 2023](https://github.com/lando/pantheon/releases/tag/v0.10.1)
 
