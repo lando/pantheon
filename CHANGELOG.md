@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.9.4 - [January 18, 2025](https://github.com/lando/pantheon/releases/tag/v1.9.4)
+
 * Updated `edge` service to use `varnish:6.0`
 * Updated to [@lando/varnish@1.3.1](https://github.com/lando/varnish/releases/tag/v1.3.1)
 
