@@ -9,6 +9,8 @@ ENV PHANTOMJS_OLD_VERSION=1.7.0
 ENV LANDO_TERMINUS_VERSION=2.5.0
 ENV TIKA_VERSION=1.18
 
+ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
 # Install the additional things that make the pantheon
 RUN \
   echo "deb http://archive.debian.org/debian stretch main non-free contrib" > /etc/apt/sources.list \
@@ -47,8 +49,14 @@ RUN \
   && wget "http://archive.apache.org/dist/tika/tika-app-${TIKA_VERSION}.jar" -O /srv/bin/tika-app-${TIKA_VERSION}.jar \
   && chmod +x /srv/bin/tika-app-${TIKA_VERSION}.jar \
   && wget "http://archive.apache.org/dist/tika/tika-app-1.1.jar" -O /srv/bin/tika-app-1.1.jar \
-  && chmod +x /srv/bin/tika-app-1.1.jar \
-  && apt-get -y clean \
+  && chmod +x /srv/bin/tika-app-1.1.jar
+
+RUN install-php-extensions \
+  igbinary \
+  tidy \
+  zstd
+
+RUN apt-get -y clean \
   && apt-get -y autoclean \
   && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/* && rm -rf && rm -rf /var/lib/cache/* && rm -rf /var/lib/log/* && rm -rf /tmp/*
