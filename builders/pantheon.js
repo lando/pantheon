@@ -20,6 +20,7 @@ const setTooling = (options, tokens) => {
   const tokenEnv = metaToken !== null ?
     {LANDO_TERMINUS_TOKEN: metaToken}
     : {};
+
   // Add in push/pull/switch
   options.tooling.pull = pull.getPantheonPull(options, tokens);
   options.tooling.push = push.getPantheonPush(options, tokens);
@@ -184,6 +185,7 @@ module.exports = {
 
       // Handle other stuff
       const tokens = utils.sortTokens(options._app.pantheonTokens, options._app.terminusTokens);
+
       options = setTooling(options, tokens);
       options = setBuildSteps(options);
 
@@ -192,6 +194,6 @@ module.exports = {
 
       // Send downstream
       super(id, options);
-    };
+    }
   },
 };

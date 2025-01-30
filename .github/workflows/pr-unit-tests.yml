@@ -11,9 +11,9 @@ jobs:
         os:
           - windows-2022
           - ubuntu-24.04
-          - macos-12
+          - macos-14
         node-version:
-          - '18'
+          - '20'
     steps:
       # Install deps and cache
       - name: Checkout code

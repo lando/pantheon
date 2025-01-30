@@ -13,6 +13,6 @@ module.exports = {
   builder: (parent, config) => class PantheonSolr extends LandoSolr.builder(parent, LandoSolr.config) {
     constructor(id, options = {}) {
       super(id, {...config, ...options});
-    };
+    }
   },
 };
