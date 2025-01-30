@@ -1,13 +1,13 @@
-# docker build -t devwithlando/pantheon-appserver:7.0-3 .
+# docker build -t devwithlando/pantheon-appserver:7.0-4 .
 
-FROM devwithlando/php:7.0-fpm-3
+FROM devwithlando/php:7.0-fpm-4
 
 # Version information
-ENV WKHTMLTOPDF_VERSION 0.12.6
-ENV PHANTOMJS_VERSION 2.1.1
-ENV PHANTOMJS_OLD_VERSION 1.7.0
-ENV LANDO_TERMINUS_VERSION 2.5.0
-ENV TIKA_VERSION 1.18
+ENV WKHTMLTOPDF_VERSION=0.12.6
+ENV PHANTOMJS_VERSION=2.1.1
+ENV PHANTOMJS_OLD_VERSION=1.7.0
+ENV LANDO_TERMINUS_VERSION=2.5.0
+ENV TIKA_VERSION=1.18
 
 # Install the additional things that make the pantheon
 RUN \

@@ -37,17 +37,22 @@ const showTokenList = (data, tokens = []) => data === 'pantheon' && !_.isEmpty(t
 // Helper to determine whether to show token password entry or not
 const showTokenEntry = (data, answer, tokens = []) => data === 'pantheon' && (_.isEmpty(tokens) || answer === 'more');
 
-// Helper to get sites for autocomplete
-const getAutoCompleteSites = (answers, lando, input = null) => {
+// Helper to get sites for autocomplete - simplify Promise chain
+const getAutoCompleteSites = async (answers, lando, input = null) => {
   if (!_.isEmpty(pantheonSites)) {
-    return lando.Promise.resolve(pantheonSites).filter(site => _.startsWith(site.name, input));
-  } else {
-    const api = new PantheonApiClient(answers['pantheon-auth'], lando.log);
-    return api.auth().then(() => api.getSites().map(site => ({name: site.name, value: site.name}))).then(sites => {
-      pantheonSites = sites;
-      return pantheonSites;
-    });
+    return pantheonSites.filter(site => _.startsWith(site.name, input));
   }
+
+  // get client
+  const api = new PantheonApiClient(answers['pantheon-auth'], lando.log);
+  // auth it
+  await api.auth();
+  // get sites
+  const sites = await api.getSites();
+
+  // return them
+  pantheonSites = sites.map(site => ({name: site.name, value: site.name}));
+  return pantheonSites;
 };
 
 /*
@@ -83,8 +88,8 @@ module.exports = {
       interactive: {
         type: 'autocomplete',
         message: 'Which site?',
-        source: (answers, input) => {
-          return getAutoCompleteSites(answers, lando, input);
+        source: async (answers, input) => {
+          return await getAutoCompleteSites(answers, lando, input);
         },
         when: answers => answers.recipe === 'pantheon',
         weight: 530,
@@ -113,76 +118,84 @@ module.exports = {
         },
       },
     },
-    build: (options, lando) => ([
+    build: () => ([
       {name: 'wait-for-user', cmd: '/helpers/pantheon-wait-for-user.sh'},
       {name: 'generate-key', cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`},
-      {name: 'post-key', func: (options, lando) => {
+      {name: 'post-key', func: async (options, lando) => {
+        // key and client
         const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
         const pubKey = path.join(lando.config.userConfRoot, 'keys', `${pantheonLandoKey}.pub`);
-        return api.auth().then(() => api.postKey(pubKey));
+
+        await api.auth();
+        return await api.postKey(pubKey);
       }},
-      {name: 'get-git-url', func: (options, lando) => {
+      {name: 'get-git-url', func: async (options, lando) => {
         const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
-        return api.auth().then(() => api.getSites())
-        .filter(site => site.name === options['pantheon-site'])
-        .then(site => {
-          options['pantheon-git-url'] = getGitUrl(site[0]);
-        });
+
+        await api.auth();
+        const site = await api.getSite(options['pantheon-site'], false);
+
+        options['pantheon-git-url'] = getGitUrl(site);
       }},
       {name: 'reload-keys', cmd: '/helpers/load-keys.sh --silent', user: 'root'},
       {name: 'clone-repo', cmd: options => `/helpers/get-remote-url.sh ${options['pantheon-git-url']}`, remove: 'true'},
     ]),
   }],
-  build: (options, lando) => {
+  build: async (options, lando) => {
     const api = new PantheonApiClient(options['pantheon-auth'], lando.log);
     const pubKey = path.join(lando.config.userConfRoot, 'keys', `${pantheonLandoKey}.pub`);
 
-    return lando.Promise.try(() => {
-      // If we don't have the keys, then resend to be make sure they are there
-      if (!fs.existsSync(pubKey)) {
-        return lando.engine.run({
-          id: 'generate-key',
-          cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`,
-          compose: utils.generateComposeFiles(options, lando),
-          project: lando.config.landoFileConfig.project,
-          opts: {
-            mode: 'attach',
-            services: ['init'],
-          },
-        });
-      }
-    })
-    .then(() => api.auth())
-    // Post our keys again.
-    .then(() => api.postKey(pubKey))
-    .then(() => api.auth())
-    // Get our sites and user
-    .then(() => Promise.all([api.getSites(), api.getUser()]))
-    // Parse the dataz and set the things
-    .then(results => {
-      // Get our site and email
-      const site = _.head(_.filter(results[0], site => site.name === options['pantheon-site']));
-      const user = results[1];
+    // If we don't have the keys, generate them
+    if (!fs.existsSync(pubKey)) {
+      await lando.engine.run({
+        id: 'generate-key',
+        cmd: `/helpers/generate-key.sh ${pantheonLandoKey} ${pantheonLandoKeyComment}`,
+        compose: utils.generateComposeFiles(options, lando),
+        project: lando.config.landoFileConfig.project,
+        opts: {
+          mode: 'attach',
+          services: ['init'],
+        },
+      });
+    }
 
-      // Error if site doesn't exist
-      if (_.isEmpty(site)) throw Error(`${site} does not appear to be a Pantheon site!`);
+    // Authenticate and post keys
+    await api.auth();
+    await api.postKey(pubKey);
 
-      // This is a good token, lets update our cache
-      const cache = {token: options['pantheon-auth'], email: user.email, date: _.toInteger(_.now() / 1000)};
+    // Get site and user info
+    const [site, user] = await Promise.all([
+      api.getSite(options['pantheon-site']),
+      api.getUser(),
+    ]);
 
-      // Update lando's store of pantheon machine tokens
-      const tokens = lando.cache.get(pantheonTokenCache) || [];
-      lando.cache.set(pantheonTokenCache, utils.sortTokens(tokens, [cache]), {persist: true});
-      // Update app metdata
-      const metaData = lando.cache.get(`${options.name}.meta.cache`);
-      lando.cache.set(`${options.name}.meta.cache`, _.merge({}, metaData, cache), {persist: true});
+    // Error if site doesn't exist
+    if (_.isEmpty(site)) {
+      throw new Error(`${site} does not appear to be a Pantheon site!`);
+    }
 
-      // Add some stuff to our landofile
-      return {config: {
+    // This is a good token, lets update our cache
+    const cache = {
+      token: options['pantheon-auth'],
+      email: user.email,
+      date: _.toInteger(_.now() / 1000),
+    };
+
+    // Update lando's store of pantheon machine tokens
+    const tokens = lando.cache.get(pantheonTokenCache) || [];
+    lando.cache.set(pantheonTokenCache, utils.sortTokens(tokens, [cache]), {persist: true});
+
+    // Update app metadata
+    const metaData = lando.cache.get(`${options.name}.meta.cache`);
+    lando.cache.set(`${options.name}.meta.cache`, _.merge({}, metaData, cache), {persist: true});
+
+    // Return config to be added to the landofile
+    return {
+      config: {
         framework: _.get(site, 'framework', 'drupal'),
         site: _.get(site, 'name', options.name),
         id: _.get(site, 'id', 'lando'),
-      }};
-    });
+      },
+    };
   },
 };

@@ -55,6 +55,6 @@ PRESSFLOW_SETTINGS: JSON object of Drupal config and settings.
 DRUPAL_HASH_SALT: Needed for Drupal8. We set this automatically.
 ```
 
-These are in addition to the [default variables](https://docs.lando.dev/core/v3/env.html#default-environment-variables) that we inject into every container.
+These are in addition to the [default variables](https://docs.lando.dev/config/env.html#default-environment-variables) that we inject into every container.
 
 **NOTE:** These can vary based on the choices you make in your recipe config.
