@@ -1,5 +1,7 @@
 # Pantheon Lando Plugin
 
+[![Build Pantheon Images](https://github.com/lando/pantheon/actions/workflows/build-pantheon-images.yml/badge.svg)](https://github.com/lando/pantheon/actions/workflows/build-pantheon-images.yml)
+
 This is the _official_ [Lando](https://lando.dev) plugin for [Pantheon](https://pantheon.io). When installed it...
 
 * Closely mimics Pantheon's [stack, versions](https://docs.pantheon.io/platform/) and [environment](https://docs.pantheon.io/read-environment-config/) locally
