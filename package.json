@@ -3,7 +3,7 @@
   "description": "A Lando plugin that provides a tight integration with Pantheon.",
   "version": "1.9.5",
   "author": "Mike Pirog @pirog",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "repository": "lando/pantheon",
   "bugs": "https://github.com/lando/pantheon/issues/new/choose",
   "homepage": "https://github.com/lando/pantheon",
