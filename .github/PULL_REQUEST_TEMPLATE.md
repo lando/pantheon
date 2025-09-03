@@ -10,7 +10,7 @@
 ### Pieces of flare
 
 - [ ] I've written a unit or functional test for my code
-- [ ] I've updated relevant documentation it my code changes it
+- [ ] I've updated relevant documentation if my code changes it
 - [ ] I've updated this repo's README if my code changes it
 - [ ] I've updated this repo's CHANGELOG with my change unless its a trivial change (like updating a typo in the docs)
 
