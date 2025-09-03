@@ -1,5 +1,9 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.10.0 - [September 3, 2025](https://github.com/lando/pantheon/releases/tag/v1.10.0)
+
+* Updated to newest Bitnamilegacy repositories
+
 ## v1.9.5 - [January 31, 2025](https://github.com/lando/pantheon/releases/tag/v1.9.5)
 
 * Added `igbinary`, `tidy`, and `zstd` extensions to PHP 7.0+ images
