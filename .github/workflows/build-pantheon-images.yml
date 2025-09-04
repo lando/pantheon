@@ -46,12 +46,13 @@ jobs:
           - image: pantheon-appserver
             tag: 7.1-4
             context: dockerfiles/7.1-fpm
-          - image: pantheon-appserver
-            tag: 7.0-4
-            context: dockerfiles/7.0-fpm
-          - image: pantheon-appserver
-            tag: 5.6-4
-            context: dockerfiles/5.6-fpm
+          # these are legacy EOL images that we dont really need to test anymore
+          # - image: pantheon-appserver
+          #   tag: 7.0-4
+          #   context: dockerfiles/7.0-fpm
+          # - image: pantheon-appserver
+          #   tag: 5.6-4
+          #   context: dockerfiles/5.6-fpm
 
     steps:
       - name: Checkout code

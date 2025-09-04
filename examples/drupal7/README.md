@@ -39,7 +39,7 @@ lando drush status | grep "Connected"
 
 # Should have 755 on pulled files
 cd drupal7
-lando exec appserver -- "stat sites/default/files/field/image/Lando-Calrissian-Cloud-City-Administrator.jpg" | grep "Access" | grep "0755"
+lando exec appserver -- "stat sites/default/files/field/image/lando.jpg" | grep "Access" | grep "0755"
 
 # Should have drush
 cd drupal7
