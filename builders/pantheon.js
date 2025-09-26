@@ -134,7 +134,6 @@ module.exports = {
     tooling: {terminus: {
       service: 'appserver',
     }},
-    unarmedVersions: ['5.3', '5.5'],
     xdebug: false,
     webroot: '.',
     proxy: {},
