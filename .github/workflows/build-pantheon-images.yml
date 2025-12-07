@@ -23,36 +23,29 @@ jobs:
             tag: 8.8-4
             context: dockerfiles/8.8-solr
           - image: pantheon-appserver
-            tag: 8.3-4
+            tag: 8.4-5
+            context: dockerfiles/8.4-fpm
+          - image: pantheon-appserver
+            tag: 8.3-5
             context: dockerfiles/8.3-fpm
           - image: pantheon-appserver
-            tag: 8.2-4
+            tag: 8.2-5
             context: dockerfiles/8.2-fpm
           - image: pantheon-appserver
-            tag: 8.1-4
+            tag: 8.1-5
             context: dockerfiles/8.1-fpm
           - image: pantheon-appserver
-            tag: 8.0-4
+            tag: 8.0-5
             context: dockerfiles/8.0-fpm
           - image: pantheon-appserver
-            tag: 7.4-4
+            tag: 7.4-5
             context: dockerfiles/7.4-fpm
           - image: pantheon-appserver
-            tag: 7.3-4
+            tag: 7.3-5
             context: dockerfiles/7.3-fpm
           - image: pantheon-appserver
-            tag: 7.2-4
+            tag: 7.2-5
             context: dockerfiles/7.2-fpm
-          - image: pantheon-appserver
-            tag: 7.1-4
-            context: dockerfiles/7.1-fpm
-          # these are legacy EOL images that we dont really need to test anymore
-          # - image: pantheon-appserver
-          #   tag: 7.0-4
-          #   context: dockerfiles/7.0-fpm
-          # - image: pantheon-appserver
-          #   tag: 5.6-4
-          #   context: dockerfiles/5.6-fpm
 
     steps:
       - name: Checkout code
