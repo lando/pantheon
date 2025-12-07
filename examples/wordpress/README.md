@@ -90,17 +90,13 @@ lando terminus auth:whoami | grep droid@lando.dev
 cd wordpress
 curl -LI http://landobot-wordress.lndo.site | grep Via || echo $? | grep 1
 
-# Should have phantomjs 1.7.0 installed at /srv/bin/phantomjs
+# Should have apache tika 1.18 installed at /srv/bin/tika-app-1.18.jar
 cd wordpress
-lando exec appserver -- "/srv/bin/phantomjs --version" | grep "1.7.0"
+lando exec appserver -- "java -jar /srv/bin/tika-app-1.18.jar --version" | grep "Apache Tika 1.18"
 
-# Should have apache tika1.18 installed /srv/bin/tika-app-1.18.jar
+# Should have apache tika 1.21 installed at /srv/bin/tika-app-1.21.jar
 cd wordpress
-lando exec appserver -- "java -jar /srv/bin/tika-app-1.1.jar --version" | grep "Apache Tika 1.1"
-
-# Should have wkhtmltopdf installed at /srv/bin/wkhtmltopdf
-cd wordpress
-lando exec appserver -- "/srv/bin/wkhtmltopdf --version"
+lando exec appserver -- "java -jar /srv/bin/tika-app-1.21.jar --version" | grep "Apache Tika 1.21"
 
 # Should be able to push commits to pantheon
 cd wordpress
