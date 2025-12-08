@@ -91,11 +91,11 @@ lando exec appserver -- "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should use php version in pantheon.upstream.yml
 cd drupal8
-lando php -v | grep "PHP 7.4"
+lando php -v | tee >(cat 1>&2) | grep "PHP 7.4"
 
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal8
-lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
+lando varnishadm param.show http_resp_hdr_len | tee >(cat 1>&2) | grep 'Value is: 25k'
 
 # Should have all pantheon services running and their tooling enabled by defaults
 docker ps --filter label=com.docker.compose.project=landobotdrupal8 | grep landobotdrupal8_appserver_nginx_1
