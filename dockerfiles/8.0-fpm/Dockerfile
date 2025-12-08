@@ -8,6 +8,11 @@ ENV TIKA_VERSION=1.18
 
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
+# MariaDB client compatibility (https://github.com/lando/php/issues/120)
+RUN mkdir -p /etc/apt/keyrings \
+  && curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp' \
+  && echo "deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] https://archive.mariadb.org/repo/10.5/debian bullseye main" > /etc/apt/sources.list.d/mariadb.list
+
 # Install the additional things that make the pantheon
 RUN mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
