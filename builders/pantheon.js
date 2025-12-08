@@ -51,6 +51,10 @@ const setBuildSteps = options => {
   options.run_root.push('/helpers/binding.sh');
   // Add composer install step
   if (options.build_step) options.build.unshift('composer install');
+  // Add Tika 3 installation if tika_version: 3 is set in pantheon.yml
+  if (options.tikaVersion === 3) {
+    options.build_root.push(utils.getTika3BuildStep());
+  }
   return options;
 };
 
