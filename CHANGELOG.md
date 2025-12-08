@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.11.0 - [December 8, 2025](https://github.com/lando/pantheon/releases/tag/v1.11.0)
+
 * Added Support for Pantheon's `PHP Runtime Generation 2`
 * Added PHP `8.4` support
 * Removed support for PHP versions `5.3`, `5.5`, `5.6`, `7.0`, and `7.1`
