@@ -1,7 +1,14 @@
-name: Lando Init Tests
+name: Pantheon Tests
 
 on:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      lando-version:
+        description: 'Lando version'
+        required: true
+        default: '3-edge'
+        type: string
 
 jobs:
   leia-tests:
@@ -10,24 +17,33 @@ jobs:
       TERM: xterm
       PANTHEON_MACHINE_TOKEN: ${{ secrets.PANTHEON_MACHINE_TOKEN }}
     strategy:
+      fail-fast: false
       matrix:
         leia-test:
+          - examples/drupal7
+          - examples/drupal8
+          - examples/drupal9
+          - examples/drupal10
           - examples/init
           - examples/pantheon-downstreamer-1
           - examples/pantheon-downstreamer-2
+          - examples/wordpress
+          - examples/wordpressnetworkdomain
+          # - examples/wordpressnetworkfolder
         lando-version:
-          - 3-dev-slim
+          - 3-edge
+          - 3-stable
         os:
-          - ubuntu-22.04
+          - ubuntu-24.04
         node-version:
-          - '18'
+          - '20'
 
     steps:
       # Install deps and cache
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Install node ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
@@ -40,7 +56,7 @@ jobs:
           version: dev
           sync: false
       - name: Setup lando ${{ matrix.lando-version }}
-        uses: lando/setup-lando@v2
+        uses: lando/setup-lando@v3
         with:
           lando-version: ${{ matrix.lando-version }}
           config: |

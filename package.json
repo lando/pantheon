@@ -1,9 +1,9 @@
 {
   "name": "@lando/pantheon",
   "description": "A Lando plugin that provides a tight integration with Pantheon.",
-  "version": "1.5.0",
+  "version": "1.11.0",
   "author": "Mike Pirog @pirog",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "repository": "lando/pantheon",
   "bugs": "https://github.com/lando/pantheon/issues/new/choose",
   "homepage": "https://github.com/lando/pantheon",
@@ -15,7 +15,7 @@
     "pantheon"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "lando": {},
   "main": "index.js",
@@ -34,8 +34,9 @@
   },
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "docs:build": "LANDO_MVB_VERSION=$(git describe --tags --always --abbrev=1 --match=\"v[0-9].*\") vitepress build docs",
+    "docs:dev": "LANDO_MVB_VERSION=$(git describe --tags --always --abbrev=1 --match=\"v[0-9].*\") vitepress dev docs",
+    "docs:mvb": "npx mvb docs",
     "docs:preview": "vitepress preview docs",
     "lint": "eslint . --ext .js --ext .mjs ",
     "test:unit": "nyc --reporter=html --reporter=text mocha --timeout 5000 test/**/*.spec.js",
@@ -43,26 +44,19 @@
     "test": "npm run lint && npm run test:unit"
   },
   "dependencies": {
-    "@lando/mariadb": "^1.1.0",
-    "@lando/mssql": "^1.0.0",
-    "@lando/mysql": "^1.1.0",
-    "@lando/nginx": "^1.0.0",
-    "@lando/php": "^1.2.0",
-    "@lando/postgres": "^1.1.0",
-    "@lando/redis": "^1.0.0",
-    "@lando/solr": "^1.0.0",
-    "@lando/varnish": "^1.0.0",
-    "axios": "^0.24.0",
-    "bluebird": "^3.7.2",
-    "dayjs": "^1.10.7",
-    "js-yaml": "^3.4.6",
-    "lodash": "^4.17.21",
-    "winston": "2.4.5"
+    "@lando/mariadb": "^1.7.0",
+    "@lando/php": "^1.8.0",
+    "@lando/redis": "^1.2.3",
+    "@lando/solr": "^1.3.3",
+    "@lando/varnish": "^1.3.1",
+    "axios": "^1.7.9",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.0",
     "@lando/leia": "^1.0.0-beta.3",
-    "@lando/vitepress-theme-default-plus": "^1.0.2",
+    "@lando/vitepress-theme-default-plus": "^1.1.1",
     "chai": "^4.3.4",
     "command-line-test": "^1.0.10",
     "eslint": "^7.32.0",
@@ -70,6 +64,6 @@
     "eslint-plugin-vue": "^8.0.3",
     "mocha": "^9.1.2",
     "nyc": "^15.1.0",
-    "vitepress": "^1.0.0-rc.42"
+    "vitepress": "^1.3.4"
   }
 }

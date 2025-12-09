@@ -20,7 +20,7 @@ const clearInvalidTokenFromToolingCache = (lando, cacheKey, meta, data) => {
 const errorIs401 = error => error.message.includes('failed with code 401');
 
 const checkTokens = (lando, command) => {
-  lando.events.on(`cli-${command}-answers`, data => {
+  lando.events.on(`cli-${command}-answers`, async data => {
     if (_.get(data, 'options._app.recipe') === 'pantheon') {
       // Gather the things we need
       const cacheKey = _.get(data, 'options._app.metaCache');
@@ -29,7 +29,10 @@ const checkTokens = (lando, command) => {
 
       if (!_.isEmpty(cachedToken)) {
         // Make sure our token is good beforehand
-        return new PantheonApi(cachedToken, lando.log).auth().catch(error => {
+        const api = new PantheonApi(cachedToken, lando.log);
+        try {
+          await api.auth();
+        } catch (error) {
           if (errorIs401(error)) {
             // Remove the bad token from the global token cache.
             removeInvalidGlobalTokens(lando, cachedToken);
@@ -39,7 +42,7 @@ const checkTokens = (lando, command) => {
             delete data.options.auth;
             console.log(lando.cli.makeArt('badToken'));
           }
-        });
+        }
       }
     }
   });

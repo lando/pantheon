@@ -13,7 +13,7 @@ At the very least you will need to have the following installed:
 
 * [Lando 3.21.0+](https://docs.lando.dev/getting-started/installation.html) preferably installed [from source](https://docs.lando.dev/install/source.html).
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [Node 18](https://nodejs.org/dist/latest-v18.x/)
+* [Node 20](https://nodejs.org/dist/latest-v20.x/)
 
 ## Installation
 
@@ -91,25 +91,31 @@ npm run test:unit
 
 We do end to end testing with our made-just-for-Lando testing framework [Leia](https://github.com/lando/leia). Leia allows us to define tests as a series of commented shell commands in human readable markdown files. Here is a simple example:
 
-```md
-Start up tests
---------------
+````md
+## Start up tests
 
+```bash
 # Should start up successfully
 lando start
+```
 
-Verification commands
----------------------
+## Verification commands
 
+```bash
 # Should be able to connect to all mariadb relationships
 lando mariadb main -e "show tables;"
 
-Destroy tests
--------------
+# Should do something else
+lando exec appserver -- some-command
+```
 
+## Destroy tests
+
+```bash
 # Should be able to destroy our app
 lando destroy -y
 ```
+````
 
 Note that the headers here are important. The _Start up tests_ header specifies things that should run before the main series of tests. _Verification commands_ is the main body of tests and is required. _Destroy tests_ specifies any needed clean up commands to run.
 

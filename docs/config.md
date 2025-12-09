@@ -5,9 +5,9 @@ description: Learn how to configure the Lando Pantheon recipe.
 
 # Configuration
 
-While Lando [recipes](https://docs.lando.dev/core/v3/recipes.html) set sane defaults so they work out of the box, they are also [configurable](https://docs.lando.dev/core/v3/recipes.html#config).
+While Lando [recipes](https://docs.lando.dev/landofile/recipes.html) set sane defaults so they work out of the box, they are also [configurable](https://docs.lando.dev/landofile/recipes.html#config).
 
-Here are the configuration options, set to the default values, for this recipe. If you are unsure about where this goes or what this means we *highly recommend* scanning the [recipes documentation](https://docs.lando.dev/core/v3/recipes.html) to get a good handle on how the magicks work.
+Here are the configuration options, set to the default values, for this recipe. If you are unsure about where this goes or what this means we *highly recommend* scanning the [recipes documentation](https://docs.lando.dev/landofile/recipes.html) to get a good handle on how the magicks work.
 
 ```yaml
 recipe: pantheon
@@ -22,9 +22,9 @@ config:
   composer_version: "2.2.12"
 ```
 
-If you do not already have a [Landofile](https://docs.lando.dev/core/v3) for your Pantheon site, we highly recommend you use [`lando init`](https://docs.lando.dev/cli/init.html) to get one as that will automatically populate the `framework`, `id` and `site` for you. Manually creating a Landofile with these things set correctly can be difficult and is *highly discouraged.*
+If you do not already have a [Landofile](https://docs.lando.dev/landofile) for your Pantheon site, we highly recommend you use [`lando init`](https://docs.lando.dev/cli/init.html) to get one as that will automatically populate the `framework`, `id` and `site` for you. Manually creating a Landofile with these things set correctly can be difficult and is *highly discouraged.*
 
-Note that if the above config options are not enough, all Lando recipes can be further [extended and overriden](https://docs.lando.dev/core/v3/recipes.html#extending-and-overriding-recipes).
+Note that if the above config options are not enough, all Lando recipes can be further [extended and overriden](https://docs.lando.dev/landofile/recipes.html#extending-and-overriding-recipes).
 
 ::: warning
 It is inadvisable to modify the `type` attribute of Pantheon services, particularly `appserver`. A common error resulting from these modifications is `service "edge" depends on undefined service appserver_nginx: invalid compose project`.
@@ -102,7 +102,7 @@ Note that if your application code depends on one of these services and you disa
 
 ## Using xdebug
 
-This is just a passthrough option to the [xdebug setting](https://docs.lando.dev/plugins/php/config.html#using-xdebug) that exists on all our [php services](https://docs.lando.dev/plugins/php). The `tl;dr` is `xdebug: true` enables and configures the php xdebug extension and `xdebug: false` disables it.
+This is just a passthrough option to the [xdebug setting](https://docs.lando.dev/plugins/php/config.html#using-xdebug) that exists on all our [php services](https://docs.lando.dev/plugins/php/index.html). The `tl;dr` is `xdebug: true` enables and configures the php xdebug extension and `xdebug: false` disables it.
 
 ```yaml
 recipe: lamp
@@ -110,7 +110,7 @@ config:
   xdebug: true|false
 ```
 
-However, for more information, we recommend you consult the [php service documentation](https://docs.lando.dev/plugins/php).
+However, for more information, we recommend you consult the [php service documentation](https://docs.lando.dev/plugins/php/index.html).
 
 ## Working With Multidev
 

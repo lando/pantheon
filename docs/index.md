@@ -1,7 +1,6 @@
 ---
 title: Pantheon Lando Plugin
 description: The best local development option for Drupal 7, Drupal 8/9 or WordPress sites running on Pantheon. Get Terminus and all the usual power tools plus awesome workflow automation.
-next: ./getting-started.html
 ---
 
 # Pantheon
@@ -10,13 +9,12 @@ next: ./getting-started.html
 
 Lando provides a snazzy integration that:
 
-* Closely mimics Pantheon's [stack, versions](https://docs.pantheon.io/platform/) and [environment](https://docs.pantheon.io/read-environment-config/) locally
-* Allows you to easily `pull` your Pantheon site down locally
-* Allows you to easily `push` your changes back to Pantheon
+* Closely mimics Pantheon's [stack, versions](https://docs.pantheon.io/platform/) and [environment](https://docs.pantheon.io/read-environment-config/) locally (PHP, Database, Object Cache, Search).
+* Allows you to easily `pull` your Pantheon site down locally.
+* Allows you to easily `push` your changes back to Pantheon.
+* Allows you to easily `switch` branches/environments to leverage Pantheon Multidev.
 * Installs `drush`, `terminus` and other power tools.
 
-However, in order to profit, **you must** have an account and a site on Pantheon to be able to use this recipe. If you don't, you can sign up [here](https://pantheon.io/register).
+However, in order to profit, **you must** have an account and a site on Pantheon to be able to use this recipe. If you don't, you can sign up [here](https://pantheon.io/register) for free site sandboxes.
 
 You should also check out Pantheon's [local dev](https://docs.pantheon.io/guides/local-development/) docs.
-
-

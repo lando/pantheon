@@ -20,6 +20,7 @@ const setTooling = (options, tokens) => {
   const tokenEnv = metaToken !== null ?
     {LANDO_TERMINUS_TOKEN: metaToken}
     : {};
+
   // Add in push/pull/switch
   options.tooling.pull = pull.getPantheonPull(options, tokens);
   options.tooling.push = push.getPantheonPush(options, tokens);
@@ -50,6 +51,10 @@ const setBuildSteps = options => {
   options.run_root.push('/helpers/binding.sh');
   // Add composer install step
   if (options.build_step) options.build.unshift('composer install');
+  // Add Tika 3 installation if tika_version: 3 is set in pantheon.yml
+  if (options.tikaVersion === 3) {
+    options.build_root.push(utils.getTika3BuildStep());
+  }
   return options;
 };
 
@@ -77,6 +82,7 @@ const getServices = options => ({
     framework: options.framework,
     drush_version: options.drush_version,
     root: options.root,
+    generation: options.generation,
   },
   database: {
     type: options.database,
@@ -133,7 +139,6 @@ module.exports = {
     tooling: {terminus: {
       service: 'appserver',
     }},
-    unarmedVersions: ['5.3', '5.5'],
     xdebug: false,
     webroot: '.',
     proxy: {},
@@ -184,6 +189,7 @@ module.exports = {
 
       // Handle other stuff
       const tokens = utils.sortTokens(options._app.pantheonTokens, options._app.terminusTokens);
+
       options = setTooling(options, tokens);
       options = setBuildSteps(options);
 
@@ -192,6 +198,6 @@ module.exports = {
 
       // Send downstream
       super(id, options);
-    };
+    }
   },
 };

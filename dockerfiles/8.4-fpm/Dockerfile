@@ -1,20 +1,17 @@
-# docker build -t devwithlando/pantheon-appserver:7.2-5 .
+# docker build -t devwithlando/pantheon-appserver:8.4-5 .
 
-FROM devwithlando/php:7.2-fpm-5
+FROM devwithlando/php:8.4-fpm-5
 
 # Version information
-ENV LANDO_TERMINUS_VERSION=2.5.0
+ENV LANDO_TERMINUS_VERSION=4.1.1
 ENV TIKA_VERSION=1.18
 
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 # Install the additional things that make the pantheon
-RUN \
-  echo "deb http://archive.debian.org/debian stretch main non-free contrib" > /etc/apt/sources.list \
-  && rm -rf /etc/apt/sources.list.d/pgdg.list \
-  && mkdir -p /usr/share/man/man1 \
+RUN mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
-    openjdk-8-jdk \
+    openjdk-17-jdk \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
   && mkdir -p /var/www/.drush \
   && mkdir -p /var/www/.backdrush \
