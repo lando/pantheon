@@ -102,7 +102,7 @@ Note that if your application code depends on one of these services and you disa
 
 ## Using xdebug
 
-This is just a passthrough option to the [xdebug setting](https://docs.lando.dev/plugins/php/config.html#using-xdebug) that exists on all our [php services](https://docs.lando.dev/plugins/php). The `tl;dr` is `xdebug: true` enables and configures the php xdebug extension and `xdebug: false` disables it.
+This is just a passthrough option to the [xdebug setting](https://docs.lando.dev/plugins/php/config.html#using-xdebug) that exists on all our [php services](https://docs.lando.dev/plugins/php/index.html). The `tl;dr` is `xdebug: true` enables and configures the php xdebug extension and `xdebug: false` disables it.
 
 ```yaml
 recipe: lamp
@@ -110,7 +110,7 @@ config:
   xdebug: true|false
 ```
 
-However, for more information, we recommend you consult the [php service documentation](https://docs.lando.dev/plugins/php).
+However, for more information, we recommend you consult the [php service documentation](https://docs.lando.dev/plugins/php/index.html).
 
 ## Working With Multidev
 

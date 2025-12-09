@@ -11,15 +11,15 @@ jobs:
         os:
           - windows-2022
           - ubuntu-24.04
-          - macos-14
+          - macos-15
         node-version:
           - '20'
     steps:
       # Install deps and cache
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm

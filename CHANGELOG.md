@@ -1,5 +1,21 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.11.0 - [December 8, 2025](https://github.com/lando/pantheon/releases/tag/v1.11.0)
+
+* Added Support for Pantheon's `PHP Runtime Generation 2`
+* Added PHP `8.4` support
+* Removed support for PHP versions `5.3`, `5.5`, `5.6`, `7.0`, and `7.1`
+
+## v1.10.0 - [September 4, 2025](https://github.com/lando/pantheon/releases/tag/v1.10.0)
+
+* Switched images to [bitnamilegacy](https://github.com/bitnami/containers/issues/83267) namespace
+* Updated to [@lando/mariadb@1.7.0](https://github.com/lando/mariadb/releases/tag/v1.7.0)
+* Updated to [@lando/php@1.8.0](https://github.com/lando/php/releases/tag/v1.8.0)
+
+## v1.9.5 - [January 31, 2025](https://github.com/lando/pantheon/releases/tag/v1.9.5)
+
+* Added `igbinary`, `tidy`, and `zstd` extensions to PHP 7.0+ images
+
 ## v1.9.4 - [January 18, 2025](https://github.com/lando/pantheon/releases/tag/v1.9.4)
 
 * Updated `edge` service to use `varnish:6.0`

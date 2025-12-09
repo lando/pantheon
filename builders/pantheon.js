@@ -51,6 +51,10 @@ const setBuildSteps = options => {
   options.run_root.push('/helpers/binding.sh');
   // Add composer install step
   if (options.build_step) options.build.unshift('composer install');
+  // Add Tika 3 installation if tika_version: 3 is set in pantheon.yml
+  if (options.tikaVersion === 3) {
+    options.build_root.push(utils.getTika3BuildStep());
+  }
   return options;
 };
 
@@ -78,6 +82,7 @@ const getServices = options => ({
     framework: options.framework,
     drush_version: options.drush_version,
     root: options.root,
+    generation: options.generation,
   },
   database: {
     type: options.database,
@@ -134,7 +139,6 @@ module.exports = {
     tooling: {terminus: {
       service: 'appserver',
     }},
-    unarmedVersions: ['5.3', '5.5'],
     xdebug: false,
     webroot: '.',
     proxy: {},
