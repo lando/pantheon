@@ -14,6 +14,12 @@ default-character-set=utf8
 # Data is stored in a volume on the db container /sql
 default-storage-engine = innodb
 
+[mariadb]
+#
+# * For where this is supported.
+#
+transaction_isolation=READ-COMMITTED
+
 #
 # * Character sets
 #
