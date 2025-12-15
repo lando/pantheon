@@ -109,6 +109,10 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal9 | grep lando
 cd drupal9
 lando php -m | grep xdebug || echo $? | grep 1
 
+# Should have phpredis with igbinary support
+cd drupal9
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
+
 # Should be able to push commits to pantheon
 cd drupal9
 lando pull --code dev --database none --files none

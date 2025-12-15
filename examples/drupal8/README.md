@@ -105,6 +105,10 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal8 | grep lando
 # Should not have xdebug enabled by defaults
 cd drupal8
 lando php -m | grep xdebug || echo $? | grep 1
+
+# Should have phpredis with igbinary support
+cd drupal8
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
 ```
 
 ## Destroy tests
