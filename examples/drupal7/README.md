@@ -120,6 +120,10 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal7 | grep lando
 cd drupal7
 lando php -m | grep xdebug || echo $? | grep 1
 
+# Should have phpredis with igbinary support
+cd drupal7
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
+
 # Should be running nginx 1.25
 cd drupal7
 lando exec appserver_nginx -- "/opt/bitnami/nginx/sbin/nginx -v 2>&1 | grep 1.25"

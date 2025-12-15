@@ -57,6 +57,10 @@ lando terminus auth:whoami | grep droid@lando.dev
 cd wordpress
 lando php -v | grep "PHP 7.3"
 
+# Should have phpredis with igbinary support
+cd wordpress
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
+
 # Should set the correct wordpress specific pantheon environment
 cd wordpress
 lando exec appserver -- "env" | grep FRAMEWORK | grep wordpress_network
