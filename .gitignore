@@ -44,3 +44,6 @@ config.*.timestamp-*-*.*
 
 # YARN
 yarn.lock
+
+# Syncthing conflicts
+*.sync-conflict-*
