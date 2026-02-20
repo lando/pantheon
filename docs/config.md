@@ -32,7 +32,7 @@ It is inadvisable to modify the `type` attribute of Pantheon services, particula
 
 ## Choosing service versions
 
-Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and use the values you've set for `php_version`, `database`, and `search` you've specified there.
+Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml) (and/or `pantheon.upstream.yml`) in your app's root directory and use the values you've set for `php_version`, `database`, and `search` you've specified there.
 
 This means that **you can not configure php, mysql, or solr versions directly in your Landofile for this recipe.**
 
@@ -51,7 +51,7 @@ search:
 
 ## Choosing a nested webroot
 
-Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and use whatever `web_docroot` you've specified there.
+Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml) (and/or `pantheon.upstream.yml`) in your app's root directory and use whatever `web_docroot` you've specified there.
 
 This means that **you cannot configure the webroot directly in your Landofile for this recipe.**
 
@@ -68,17 +68,17 @@ web_docroot: true
 
 By default, Lando will spin up a **very close** approximation of the Pantheon stack:
 
-* [php appserver served by nginx](https://docs.pantheon.io/application-containers/)
+* [php appserver served by nginx](https://docs.pantheon.io/application-containers)
 * [mariadb database](https://pantheon.io/blog/using-mariadb-mysql-replacement)
-* [redis cache](https://docs.pantheon.io/redis/)
-* [solr index](https://docs.pantheon.io/solr/)
-* [varnish edge](https://docs.pantheon.io/caching-advanced-topics/)
+* [redis cache](https://docs.pantheon.io/object-cache)
+* [solr index](https://docs.pantheon.io/solr)
+* [varnish edge](https://docs.pantheon.io/caching-advanced-topics)
 
 Please review the docs to get a better handle on [how Pantheon works](https://pantheon.io/about/how-it-works) below:
 
-*   [Pantheon Edge and Varnish](https://docs.pantheon.io/varnish/)
-*   [Pantheon Index and Solr](https://docs.pantheon.io/solr/)
-*   [Pantheon Caching and Redis](https://docs.pantheon.io/redis/)
+*   [Pantheon Edge and Varnish](https://docs.pantheon.io/guides/global-cdn)
+*   [Pantheon Index and Solr](https://docs.pantheon.io/solr)
+*   [Pantheon Caching and Redis](https://docs.pantheon.io/object-cache)
 
 What works on Pantheon **should** also work on Lando but recognize that the Pantheon platform is changing all the time and Lando is necessarily reactive.
 
@@ -114,7 +114,7 @@ However, for more information, we recommend you consult the [php service documen
 
 ## Working With Multidev
 
-Pantheon [multidev](https://docs.pantheon.io/multidev/) is a great (and easy) way to kick-start an advanced dev workflow for teams. By default, `lando` will pull down your `dev` environment but you can use `lando switch <env>` to switch your local copy over to a Pantheon multidev environment.
+Pantheon [multidev](https://docs.pantheon.io/guides/multidev) is a great (and easy) way to kick-start an advanced dev workflow for teams. By default, `lando` will pull down your `dev` environment but you can use `lando switch <env>` to switch your local copy over to a Pantheon multidev environment.
 
 ### Usage
 
