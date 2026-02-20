@@ -98,7 +98,7 @@ tooling:
 
 ## Using Drush
 
-Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml/) (and/or `pantheon.upstream.yml`) in your app's root directory and will globally install whatever `drush_version` you've specified there. However, it will not go below Drush 8. This means that if you've specified Drush 5, Lando will still install Drush 8.
+Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml) (and/or `pantheon.upstream.yml`) in your app's root directory and will globally install whatever `drush_version` you've specified there. However, it will not go below Drush 8. This means that if you've specified Drush 5, Lando will still install Drush 8.
 
 If this has not been specified then we will globally install the [latest version of Drush 8](http://docs.drush.org/en/8.x/install/). For Backdrop sites, we will also install the latest version of [Backdrop Drush](https://github.com/backdrop-contrib/backdrop-drush-extension).
 
@@ -144,7 +144,7 @@ You should be able to use `terminus` commands in the exact same way by prefixing
 
 ### Terminus Plugins
 
-By default, Lando will only install `terminus` proper but you can add [Terminus Plugins](https://docs.pantheon.io/terminus/plugins/directory/) to your Landofile with a [build step](https://docs.lando.dev/services/lando-3.html#build-steps).
+By default, Lando will only install `terminus` proper but you can add [Terminus Plugins](https://docs.pantheon.io/terminus/directory) to your Landofile with a [build step](https://docs.lando.dev/services/lando-3.html#build-steps).
 
 You will want to consult the relevant install instructions for each plugin but an example that installs the [Terminus Build Tools](https://github.com/pantheon-systems/terminus-build-tools-plugin) plugin is shown below:
 

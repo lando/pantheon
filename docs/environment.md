@@ -7,7 +7,7 @@ description: Learn how to work with Environment variables within the Lando Panth
 
 ## Environment Variables
 
-Like Pantheon, Lando will also [inject variables](https://docs.pantheon.io/read-environment-config/) into your runtime container so that you have useful information stored about your app. These are stored directly in the environment (e.g. accessible via [`getenv()`](https://www.php.net/manual/en/function.getenv.php)), `$_ENV`, `$_SERVER` or as defined `php` constants.
+Like Pantheon, Lando will also [inject variables](https://docs.pantheon.io/guides/environment-configuration/read-environment-config) into your runtime container so that you have useful information stored about your app. These are stored directly in the environment (e.g. accessible via [`getenv()`](https://www.php.net/manual/en/function.getenv.php)), `$_ENV`, `$_SERVER` or as defined `php` constants.
 
 A non-exhaustive list of some of the most commonly used config is shown below:
 
