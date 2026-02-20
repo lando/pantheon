@@ -23,28 +23,28 @@ jobs:
             tag: 8.8-4
             context: dockerfiles/8.8-solr
           - image: pantheon-appserver
-            tag: 8.4-5
+            tag: 8.4-6
             context: dockerfiles/8.4-fpm
           - image: pantheon-appserver
-            tag: 8.3-5
+            tag: 8.3-6
             context: dockerfiles/8.3-fpm
           - image: pantheon-appserver
-            tag: 8.2-5
+            tag: 8.2-6
             context: dockerfiles/8.2-fpm
           - image: pantheon-appserver
-            tag: 8.1-5
+            tag: 8.1-6
             context: dockerfiles/8.1-fpm
           - image: pantheon-appserver
-            tag: 8.0-5
+            tag: 8.0-6
             context: dockerfiles/8.0-fpm
           - image: pantheon-appserver
-            tag: 7.4-5
+            tag: 7.4-6
             context: dockerfiles/7.4-fpm
           - image: pantheon-appserver
-            tag: 7.3-5
+            tag: 7.3-6
             context: dockerfiles/7.3-fpm
           - image: pantheon-appserver
-            tag: 7.2-5
+            tag: 7.2-6
             context: dockerfiles/7.2-fpm
 
     steps:
