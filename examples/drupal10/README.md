@@ -82,7 +82,7 @@ lando exec appserver -- "env" | grep TERMINUS_USER | grep droid@lando.dev
 
 # Should use php version in pantheon.yml
 cd drupal10
-lando php -v | grep "PHP 8.3"
+lando php -v | grep "PHP 8.4"
 
 # Should use the database version in pantheon.yml
 cd drupal10
@@ -105,6 +105,14 @@ lando exec database -- "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LAN
 # Should not have xdebug enabled by defaults
 cd drupal10
 lando php -m | grep xdebug || echo $? | grep 1
+
+# Should have the imagick PHP extension enabled
+cd drupal10
+lando php -m | grep imagick
+
+# Should have ImageMagick 7 for PHP 8.4
+cd drupal10
+lando php -r 'echo Imagick::getVersion()["versionString"];' | grep "ImageMagick 7\."
 
 # Should have phpredis with igbinary support
 cd drupal10
