@@ -1,6 +1,6 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
-* Updated `@lando/php` to `^1.11.0` for MySQL client auto-detection fix
+* Updated `@lando/php` to `^1.11.1` for MySQL client auto-detection fix
 * Added `igbinary` support to `PhpRedis` extension for PHP `7.3`+ images
 * Updated to [@lando/php@1.10.0](https://github.com/lando/php/releases/tag/v1.10.0)
 * Updated `drush` to latest release version
