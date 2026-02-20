@@ -71,13 +71,13 @@ By default, Lando will spin up a **very close** approximation of the Pantheon st
 * [php appserver served by nginx](https://docs.pantheon.io/application-containers)
 * [mariadb database](https://pantheon.io/blog/using-mariadb-mysql-replacement)
 * [redis cache](https://docs.pantheon.io/object-cache)
-* [solr index](https://docs.pantheon.io/solr)
+* [solr index](https://docs.pantheon.io/pantheon-search/solr)
 * [varnish edge](https://docs.pantheon.io/caching-advanced-topics)
 
 Please review the docs to get a better handle on [how Pantheon works](https://pantheon.io/about/how-it-works) below:
 
 *   [Pantheon Edge and Varnish](https://docs.pantheon.io/guides/global-cdn)
-*   [Pantheon Index and Solr](https://docs.pantheon.io/solr)
+*   [Pantheon Index and Solr](https://docs.pantheon.io/pantheon-search/solr)
 *   [Pantheon Caching and Redis](https://docs.pantheon.io/object-cache)
 
 What works on Pantheon **should** also work on Lando but recognize that the Pantheon platform is changing all the time and Lando is necessarily reactive.
