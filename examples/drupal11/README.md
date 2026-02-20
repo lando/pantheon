@@ -69,6 +69,7 @@ lando exec appserver -- "env" | grep FILEMOUNT | grep "sites/default/files"
 lando exec appserver -- "env" | grep PANTHEON_ENVIRONMENT | grep lando
 lando exec appserver -- "env" | grep PANTHEON_INDEX_HOST | grep index
 lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEME | grep http
+lando exec appserver -- "env" | grep PANTHEON_SITE | grep c354aed8-76eb-44d7-8f54-57b9ea3079be
 lando exec appserver -- "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal11
 lando exec appserver -- "env" | grep php_version | grep "8"
 lando exec appserver -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
