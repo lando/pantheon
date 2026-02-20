@@ -1,8 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
-* Updated `@lando/php` to `^1.11.1` for MySQL client auto-detection fix
+* Updated to [@lando/php@1.11.1](https://github.com/lando/php/releases/tag/v1.11.1) for PHP 8.5 support
 * Added `igbinary` support to `PhpRedis` extension for PHP `7.3`+ images
-* Updated to [@lando/php@1.10.0](https://github.com/lando/php/releases/tag/v1.10.0)
 * Updated `drush` to latest release version
 
 ## v1.11.0 - [December 8, 2025](https://github.com/lando/pantheon/releases/tag/v1.11.0)
