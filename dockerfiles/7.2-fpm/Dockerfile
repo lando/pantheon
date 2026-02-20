@@ -1,6 +1,6 @@
-# docker build -t devwithlando/pantheon-appserver:7.2-5 .
+# docker build -t devwithlando/pantheon-appserver:7.2-6 .
 
-FROM devwithlando/php:7.2-fpm-5
+FROM devwithlando/php:7.2-fpm-7
 
 # Version information
 ENV LANDO_TERMINUS_VERSION=2.5.0

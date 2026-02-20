@@ -10,7 +10,7 @@ module.exports = {
   name: 'pantheon-php',
   parent: '_appserver',
   defaults: {
-    generation: '5',
+    generation: '6',
   },
   builder: (parent, defaults) => class PantheonPhp extends LandoPhp.builder(parent, LandoPhp.config) {
     constructor(id, options = {}, factory) {

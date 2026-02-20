@@ -1,5 +1,6 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Bumped image generation to 6 with `@lando/php` base image v7 for ImageMagick 7 support on PHP 8.3+ [#315](https://github.com/lando/pantheon/issues/315)
 * Updated to [@lando/php@1.11.1](https://github.com/lando/php/releases/tag/v1.11.1) for PHP 8.5 support
 * Added `igbinary` support to `PhpRedis` extension for PHP `7.3`+ images
 * Updated `drush` to latest release version
