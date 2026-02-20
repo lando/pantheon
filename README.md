@@ -70,6 +70,7 @@ If you're interested in working on this plugin then we recommend you check out t
 
 * [@pirog](https://github.com/pirog)
 * [@reynoldsalec](https://github.com/reynoldsalec)
+* [@AaronFeledy](https://github.com/AaronFeledy)
 
 ## Contributors
 
