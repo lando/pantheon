@@ -116,8 +116,8 @@ lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(tru
 # Should be able to push commits to pantheon
 cd drupal9
 lando pull --code dev --database none --files none
-lando exec appserver -- "git rev-parse HEAD > test.log"
 lando exec appserver -- "git pull"
+lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
 
 # Should allow code pull from protected environments
