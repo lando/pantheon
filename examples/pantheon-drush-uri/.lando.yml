@@ -1,0 +1,11 @@
+name: lando-pantheon-drush-uri
+recipe: pantheon
+config:
+  framework: drupal
+  site: fake-site
+  id: fake-id
+
+# do not remove this
+plugins:
+  "@lando/pantheon": ../..
+  "@lando/mariadb": ../../node_modules/@lando/mariadb

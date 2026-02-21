@@ -20,6 +20,7 @@ config:
   edge: true
   cache: true
   composer_version: "2.2.12"
+  drush_uri: SEE BELOW
 ```
 
 If you do not already have a [Landofile](https://docs.lando.dev/landofile) for your Pantheon site, we highly recommend you use [`lando init`](https://docs.lando.dev/cli/init.html) to get one as that will automatically populate the `framework`, `id` and `site` for you. Manually creating a Landofile with these things set correctly can be difficult and is *highly discouraged.*
@@ -111,6 +112,20 @@ config:
 ```
 
 However, for more information, we recommend you consult the [php service documentation](https://docs.lando.dev/plugins/php/index.html).
+
+## Configuring Drush URI
+
+The `drush_uri` option allows you to set a custom URL for Drush to use when connecting to your Drupal site. This overrides the `DRUSH_OPTIONS_URI` environment variable in the `appserver` service which, by default, is automatically set to the proxy URL for the webserver you are using. You will need to run `lando rebuild` to apply changes to this setting.
+
+```yaml
+recipe: pantheon
+config:
+  drush_uri: 'https://custom-uri.lndo.site'
+```
+
+::: warning
+This option is only relevant for Drupal-based Pantheon sites. WordPress sites do not use Drush.
+:::
 
 ## Working With Multidev
 

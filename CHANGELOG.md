@@ -1,12 +1,13 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
-* Set MariaDB `transaction_isolation` to `READ-COMMITTED` to match Pantheon and fix Drupal 10+ status warnings [#246](https://github.com/lando/pantheon/issues/246)
 * Updated PHP 8.4 image to use ImageMagick 7.1 to match Pantheon's production environment [#315](https://github.com/lando/pantheon/issues/315)
+* Added `drush_uri` config option to automatically set `DRUSH_OPTIONS_URI` for Drush
+* Set MariaDB `transaction_isolation` to `READ-COMMITTED` to match Pantheon and fix Drupal 10+ status warnings [#246](https://github.com/lando/pantheon/issues/246)
 * Fixed `lando init` to initialize main branch to be `master` instead of `main`
 * Fixed global drush install issue on PHP 8.4 image
-* Updated to [@lando/php@1.11.1](https://github.com/lando/php/releases/tag/v1.11.1)
 * Added `igbinary` support to `PhpRedis` extension for PHP `7.3`+ images
 * Updated `drush` to latest release version
+* Updated to [@lando/php@1.11.1](https://github.com/lando/php/releases/tag/v1.11.1)
 
 ## v1.11.0 - [December 8, 2025](https://github.com/lando/pantheon/releases/tag/v1.11.0)
 
