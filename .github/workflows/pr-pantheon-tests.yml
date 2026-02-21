@@ -60,6 +60,7 @@ jobs:
         uses: lando/setup-lando@v3
         with:
           lando-version: ${{ matrix.lando-version }}
+          lando-version-file: ''
           config: |
             setup.skipCommonPlugins=true
             setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
