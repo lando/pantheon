@@ -14,12 +14,6 @@ default-character-set=utf8
 # Data is stored in a volume on the db container /sql
 default-storage-engine = innodb
 
-[mariadb]
-#
-# * For where this is supported.
-#
-transaction_isolation=READ-COMMITTED
-
 #
 # * Character sets
 #
@@ -121,6 +115,12 @@ innodb_file_format=barracuda
 # ssl-ca=/etc/mysql/cacert.pem
 # ssl-cert=/etc/mysql/server-cert.pem
 # ssl-key=/etc/mysql/server-key.pem
+
+[mariadb]
+#
+# * MariaDB-specific settings
+#
+transaction_isolation=READ-COMMITTED
 
 [mysqldump]
 quick
