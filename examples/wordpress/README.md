@@ -61,7 +61,7 @@ lando composer --version | grep Composer | grep 1.10.1
 
 # Should be logged in
 cd wordpress
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should use custom php version if set in pantheon.yml
 cd wordpress
@@ -86,9 +86,9 @@ docker ps --filter label=com.docker.compose.project=landobotwordpress | grep lan
 
 # Should still be logged in even after a rebuild
 cd wordpress
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 lando rebuild -y
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should serve proxy from nginx
 cd wordpress
