@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Reinstall imagick PHP extension against ImageMagick 7
 RUN rm -f /usr/local/etc/php/conf.d/*imagick* \
+  && pecl uninstall imagick \
   && install-php-extensions imagick
 
 # Install the additional things that make the pantheon
