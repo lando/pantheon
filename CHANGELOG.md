@@ -1,5 +1,6 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Added `drush_uri` config option to automatically set `DRUSH_OPTIONS_URI` for Drush
 * Updated PHP 8.4 image to use ImageMagick 7.1 to match Pantheon's production environment [#315](https://github.com/lando/pantheon/issues/315)
 * Added `drush_uri` config option to automatically set `DRUSH_OPTIONS_URI` for Drush
 * Set MariaDB `transaction_isolation` to `READ-COMMITTED` to match Pantheon and fix Drupal 10+ status warnings [#246](https://github.com/lando/pantheon/issues/246)
