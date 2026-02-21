@@ -23,6 +23,7 @@ DATABASE=${TERMINUS_ENV:-dev}
 FILES=${TERMINUS_ENV:-dev}
 RSYNC=false
 NO_AUTH=false
+VERBOSITY=""
 
 # Set helpers
 FRAMEWORK=${FRAMEWORK:-drupal}
@@ -77,6 +78,14 @@ while (( "$#" )); do
         NO_AUTH=true
         shift
       ;;
+    -vv|--verbose)
+        VERBOSITY="-vv"
+        shift
+      ;;
+    -vvv|--debug)
+        VERBOSITY="-vvv"  
+        shift
+      ;;
     --)
       shift
       break
@@ -100,7 +109,7 @@ fi
 if [ "$CODE" != "none" ]; then
   # Validate before we begin
   lando_pink "Validating you can pull code from $CODE..."
-  terminus env:info $SITE.$CODE
+  terminus env:info $VERBOSITY $SITE.$CODE
   lando_green "Confirmed!"
 
   # Get the git branch
@@ -126,7 +135,7 @@ fi
 # Get the database
 if [ "$DATABASE" != "none" ]; then
   # Holla at @uberhacker for this fu
-  FALLBACK_PULL_DB="$(echo $(terminus connection:info $SITE.$DATABASE --field=mysql_command) | sed 's,^mysql,mysqldump --no-autocommit --single-transaction --opt -Q,')"
+  FALLBACK_PULL_DB="$(echo $(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command) | sed 's,^mysql,mysqldump --no-autocommit --single-transaction --opt -Q,')"
   LOCAL_MYSQL_CONNECT_STRING="mysql --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306"
 
   # Make sure the terminus command returned from buildDbPullCommand() has the
@@ -135,7 +144,7 @@ if [ "$DATABASE" != "none" ]; then
 
   # Validate before we begin
   lando_pink "Validating you can pull the database from $DATABASE..."
-  terminus env:info $SITE.$DATABASE
+  terminus env:info $VERBOSITY $SITE.$DATABASE
   lando_green "Confirmed!"
 
   # Destroy existing tables
@@ -153,7 +162,7 @@ EOF
 
   # Wake up the database so we can actually connect
   lando_pink "Making sure your site is awake..."
-  terminus env:wake $SITE.$DATABASE
+  terminus env:wake $VERBOSITY $SITE.$DATABASE
 
   # Importing database
   echo "Pulling your database... This miiiiight take a minute"
@@ -185,7 +194,7 @@ if [ "$FILES" != "none" ]; then
 
   # Validate before we begin
   lando_pink "Validating you can pull files from $FILES..."
-  terminus env:info $SITE.$FILES
+  terminus env:info $VERBOSITY $SITE.$FILES
   lando_green "Confirmed!"
 
   # Make sure the filemount actually exists
@@ -212,13 +221,13 @@ if [ "$FILES" != "none" ]; then
     $LANDO_WEBROOT/$FILEMOUNT"
 
   # Verify we have a files dump, it not let's switch to rsync mode
-  if ! terminus backup:list $SITE.$FILES --element=files --format=list | grep "files" 2>&1; then
+  if ! terminus backup:list $VERBOSITY $SITE.$FILES --element=files --format=list | grep "files" 2>&1; then
     RSYNC=true
   fi
 
   # Build the extract CMD
   if [ "$RSYNC" == "false" ]; then
-    PULL_FILES="rm -f $FILE_DUMP && terminus backup:get $SITE.$FILES --element=files --to=$FILE_DUMP &&"
+    PULL_FILES="rm -f $FILE_DUMP && terminus backup:get $VERBOSITY $SITE.$FILES --element=files --to=$FILE_DUMP &&"
     PULL_FILES="$PULL_FILES pv $FILE_DUMP | tar xzf - -C $LANDO_WEBROOT/$FILEMOUNT --strip-components 1 &&"
   fi
 
