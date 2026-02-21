@@ -127,11 +127,11 @@ if [ "$CODE" != "none" ]; then
 
   # Get connection mode
   lando_pink "Checking connection mode"
-  CONNECTION_MODE=$(terminus env:info $SITE.$CODE --field=connection_mode)
+  CONNECTION_MODE=$(terminus env:info $VERBOSITY $SITE.$CODE --field=connection_mode)
   # If we are not in git mode lets check for uncommited changes
   if [ "$CONNECTION_MODE" != "git" ]; then
     # Get the code diff
-    CODE_DIFF=$(terminus env:diffstat $SITE.$CODE --format=json)
+    CODE_DIFF=$(terminus env:diffstat $VERBOSITY $SITE.$CODE --format=json)
     if [ "$CODE_DIFF" != "[]" ]; then
       lando_yellow "Lando has detected you have uncommitted changes on Pantheon."
       lando_yellow "Please login to your Pantheon dashboard, commit those changes and then try lando push again."
@@ -155,8 +155,8 @@ if [ "$CODE" != "none" ]; then
   fi
 
   # Set the git config if we need to
-  git config user.name "$(terminus auth:whoami --field='First Name') $(terminus auth:whoami --field='Last Name')"
-  git config user.email "$(terminus auth:whoami --field='Email')"
+  git config user.name "$(terminus auth:whoami $VERBOSITY --field='First Name') $(terminus auth:whoami $VERBOSITY --field='Last Name')"
+  git config user.email "$(terminus auth:whoami $VERBOSITY --field='Email')"
 
   # Commit the goods
   echo "Pushing code to $CODE as $(git config --local --get user.name) <$(git config --local --get user.email)> ..."
@@ -186,7 +186,7 @@ if [ "$DATABASE" != "none" ]; then
 
   # And push
   echo "Pushing your database... This miiiiight take a minute"
-  REMOTE_CONNECTION="$(terminus connection:info $SITE.$DATABASE --field=mysql_command)"
+  REMOTE_CONNECTION="$(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command)"
   PUSH_DB="mysqldump -u pantheon -ppantheon -h database --no-autocommit --single-transaction --opt -Q pantheon | $REMOTE_CONNECTION"
   eval "$PUSH_DB"
 fi

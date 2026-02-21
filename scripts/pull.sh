@@ -135,7 +135,7 @@ fi
 # Get the database
 if [ "$DATABASE" != "none" ]; then
   # Holla at @uberhacker for this fu
-  FALLBACK_PULL_DB="$(echo $(terminus connection:info $SITE.$DATABASE --field=mysql_command) | sed 's,^mysql,mysqldump --no-autocommit --single-transaction --opt -Q,')"
+  FALLBACK_PULL_DB="$(echo $(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command) | sed 's,^mysql,mysqldump --no-autocommit --single-transaction --opt -Q,')"
   LOCAL_MYSQL_CONNECT_STRING="mysql --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306"
 
   # Make sure the terminus command returned from buildDbPullCommand() has the
@@ -227,7 +227,7 @@ if [ "$FILES" != "none" ]; then
 
   # Build the extract CMD
   if [ "$RSYNC" == "false" ]; then
-    PULL_FILES="rm -f $FILE_DUMP && terminus backup:get $SITE.$FILES --element=files --to=$FILE_DUMP &&"
+    PULL_FILES="rm -f $FILE_DUMP && terminus backup:get $VERBOSITY $SITE.$FILES --element=files --to=$FILE_DUMP &&"
     PULL_FILES="$PULL_FILES pv $FILE_DUMP | tar xzf - -C $LANDO_WEBROOT/$FILEMOUNT --strip-components 1 &&"
   fi
 
