@@ -138,7 +138,7 @@ module.exports = {
         options['pantheon-git-url'] = getGitUrl(site);
       }},
       {name: 'reload-keys', cmd: '/helpers/load-keys.sh --silent', user: 'root'},
-      {name: 'clone-repo', cmd: options => `/helpers/get-remote-url.sh ${options['pantheon-git-url']}`, remove: 'true'},
+      {name: 'clone-repo', cmd: options => `/helpers/get-remote-url.sh ${options['pantheon-git-url']} "--branch master"`, remove: 'true'},
     ]),
   }],
   build: async (options, lando) => {
