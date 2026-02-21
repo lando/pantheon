@@ -137,6 +137,7 @@ lando pull --code test --database none --files none
 lando pull --code live --database none --files none
 
 # Should switch to multidev environment
+cd drupal11
 lando switch -e tester
 ```
 
