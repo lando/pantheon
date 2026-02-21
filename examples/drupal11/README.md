@@ -126,23 +126,19 @@ lando exec appserver -- "mysql -h database -u pantheon -ppantheon pantheon -e 'S
 
 # Should be able to push commits to pantheon
 cd drupal11
-rm -f composer.lock .lando.yml .lando.*.yml
 lando pull --code dev --database none --files none
-lando exec appserver -- "git pull"
+lando exec appserver -- "git pull --rebase"
 lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
 
 # Should allow code pull from protected environments
 # https://github.com/lando/lando/issues/2021
 cd drupal11
-rm -f composer.lock
 lando pull --code test --database none --files none
-rm -f composer.lock
 lando pull --code live --database none --files none
 
 # Should switch to multidev environment
 cd drupal11
-rm -f composer.lock
 lando switch -e tester
 ```
 

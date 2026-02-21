@@ -139,7 +139,7 @@ lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
 # Should be able to push commits to pantheon
 cd drupal7
 lando pull --code dev --database none --files none
-lando exec appserver -- "git pull"
+lando exec appserver -- "git pull --rebase"
 lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)" || true
 
