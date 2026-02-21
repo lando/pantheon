@@ -71,7 +71,7 @@ lando exec appserver -- "env" | grep PANTHEON_INDEX_HOST | grep index
 lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEME | grep http
 lando exec appserver -- "env" | grep PANTHEON_SITE | grep c354aed8-76eb-44d7-8f54-57b9ea3079be
 lando exec appserver -- "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal11
-lando exec appserver -- "env" | grep php_version | grep "8"
+lando exec appserver -- "env" | grep php_version | grep "8.4"
 lando exec appserver -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando exec appserver -- "env" | grep TERMINUS_ENV | grep dev
 lando exec appserver -- "env" | grep TERMINUS_SITE | grep landobot-drupal11
@@ -99,7 +99,7 @@ cd drupal11
 lando exec appserver -- "cat /usr/local/etc/php/conf.d/zzz-lando-my-custom.ini" | grep "; LANDOPANTHEONPHPINI"
 lando exec database -- "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LANDOPANTHEONMYSQLCNF"
 
-# Should not have xdebug enabled by defaults
+# Should not have xdebug enabled by default
 cd drupal11
 lando php -m | grep xdebug || echo $? | grep 1
 
@@ -126,7 +126,7 @@ lando exec appserver -- "mysql -h database -u pantheon -ppantheon pantheon -e 'S
 
 # Should be able to push commits to pantheon
 cd drupal11
-rm -f composer.lock
+rm -f composer.lock .lando.yml .lando.*.yml
 lando pull --code dev --database none --files none
 lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"

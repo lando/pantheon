@@ -2,7 +2,7 @@
 
 This example exists primarily to test the following:
 
-* [Pantheon Recipe - Drupal 8](https://docs.devwithlando.io/tutorials/pantheon.html)
+* [Pantheon Recipe - Drupal 8](https://docs.lando.dev/plugins/pantheon)
 
 **Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN` and `--pantheon-site` to values that make sense for you.**
 
