@@ -17,9 +17,6 @@ mkdir -p /var/www/certs
 mkdir -p /srv/bindings
 chown -R www-data:www-data /var/www/certs /srv/bindings /certs
 
-# run through add cert
-/helpers/add-cert.sh --silent
-
 # Set up some symlnks
 ln -sfn /var/www /srv/bindings/lando
 ln -sfn /tmp /srv/bindings/lando/tmp
