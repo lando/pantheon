@@ -127,6 +127,7 @@ module.exports = {
       database: 'mysql.cnf',
       server: 'nginx.conf.tpl',
     },
+    drush_uri: null,
     edge: true,
     env: 'dev',
     framework: 'drupal',
@@ -195,6 +196,20 @@ module.exports = {
 
       // Add appserver and database services.
       options.services = _.merge({}, getServices(options), options.services);
+
+      // Set DRUSH_OPTIONS_URI based on drush_uri config or proxy settings
+      let drushUri = options.drush_uri;
+      if (!drushUri) {
+        const proxyUrl = options.proxy[options.proxyService]?.[0];
+        if (proxyUrl) {
+          const proxyServiceSsl = options.services[options.proxyService]?.ssl;
+          const ssl = proxyServiceSsl !== undefined ? proxyServiceSsl : options.services.appserver?.ssl;
+          drushUri = ssl ? `https://${proxyUrl}` : `http://${proxyUrl}`;
+        }
+      }
+      if (drushUri) {
+        _.set(options, 'services.appserver.overrides.environment.DRUSH_OPTIONS_URI', drushUri);
+      }
 
       // Send downstream
       super(id, options);
