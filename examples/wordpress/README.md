@@ -105,7 +105,7 @@ lando exec appserver -- "java -jar /srv/bin/tika-app-1.21.jar --version" | grep 
 # Should be able to push commits to pantheon
 cd wordpress
 lando pull --code dev --database none --files none
-lando exec appserver -- "git pull"
+lando exec appserver -- "git pull --rebase"
 lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
 
