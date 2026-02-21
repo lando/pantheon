@@ -117,6 +117,7 @@ lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(tru
 cd drupal9
 lando pull --code dev --database none --files none
 lando exec appserver -- "git rev-parse HEAD > test.log"
+lando exec appserver -- "git pull"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
 
 # Should allow code pull from protected environments
