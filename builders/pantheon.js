@@ -209,10 +209,10 @@ module.exports = {
           const ports = _.get(options, '_app._config.proxyLastPorts');
           let port = '';
           if (ports) {
-            const activePort = ssl ? ports.https : ports.http;
-            if (activePort && ((ssl && activePort !== '443') || (!ssl && activePort !== '80'))) {
-              port = `:${activePort}`;
-            }
+          const activePort = ssl ? ports.https : ports.http;
+          if (activePort && ((ssl && activePort !== 443) || (!ssl && activePort !== 80))) {
+            port = `:${activePort}`;
+          }
           }
           drushUri = `${protocol}://${proxyUrl}${port}`;
         }
