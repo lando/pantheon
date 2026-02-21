@@ -118,7 +118,7 @@ lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(tru
 # Should be able to pull the database without SSL errors
 # https://github.com/lando/pantheon/issues/316
 cd drupal11
-lando pull --code none --database dev --files none 2>&1 | grep -v "TLS/SSL error"
+! lando pull --code none --database dev --files none 2>&1 | grep "TLS/SSL error"
 
 # Should be able to connect to the database with mysql client without SSL errors
 cd drupal11
