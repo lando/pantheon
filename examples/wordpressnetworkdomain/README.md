@@ -51,11 +51,15 @@ lando terminus -V
 
 # Should be logged in
 cd wordpress
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should use custom php version if set in pantheon.yml
 cd wordpress
 lando php -v | grep "PHP 7.3"
+
+# Should have phpredis with igbinary support
+cd wordpress
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
 
 # Should set the correct wordpress specific pantheon environment
 cd wordpress

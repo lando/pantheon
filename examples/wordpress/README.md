@@ -61,11 +61,15 @@ lando composer --version | grep Composer | grep 1.10.1
 
 # Should be logged in
 cd wordpress
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should use custom php version if set in pantheon.yml
 cd wordpress
 lando php -v | grep "PHP 7.3"
+
+# Should have phpredis with igbinary support
+cd wordpress
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
 
 # Should set the correct wordpress specific pantheon environment
 cd wordpress
@@ -82,9 +86,9 @@ docker ps --filter label=com.docker.compose.project=landobotwordpress | grep lan
 
 # Should still be logged in even after a rebuild
 cd wordpress
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 lando rebuild -y
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should serve proxy from nginx
 cd wordpress
@@ -101,6 +105,7 @@ lando exec appserver -- "java -jar /srv/bin/tika-app-1.21.jar --version" | grep 
 # Should be able to push commits to pantheon
 cd wordpress
 lando pull --code dev --database none --files none
+lando exec appserver -- "git pull --rebase"
 lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
 

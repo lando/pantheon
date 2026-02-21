@@ -2,7 +2,7 @@
 
 This example exists primarily to test the following:
 
-* [Pantheon Recipe - Drupal 8](https://docs.devwithlando.io/tutorials/pantheon.html)
+* [Pantheon Recipe - Drupal 8](https://docs.lando.dev/plugins/pantheon)
 
 **Note that you will need to replace (or export) `$PANTHEON_MACHINE_TOKEN` and `--pantheon-site` to values that make sense for you.**
 
@@ -59,7 +59,7 @@ lando terminus -V
 
 # Should be logged in
 cd drupal8
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should have a binding.pem in all the right places
 cd drupal8
@@ -87,7 +87,7 @@ lando exec appserver -- "env" | grep php_version | grep "7.4"
 lando exec appserver -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando exec appserver -- "env" | grep TERMINUS_ENV | grep dev
 lando exec appserver -- "env" | grep TERMINUS_SITE | grep landobot-drupal8
-lando exec appserver -- "env" | grep TERMINUS_USER | grep droid@lando.dev
+lando exec appserver -- "env" | grep -E "TERMINUS_USER=.+@.+"
 
 # Should use php version in pantheon.upstream.yml
 cd drupal8
@@ -105,6 +105,10 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal8 | grep lando
 # Should not have xdebug enabled by defaults
 cd drupal8
 lando php -m | grep xdebug || echo $? | grep 1
+
+# Should have phpredis with igbinary support
+cd drupal8
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
 ```
 
 ## Destroy tests

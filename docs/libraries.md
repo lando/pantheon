@@ -5,7 +5,7 @@ description: Learn how to work with External Libraries within the Lando Pantheon
 
 # External Libraries
 
-Lando supports [external libraries](https://docs.pantheon.io/external-libraries/) available on Pantheon's Gen 2 runtime.
+Lando supports [external libraries](https://docs.pantheon.io/external-libraries) available on Pantheon's Gen 2 runtime.
 
 ## Tika
 

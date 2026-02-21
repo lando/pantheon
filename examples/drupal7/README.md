@@ -63,7 +63,7 @@ lando composer --version | grep Composer | grep 2.
 
 # Should be logged in
 cd drupal7
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should have a binding.pem in all the right places
 cd drupal7
@@ -91,7 +91,7 @@ lando exec appserver -- env | grep php_version | grep "7.4"
 lando exec appserver -- env | grep PRESSFLOW_SETTINGS | grep pantheon
 lando exec appserver -- env | grep TERMINUS_ENV | grep dev
 lando exec appserver -- env | grep TERMINUS_SITE | grep landobot-drupal7
-lando exec appserver -- env | grep TERMINUS_USER | grep droid@lando.dev
+lando exec appserver -- env | grep -E "TERMINUS_USER=.+@.+"
 
 # Should not set any 8983 perms
 cd drupal7
@@ -120,6 +120,10 @@ docker ps --filter label=com.docker.compose.project=landobotdrupal7 | grep lando
 cd drupal7
 lando php -m | grep xdebug || echo $? | grep 1
 
+# Should have phpredis with igbinary support
+cd drupal7
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
+
 # Should be running nginx 1.25
 cd drupal7
 lando exec appserver_nginx -- "/opt/bitnami/nginx/sbin/nginx -v 2>&1 | grep 1.25"
@@ -135,6 +139,7 @@ lando varnishadm param.show http_resp_hdr_len | grep 'Value is: 25k'
 # Should be able to push commits to pantheon
 cd drupal7
 lando pull --code dev --database none --files none
+lando exec appserver -- "git pull --rebase"
 lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)" || true
 

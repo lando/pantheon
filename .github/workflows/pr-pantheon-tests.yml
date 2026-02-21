@@ -24,6 +24,7 @@ jobs:
           - examples/drupal8
           - examples/drupal9
           - examples/drupal10
+          - examples/drupal11
           - examples/init
           - examples/pantheon-downstreamer-1
           - examples/pantheon-downstreamer-2
@@ -59,6 +60,7 @@ jobs:
         uses: lando/setup-lando@v3
         with:
           lando-version: ${{ matrix.lando-version }}
+          lando-version-file: ''
           config: |
             setup.skipCommonPlugins=true
             setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon

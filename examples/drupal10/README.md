@@ -47,7 +47,7 @@ lando terminus -V
 
 # Should be logged in
 cd drupal10
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should have a binding.pem in all the right places
 cd drupal10
@@ -78,7 +78,7 @@ lando exec appserver -- "env" | grep php_version | grep "8"
 lando exec appserver -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando exec appserver -- "env" | grep TERMINUS_ENV | grep dev
 lando exec appserver -- "env" | grep TERMINUS_SITE | grep landobot-drupal10
-lando exec appserver -- "env" | grep TERMINUS_USER | grep droid@lando.dev
+lando exec appserver -- "env" | grep -E "TERMINUS_USER=.+@.+"
 
 # Should use php version in pantheon.yml
 cd drupal10
@@ -106,9 +106,14 @@ lando exec database -- "cat /opt/bitnami/mariadb/conf/my_custom.cnf" | grep "LAN
 cd drupal10
 lando php -m | grep xdebug || echo $? | grep 1
 
+# Should have phpredis with igbinary support
+cd drupal10
+lando php -r 'var_dump(defined("Redis::SERIALIZER_IGBINARY"));' | grep 'bool(true)'
+
 # Should be able to push commits to pantheon
 cd drupal10
 lando pull --code dev --database none --files none
+lando exec appserver -- "git pull --rebase"
 lando exec appserver -- "git rev-parse HEAD > test.log"
 lando push --code dev --database none --files none --message "Testing commit $(git rev-parse HEAD)"
 

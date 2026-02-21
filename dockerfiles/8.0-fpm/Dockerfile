@@ -36,6 +36,12 @@ RUN install-php-extensions \
   tidy \
   zstd
 
+# Reinstall PhpRedis extension with igbinary support
+RUN \
+  rm -f /usr/local/etc/php/conf.d/docker-php-ext-redis.ini \
+  && pecl uninstall redis \
+  && install-php-extensions redis
+
 RUN apt-get -y clean \
   && apt-get -y autoclean \
   && apt-get -y autoremove \
