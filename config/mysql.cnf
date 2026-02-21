@@ -116,6 +116,12 @@ innodb_file_format=barracuda
 # ssl-cert=/etc/mysql/server-cert.pem
 # ssl-key=/etc/mysql/server-key.pem
 
+[mariadb]
+#
+# * MariaDB-specific settings
+#
+transaction_isolation=READ-COMMITTED
+
 [mysqldump]
 quick
 quote-names
