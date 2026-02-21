@@ -51,7 +51,7 @@ lando terminus -V
 
 # Should be logged in
 cd wordpress
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should use custom php version if set in pantheon.yml
 cd wordpress

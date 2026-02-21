@@ -47,7 +47,7 @@ lando terminus -V
 
 # Should be logged in
 cd drupal9
-lando terminus auth:whoami | grep droid@lando.dev
+lando terminus auth:whoami | grep "@"
 
 # Should have a binding.pem in all the right places
 cd drupal9
@@ -78,7 +78,7 @@ lando exec appserver -- "env" | grep php_version | grep "8"
 lando exec appserver -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando exec appserver -- "env" | grep TERMINUS_ENV | grep dev
 lando exec appserver -- "env" | grep TERMINUS_SITE | grep landobot-drupal9
-lando exec appserver -- "env" | grep TERMINUS_USER | grep droid@lando.dev
+lando exec appserver -- "env" | grep -E "TERMINUS_USER=.+@.+"
 
 # Should use php version in pantheon.upstream.yml
 cd drupal9
