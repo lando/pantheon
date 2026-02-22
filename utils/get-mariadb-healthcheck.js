@@ -3,7 +3,7 @@
 // checks to see if a setting is disabled
 module.exports = options => {
   return [
-    'mariadb',
+    'mysql',
     `--host=${options.name}`,
     `--user=${options.creds.user}`,
     `--database=${options.creds.database}`,
