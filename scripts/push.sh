@@ -187,7 +187,7 @@ if [ "$DATABASE" != "none" ]; then
   # And push
   echo "Pushing your database... This miiiiight take a minute"
   REMOTE_CONNECTION="$(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command)"
-  PUSH_DB="mysqldump -u pantheon -ppantheon -h database --no-autocommit --single-transaction --opt -Q pantheon | $REMOTE_CONNECTION"
+  PUSH_DB="mariadb-dump -u pantheon -ppantheon -h database --no-autocommit --single-transaction --opt -Q pantheon | $REMOTE_CONNECTION"
   eval "$PUSH_DB"
 fi
 
