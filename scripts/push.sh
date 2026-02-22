@@ -174,6 +174,13 @@ fi
 
 # Push the database
 if [ "$DATABASE" != "none" ]; then
+  # Detect available MySQL/MariaDB client binaries (mariadb-dump available in MariaDB 10.5+)
+  if command -v mariadb-dump >/dev/null 2>&1; then
+    MYSQL_DUMP_CMD="mariadb-dump"
+  else
+    MYSQL_DUMP_CMD="mysqldump"
+  fi
+
   # Validate before we begin
   lando_pink "Validating you can push data to $DATABASE..."
   terminus env:info $VERBOSITY $SITE.$DATABASE
@@ -187,7 +194,7 @@ if [ "$DATABASE" != "none" ]; then
   # And push
   echo "Pushing your database... This miiiiight take a minute"
   REMOTE_CONNECTION="$(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command)"
-  PUSH_DB="mariadb-dump -u pantheon -ppantheon -h database --no-autocommit --single-transaction --opt -Q pantheon | $REMOTE_CONNECTION"
+  PUSH_DB="$MYSQL_DUMP_CMD -u pantheon -ppantheon -h database --no-autocommit --single-transaction --opt -Q pantheon | $REMOTE_CONNECTION"
   eval "$PUSH_DB"
 fi
 

@@ -134,9 +134,21 @@ fi
 
 # Get the database
 if [ "$DATABASE" != "none" ]; then
+  # Detect available MySQL/MariaDB client binaries (mariadb-dump available in MariaDB 10.5+, mariadb in 10.4.6+)
+  if command -v mariadb-dump >/dev/null 2>&1; then
+    MYSQL_DUMP_CMD="mariadb-dump"
+  else
+    MYSQL_DUMP_CMD="mysqldump"
+  fi
+  if command -v mariadb >/dev/null 2>&1; then
+    MYSQL_CMD="mariadb"
+  else
+    MYSQL_CMD="mysql"
+  fi
+
   # Holla at @uberhacker for this fu
-  FALLBACK_PULL_DB="$(echo $(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command) | sed 's,^mysql,mariadb-dump --no-autocommit --single-transaction --opt -Q,')"
-  LOCAL_MARIADB_CONNECT_STRING="mariadb --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306"
+  FALLBACK_PULL_DB="$(echo $(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command) | sed "s,^mysql,$MYSQL_DUMP_CMD --no-autocommit --single-transaction --opt -Q,")"
+  LOCAL_MARIADB_CONNECT_STRING="$MYSQL_CMD --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306"
 
   # Make sure the terminus command returned from buildDbPullCommand() has the
   # correct <site.env> specified.
@@ -149,11 +161,11 @@ if [ "$DATABASE" != "none" ]; then
 
   # Destroy existing tables
   # NOTE: We do this so the source DB **EXACTLY MATCHES** the target DB
-  TABLES=$(mariadb --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 -e 'SHOW TABLES' | awk '{ print $1}' | grep -v '^Tables' ) || true
+  TABLES=$($MYSQL_CMD --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 -e 'SHOW TABLES' | awk '{ print $1}' | grep -v '^Tables' ) || true
   echo "Destroying all current tables in database if needed... "
   for t in $TABLES; do
     echo "Dropping $t from local pantheon database..."
-    mariadb --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 <<-EOF
+    $MYSQL_CMD --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 <<-EOF
       SET FOREIGN_KEY_CHECKS=0;
       DROP VIEW IF EXISTS \`$t\`;
       DROP TABLE IF EXISTS \`$t\`;
@@ -171,7 +183,7 @@ EOF
   # Weak check that we got tables
   PULL_DB_CHECK_TABLE=${LANDO_DB_USER_TABLE:-users}
   lando_pink "Checking db pull for expected tables..."
-  if ! mariadb --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 -e "SHOW TABLES;" | grep $PULL_DB_CHECK_TABLE; then
+  if ! $MYSQL_CMD --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 -e "SHOW TABLES;" | grep $PULL_DB_CHECK_TABLE; then
     lando_red "Couldn't find expected tables ($PULL_DB_CHECK_TABLE)"
     exit 1
   fi
