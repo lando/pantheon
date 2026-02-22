@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.12.0 - [February 22, 2026](https://github.com/lando/pantheon/releases/tag/v1.12.0)
+
 * Added `-vv`/`--verbose` and `-vvv`/`--debug` flag passthrough to all Terminus commands in `lando pull` and `lando push` [#215](https://github.com/lando/pantheon/issues/215)
 * Fixed `Pantheon pre-run scripting` error caused by redundant cert setup on rebuild [#317](https://github.com/lando/pantheon/issues/317)
 * Updated PHP 8.4 image to use ImageMagick 7 to match Pantheon's production environment [#315](https://github.com/lando/pantheon/issues/315)
