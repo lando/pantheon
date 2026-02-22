@@ -1,6 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
 * Added `-vv`/`--verbose` and `-vvv`/`--debug` flag passthrough to all Terminus commands in `lando pull` and `lando push` [#215](https://github.com/lando/pantheon/issues/215)
+* Fixed `Pantheon pre-run scripting` error caused by redundant cert setup on rebuild [#317](https://github.com/lando/pantheon/issues/317)
 * Updated PHP 8.4 image to use ImageMagick 7.1 to match Pantheon's production environment [#315](https://github.com/lando/pantheon/issues/315)
 * Added `drush_uri` config option to automatically set `DRUSH_OPTIONS_URI` for Drush
 * Set MariaDB `transaction_isolation` to `READ-COMMITTED` to match Pantheon and fix Drupal 10+ status warnings [#246](https://github.com/lando/pantheon/issues/246)
