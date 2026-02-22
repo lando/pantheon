@@ -2,12 +2,6 @@
 
 FROM devwithlando/php:8.4-fpm-5
 
-# Upgrade MariaDB client to 11.4 LTS
-RUN sed -i 's|repo/10.11/|repo/11.4/|' /etc/apt/sources.list.d/*.list \
-  && apt-get update \
-  && apt-get install -y --only-upgrade mariadb-client mariadb-client-core libmariadb3 \
-  && rm -rf /var/lib/apt/lists/*
-
 # Version information
 ENV LANDO_TERMINUS_VERSION=4.1.1
 ENV TIKA_VERSION=1.18
