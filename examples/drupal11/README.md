@@ -87,7 +87,7 @@ lando exec database -- "mysql -V" | grep 10.6.
 
 # Should have the transaction isolation level set to READ-COMMITTED
 cd drupal11
-lando mysql -e "SELECT @@transaction_isolation;" | grep READ-COMMITTED
+lando mysql -e "SELECT @@tx_isolation;" | grep READ-COMMITTED
 
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal11
