@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Updated to [@lando/php@1.12.0](https://github.com/lando/php/releases/tag/v1.12.0) for mod_headers/mod_expires and xdebug log fix
+
 ## v1.12.0 - [February 22, 2026](https://github.com/lando/pantheon/releases/tag/v1.12.0)
 
 * Added `-vv`/`--verbose` and `-vvv`/`--debug` flag passthrough to all Terminus commands in `lando pull` and `lando push` [#215](https://github.com/lando/pantheon/issues/215)
