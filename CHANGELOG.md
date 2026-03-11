@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.13.0 - [March 11, 2026](https://github.com/lando/pantheon/releases/tag/v1.13.0)
+
 * Fixed `@@tx_isolation` usage for MariaDB 10.4 compatibility
 * Updated to [@lando/php@1.12.0](https://github.com/lando/php/releases/tag/v1.12.0) to enable mod_headers/mod_expires by default and fix xdebug log ownership
 
