@@ -5,6 +5,9 @@ const path = require('path');
 const LandoPhp = require('@lando/php/builders/php.js');
 const utils = require('./../lib/utils.js');
 
+// PHP versions that have generation 5 images; older versions top out at generation 4
+const SUPPORTED_PHP_VERSIONS_GEN5 = ['8.0', '8.1', '8.2', '8.3', '8.4'];
+
 // Builder
 module.exports = {
   name: 'pantheon-php',
@@ -20,6 +23,11 @@ module.exports = {
       // Normalize because 7.0/8.0 right away gets handled strangely by js-yaml
       if (options.php === '7' || options.php === 7) options.php = '7.0';
       if (options.php === '8' || options.php === 8) options.php = '8.0';
+
+      // Safety check: fall back to generation 4 if the php+generation combo has no image
+      if (options.generation === '5' && !SUPPORTED_PHP_VERSIONS_GEN5.includes(String(options.php))) {
+        options.generation = '4';
+      }
 
       // main event
       options.version = options.php;
