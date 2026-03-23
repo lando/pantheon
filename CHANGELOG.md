@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Fixed `manifest unknown` Docker error by validating `php_version` and `php_runtime_generation` against published images and falling back to a working generation when needed [#347](https://github.com/lando/pantheon/issues/347)
+
 ## v1.13.0 - [March 11, 2026](https://github.com/lando/pantheon/releases/tag/v1.13.0)
 
 * Fixed `@@tx_isolation` usage for MariaDB 10.4 compatibility
