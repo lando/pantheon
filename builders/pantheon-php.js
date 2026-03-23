@@ -21,6 +21,11 @@ module.exports = {
       if (options.php === '7' || options.php === 7) options.php = '7.0';
       if (options.php === '8' || options.php === 8) options.php = '8.0';
 
+      // Safety check: fall back to generation 4 if the php+generation combo has no image
+      if (options.generation === '5' && !utils.SUPPORTED_PHP_VERSIONS.includes(String(options.php))) {
+        options.generation = '4';
+      }
+
       // main event
       options.version = options.php;
       options.image = `devwithlando/pantheon-appserver:${options.php}-${options.generation}`;
