@@ -68,13 +68,6 @@ server {
     location ~ /sites/default/files/.*\.php$ {
         return 403;
     }
-    location ~ ^/robots.txt {
-        add_header X-Pantheon-Site TBD always;
-        add_header X-Pantheon-Environment lando always;
-        add_header Cache-Control max-age=86000;
-        root /srv/error_pages;
-    }
-
     # Web fonts support.
     location ~* \.(eot|ttf|woff|woff2|otf|svg)$ {
         auth_basic $auth_basic_realm;
