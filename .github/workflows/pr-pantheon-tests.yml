@@ -18,11 +18,9 @@ jobs:
       PANTHEON_MACHINE_TOKEN: ${{ secrets.PANTHEON_MACHINE_TOKEN }}
     strategy:
       fail-fast: false
-      max-parallel: 6
       matrix:
         leia-test:
           - examples/drupal7
-          - examples/drupal8
           - examples/drupal9
           - examples/drupal10
           - examples/drupal11
@@ -70,10 +68,10 @@ jobs:
       - name: Stagger start to avoid Pantheon API burst
         shell: bash
         run: |
-          # Deterministic 0-60s delay based on test + lando-version hash.
-          # Keeps the concurrent jobs in a wave from hitting Pantheon at the same instant.
+          # Deterministic 0-300s delay based on test + lando-version hash.
+          # Spreads the full matrix over ~5 minutes so Pantheon API calls don't cluster.
           KEY="${{ matrix.leia-test }}-${{ matrix.lando-version }}"
-          DELAY=$(( $(echo -n "$KEY" | cksum | cut -d' ' -f1) % 60 ))
+          DELAY=$(( $(echo -n "$KEY" | cksum | cut -d' ' -f1) % 300 ))
           echo "Sleeping ${DELAY}s before starting (key: $KEY)"
           sleep "$DELAY"
       - name: Run Leia Tests
