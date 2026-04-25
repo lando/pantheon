@@ -1,0 +1,13 @@
+# This pantheon.yml exists to test the unsupported-PHP-version warning
+# behavior introduced in https://github.com/lando/pantheon/pull/347.
+#
+# php_version: 6.0 is intentionally a PHP version that does not exist
+# (PHP famously skipped 6.0; the project was abandoned in 2010) so this
+# test stays valid even as Pantheon publishes new images. With no
+# devwithlando/pantheon-appserver:6.0-* image available, the Lando
+# Pantheon plugin should emit a clear, user-facing warning instead of
+# leaving the user to decode a cryptic Docker "manifest unknown" error.
+api_version: 1
+php_version: "6.0"
+database:
+  version: 10.6

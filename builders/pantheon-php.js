@@ -17,9 +17,17 @@ module.exports = {
       // rebase option on defaults
       options = _.merge({}, defaults, options);
 
-      // Normalize because 7.0/8.0 right away gets handled strangely by js-yaml
-      if (options.php === '7' || options.php === 7) options.php = '7.0';
-      if (options.php === '8' || options.php === 8) options.php = '8.0';
+      // Normalize because js-yaml parses unquoted x.0 PHP versions as the
+      // integer x (e.g. `php_version: 8.0` becomes the number 8).
+      options.php = String(options.php);
+      if (/^\d+$/.test(options.php)) options.php = `${options.php}.0`;
+
+      // Safety check: if the php+generation combo has no published image,
+      // fall back to a generation that does. getPantheonConfig already does
+      // this with a user-facing warning; this is a silent second line of
+      // defense in case the builder is invoked without going through it.
+      const resolvedGen = utils.resolveGeneration(String(options.php), String(options.generation));
+      if (resolvedGen !== null) options.generation = resolvedGen;
 
       // main event
       options.version = options.php;
