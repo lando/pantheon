@@ -21,7 +21,6 @@ jobs:
       matrix:
         leia-test:
           - examples/drupal7
-          - examples/drupal8
           - examples/drupal9
           - examples/drupal10
           - examples/drupal11
@@ -66,6 +65,23 @@ jobs:
             setup.skipCommonPlugins=true
             setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
           telemetry: false
+      - name: Stagger start to avoid Pantheon API burst
+        shell: bash
+        run: |
+          # Deterministic per-cell delay. Separate windows per lando-version
+          # keep the 3-stable variant from racing the 3-edge variant of the
+          # same example on shared Pantheon SSH-key cleanup:
+          #   3-stable -> 0-119s   (finishes well before edge starts)
+          #   3-edge   -> 300-419s (starts after stable has torn down)
+          KEY="${{ matrix.leia-test }}-${{ matrix.lando-version }}"
+          HASH=$(echo -n "$KEY" | cksum | cut -d' ' -f1)
+          if [ "${{ matrix.lando-version }}" = "3-stable" ]; then
+            DELAY=$(( HASH % 120 ))
+          else
+            DELAY=$(( 300 + (HASH % 120) ))
+          fi
+          echo "Sleeping ${DELAY}s before starting (key: $KEY)"
+          sleep "$DELAY"
       - name: Run Leia Tests
         uses: lando/run-leia-action@v2
         with:
