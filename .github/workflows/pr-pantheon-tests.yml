@@ -28,6 +28,7 @@ jobs:
           - examples/pantheon-downstreamer-1
           - examples/pantheon-downstreamer-2
           - examples/pantheon-drush-uri
+          - examples/pantheon-php-warning
           - examples/wordpress
           - examples/wordpressnetworkdomain
           # - examples/wordpressnetworkfolder
