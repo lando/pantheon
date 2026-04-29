@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Added PHP `8.5` support with Terminus `4.2.0`
+
 ## v1.13.0 - [March 11, 2026](https://github.com/lando/pantheon/releases/tag/v1.13.0)
 
 * Fixed `@@tx_isolation` usage for MariaDB 10.4 compatibility
