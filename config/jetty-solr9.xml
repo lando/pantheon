@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_10_0.dtd">
+
+<!-- =============================================================== -->
+<!-- Configure the Jetty Server                                      -->
+<!--                                                                 -->
+<!-- Solr 9 / Jetty 10 version of jetty.xml for Lando Pantheon       -->
+<!-- Based on Solr 9.10.0 default + Pantheon URL rewrite rules       -->
+<!--                                                                 -->
+<!-- =============================================================== -->
+
+
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+
+  <!-- =========================================================== -->
+  <!-- Configure the Server Thread Pool.                           -->
+  <!-- =========================================================== -->
+  <Arg name="threadpool">
+    <New id="threadpool" class="io.dropwizard.metrics.jetty10.InstrumentedQueuedThreadPool">
+      <Arg name="registry">
+        <Call id="solrJettyMetricRegistry" name="getOrCreate" class="com.codahale.metrics.SharedMetricRegistries">
+          <Arg>solr.jetty</Arg>
+        </Call>
+      </Arg>
+    </New>
+  </Arg>
+
+  <Get name="ThreadPool">
+    <Set name="minThreads" type="int"><Property name="solr.jetty.threads.min" default="10"/></Set>
+    <Set name="maxThreads" type="int"><Property name="solr.jetty.threads.max" default="10000"/></Set>
+    <Set name="idleTimeout" type="int"><Property name="solr.jetty.threads.idle.timeout" default="120000"/></Set>
+    <Set name="stopTimeout" type="int"><Property name="solr.jetty.threads.stop.timeout" default="60000"/></Set>
+    <Set name="detailedDump">false</Set>
+  </Get>
+
+  <Call class="org.slf4j.bridge.SLF4JBridgeHandler" name="removeHandlersForRootLogger"/>
+  <Call class="org.slf4j.bridge.SLF4JBridgeHandler" name="install"/>
+
+  <!-- =========================================================== -->
+  <!-- Http Configuration.                                         -->
+  <!-- =========================================================== -->
+  <New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
+    <Set name="secureScheme">https</Set>
+    <Set name="securePort"><Property name="solr.jetty.secure.port" default="8443" /></Set>
+    <Set name="outputBufferSize"><Property name="solr.jetty.output.buffer.size" default="32768" /></Set>
+    <Set name="outputAggregationSize"><Property name="solr.jetty.output.aggregation.size" default="8192" /></Set>
+    <Set name="requestHeaderSize"><Property name="solr.jetty.request.header.size" default="8192" /></Set>
+    <Set name="responseHeaderSize"><Property name="solr.jetty.response.header.size" default="8192" /></Set>
+    <Set name="sendServerVersion"><Property name="solr.jetty.send.server.version" default="false" /></Set>
+    <Set name="sendDateHeader"><Property name="solr.jetty.send.date.header" default="false" /></Set>
+    <Set name="headerCacheSize"><Property name="solr.jetty.header.cache.size" default="512" /></Set>
+    <Set name="delayDispatchUntilContent"><Property name="solr.jetty.delayDispatchUntilContent" default="false"/></Set>
+    <Set name="relativeRedirectAllowed">true</Set>
+  </New>
+
+    <!-- =========================================================== -->
+    <!-- RewriteHandler to set headers, redirect root to Solr        -->
+    <!-- Includes Pantheon URL rewrite rules for /lando paths        -->
+    <!-- =========================================================== -->
+     <New id="RewriteHandler" class="org.eclipse.jetty.rewrite.handler.RewriteHandler">
+      <Set name="rewriteRequestURI">true</Set>
+      <Set name="rewritePathInfo">false</Set>
+      <Set name="originalPathAttribute">requestedPath</Set>
+
+      <!-- security-related headers -->
+      <Call name="addRule">
+        <Arg>
+          <New class="org.eclipse.jetty.rewrite.handler.HeaderPatternRule">
+            <Set name="pattern">/solr/*</Set>
+            <Set name="name">Content-Security-Policy</Set>
+            <Set name="value">default-src 'none'; base-uri 'none'; connect-src 'self'; form-action 'self'; font-src 'self'; frame-ancestors 'none'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; worker-src 'self';</Set>
+          </New>
+        </Arg>
+      </Call>
+      <Call name="addRule">
+        <Arg>
+          <New class="org.eclipse.jetty.rewrite.handler.HeaderPatternRule">
+            <Set name="pattern">/solr/*</Set>
+            <Set name="name">X-Content-Type-Options</Set>
+            <Set name="value">nosniff</Set>
+          </New>
+        </Arg>
+      </Call>
+      <Call name="addRule">
+        <Arg>
+          <New class="org.eclipse.jetty.rewrite.handler.HeaderPatternRule">
+            <Set name="pattern">/solr/*</Set>
+            <Set name="name">X-Frame-Options</Set>
+            <Set name="value">SAMEORIGIN</Set>
+          </New>
+        </Arg>
+      </Call>
+      <Call name="addRule">
+        <Arg>
+          <New class="org.eclipse.jetty.rewrite.handler.HeaderPatternRule">
+            <Set name="pattern">/solr/*</Set>
+            <Set name="name">X-XSS-Protection</Set>
+            <Set name="value">1; mode=block</Set>
+          </New>
+        </Arg>
+      </Call>
+
+      <!-- Pantheon URL rewrites: /lando/v1/lando/* -> /solr/lando/* -->
+      <Call name="addRule">
+        <Arg>
+          <New class="org.eclipse.jetty.rewrite.handler.RewriteRegexRule">
+            <Set name="regex">/lando/v1/lando/(\S+)</Set>
+            <Set name="replacement">/solr/lando/$1</Set>
+          </New>
+        </Arg>
+      </Call>
+      <Call name="addRule">
+        <Arg>
+          <New class="org.eclipse.jetty.rewrite.handler.RewriteRegexRule">
+            <Set name="regex">/lando/v1lando/(\S+)</Set>
+            <Set name="replacement">/solr/lando/$1</Set>
+          </New>
+        </Arg>
+      </Call>
+      <Call name="addRule">
+        <Arg>
+          <New class="org.eclipse.jetty.rewrite.handler.RewriteRegexRule">
+            <Set name="regex">/lando/(\S+)</Set>
+            <Set name="replacement">/solr/lando/$1</Set>
+          </New>
+        </Arg>
+      </Call>
+
+      <!-- redirect root to solr -->
+      <Call name="addRule">
+        <Arg>
+          <New class="org.eclipse.jetty.rewrite.handler.RedirectRegexRule">
+            <Set name="regex">^/$</Set>
+            <Set name="location">/solr/</Set>
+          </New>
+        </Arg>
+      </Call>
+       <Call name="addRule">
+         <Arg>
+           <New class="org.eclipse.jetty.rewrite.handler.RewritePatternRule">
+             <Set name="pattern">/v2/*</Set>
+             <Set name="replacement">/solr/____v2</Set>
+           </New>
+         </Arg>
+       </Call>
+       <Call name="addRule">
+         <Arg>
+           <New class="org.eclipse.jetty.rewrite.handler.RewritePatternRule">
+             <Set name="pattern">/api/*</Set>
+             <Set name="replacement">/solr/____v2</Set>
+           </New>
+         </Arg>
+       </Call>
+       <Set name="handler">
+         <New id="Handlers" class="org.eclipse.jetty.server.handler.HandlerCollection">
+           <Set name="handlers">
+             <Array type="org.eclipse.jetty.server.Handler">
+               <Item>
+                 <New class="org.eclipse.jetty.server.handler.InetAccessHandler">
+                   <Call name="include">
+                     <Arg>
+                       <Call class="org.eclipse.jetty.util.StringUtil" name="csvSplit">
+                         <Arg><Property name="solr.jetty.inetaccess.includes" default=""/></Arg>
+                       </Call>
+                     </Arg>
+                   </Call>
+                   <Call name="exclude">
+                     <Arg>
+                       <Call class="org.eclipse.jetty.util.StringUtil" name="csvSplit">
+                         <Arg><Property name="solr.jetty.inetaccess.excludes" default=""/></Arg>
+                       </Call>
+                     </Arg>
+                   </Call>
+                   <Set name="handler">
+                     <New id="Contexts" class="org.eclipse.jetty.server.handler.ContextHandlerCollection"/>
+                   </Set>
+                 </New>
+               </Item>
+               <Item>
+                 <New id="InstrumentedHandler" class="io.dropwizard.metrics.jetty10.InstrumentedHandler">
+                   <Arg><Ref refid="solrJettyMetricRegistry"/></Arg>
+                   <Set name="handler">
+                     <New id="DefaultHandler" class="org.eclipse.jetty.server.handler.DefaultHandler"/>
+                   </Set>
+                 </New>
+               </Item>
+             </Array>
+           </Set>
+         </New>
+       </Set>
+     </New>
+
+    <!-- =========================================================== -->
+    <!-- Set handler Collection Structure                            -->
+    <!-- =========================================================== -->
+    <Set name="handler">
+      <Ref refid="RewriteHandler"/>
+    </Set>
+
+    <!-- =========================================================== -->
+    <!-- extra options                                               -->
+    <!-- =========================================================== -->
+    <Set name="stopAtShutdown">true</Set>
+    <Set name="dumpAfterStart">false</Set>
+    <Set name="dumpBeforeStop">false</Set>
+
+    <Call name="addBean">
+      <Arg>
+        <New id="DeploymentManager" class="org.eclipse.jetty.deploy.DeploymentManager">
+          <Set name="contexts">
+            <Ref refid="Contexts" />
+          </Set>
+          <Call name="setContextAttribute">
+            <Arg>org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern</Arg>
+            <Arg>.*/servlet-api-[^/]*\.jar$</Arg>
+          </Call>
+
+          <Call name="addAppProvider">
+            <Arg>
+              <New class="org.eclipse.jetty.deploy.providers.WebAppProvider">
+                <Set name="monitoredDirName"><Property name="jetty.base" default="."/>/contexts</Set>
+                <Set name="scanInterval">0</Set>
+              </New>
+            </Arg>
+          </Call>
+
+        </New>
+      </Arg>
+    </Call>
+
+</Configure>
