@@ -47,8 +47,10 @@ php_version: 8.1
 database:
   version: 10.6
 search:
-  version: 8
+  version: 9
 ```
+
+Supported Solr versions: `8` and `9`.
 
 ## Choosing a nested webroot
 
