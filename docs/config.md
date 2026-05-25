@@ -47,7 +47,7 @@ php_version: 8.1
 database:
   version: 10.6
 search:
-  version: 9
+  version: 8
 ```
 
 Supported Solr versions: `8` and `9`.
