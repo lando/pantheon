@@ -1,4 +1,4 @@
-# docker build -t devwithlando/pantheon-index:9.x-1 .
+# docker build -t devwithlando/pantheon-index:9.10-1 .
 
 FROM solr:9.10.1
 
