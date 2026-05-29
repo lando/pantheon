@@ -67,7 +67,7 @@ lando exec appserver -- "env" | grep DB_NAME | grep pantheon
 lando exec appserver -- "env" | grep FRAMEWORK | grep drupal8
 lando exec appserver -- "env" | grep FILEMOUNT | grep "sites/default/files"
 lando exec appserver -- "env" | grep PANTHEON_ENVIRONMENT | grep lando
-lando exec appserver -- "env" | grep PANTHEON_INDEX_CORE | grep "\/lando"
+lando exec appserver -- "env" | grep PANTHEON_INDEX_CORE | grep lando
 lando exec appserver -- "env" | grep PANTHEON_INDEX_HOST | grep index
 lando exec appserver -- "env" | grep PANTHEON_INDEX_PORT | grep 8983
 lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
