@@ -98,13 +98,13 @@ tooling:
 
 ## Using Drush
 
-Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml) (and/or `pantheon.upstream.yml`) in your app's root directory and will globally install whatever `drush_version` you've specified there. However, it will not go below Drush 8. This means that if you've specified Drush 5, Lando will still install Drush 8.
+Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml) (and/or `pantheon.upstream.yml`) in your app's root directory and will globally install whatever `drush_version` you've specified there. Drush versions below `8` are not supported by Pantheon — if you've specified one (e.g. `drush_version: 5` or `drush_version: 7`), Lando will install Drush 8 instead.
 
-If this has not been specified then we will globally install the [latest version of Drush 8](http://docs.drush.org/en/8.x/install/). For Backdrop sites, we will also install the latest version of [Backdrop Drush](https://github.com/backdrop-contrib/backdrop-drush-extension).
+If `drush_version` has not been specified then we will globally install the [latest version of Drush 8](http://docs.drush.org/en/8.x/install/). For Backdrop sites, we will also install the latest version of [Backdrop Drush](https://github.com/backdrop-contrib/backdrop-drush-extension).
 
 This means that you should be able to use `lando drush` out of the box. That said, you can [easily change](https://docs.lando.dev/plugins/pantheon/config.html) the Drush installation behavior if you so desire.
 
-If you decide to list `drush` as a dependency in your project's `composer.json` then Lando will use that one instead. You should be careful if you use Drush 9 as this is not currently *officially* supported by Pantheon.
+If you decide to list `drush` as a dependency in your project's `composer.json` then Lando will use that one instead.
 
 ### Configuring your root directory
 
