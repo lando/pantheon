@@ -67,7 +67,11 @@ lando exec appserver -- "env" | grep DB_NAME | grep pantheon
 lando exec appserver -- "env" | grep FRAMEWORK | grep drupal8
 lando exec appserver -- "env" | grep FILEMOUNT | grep "sites/default/files"
 lando exec appserver -- "env" | grep PANTHEON_ENVIRONMENT | grep lando
+lando exec appserver -- "env" | grep -x "PANTHEON_INDEX_CORE=lando"
+lando exec appserver -- "env" | grep -x "PANTHEON_INDEX_PATH="
 lando exec appserver -- "env" | grep PANTHEON_INDEX_HOST | grep index
+lando exec appserver -- "env" | grep PANTHEON_INDEX_PORT | grep 8983
+lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
 lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEME | grep http
 lando exec appserver -- "env" | grep PANTHEON_SITE | grep c354aed8-76eb-44d7-8f54-57b9ea3079be
 lando exec appserver -- "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal11
@@ -84,6 +88,18 @@ lando php -v | grep "PHP 8.4"
 # Should use the database version in pantheon.yml
 cd drupal11
 lando exec database -- "mysql -V" | grep 10.6.
+
+# Should use the solr version in pantheon.yml
+cd drupal11
+lando exec appserver -- "curl http://index:8983/solr/admin/info/system" | grep "\"solr-spec-version\":\"9.10.1\""
+
+# Jetty redirects should work for Pantheon Search
+cd drupal11
+lando exec appserver -- "curl http://index:8983/lando/v1/lando/admin/system" | grep "\"solr-spec-version\":\"9.10.1\""
+
+# The Solr connector env vars should resolve to the core
+cd drupal11
+lando exec appserver -- "curl http://\$PANTHEON_INDEX_HOST:\$PANTHEON_INDEX_PORT/\$PANTHEON_INDEX_PATH\$PANTHEON_INDEX_CORE/admin/system" | grep "\"solr-spec-version\":\"9.10.1\""
 
 # Should have the transaction isolation level set to READ-COMMITTED
 cd drupal11
