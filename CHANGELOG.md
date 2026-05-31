@@ -1,5 +1,6 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Added Solr `9` support [#362](https://github.com/lando/pantheon/pull/362)
 * Added PHP `8.5` support with Terminus `4.2.0`
 
 ## v1.13.0 - [March 11, 2026](https://github.com/lando/pantheon/releases/tag/v1.13.0)
