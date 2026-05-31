@@ -22,6 +22,9 @@ jobs:
           - image: pantheon-index
             tag: 8.8-4
             context: dockerfiles/8.8-solr
+          - image: pantheon-index
+            tag: 9.10-1
+            context: dockerfiles/9.x-solr
           - image: pantheon-appserver
             tag: 8.5-5
             context: dockerfiles/8.5-fpm
