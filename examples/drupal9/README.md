@@ -67,7 +67,8 @@ lando exec appserver -- "env" | grep DB_NAME | grep pantheon
 lando exec appserver -- "env" | grep FRAMEWORK | grep drupal8
 lando exec appserver -- "env" | grep FILEMOUNT | grep "sites/default/files"
 lando exec appserver -- "env" | grep PANTHEON_ENVIRONMENT | grep lando
-lando exec appserver -- "env" | grep PANTHEON_INDEX_CORE | grep lando
+lando exec appserver -- "env" | grep -x "PANTHEON_INDEX_CORE=lando"
+lando exec appserver -- "env" | grep -x "PANTHEON_INDEX_PATH="
 lando exec appserver -- "env" | grep PANTHEON_INDEX_HOST | grep index
 lando exec appserver -- "env" | grep PANTHEON_INDEX_PORT | grep 8983
 lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/lando\/schema"
@@ -95,6 +96,10 @@ lando exec appserver -- "curl http://index:8983/solr/admin/info/system" | grep "
 # Jetty redirects should work for Pantheon Search
 cd drupal9
 lando exec appserver -- "curl http://index:8983/lando/v1/lando/admin/system" | grep "\"solr-spec-version\":\"8.8.2\""
+
+# The Solr connector env vars should resolve to the core
+cd drupal9
+lando exec appserver -- "curl http://\$PANTHEON_INDEX_HOST:\$PANTHEON_INDEX_PORT/\$PANTHEON_INDEX_PATH\$PANTHEON_INDEX_CORE/admin/system" | grep "\"solr-spec-version\":\"8.8.2\""
 
 # Should use a varnish http_resp_hdr_len setting of 25k
 cd drupal9
