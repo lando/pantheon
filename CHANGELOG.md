@@ -1,5 +1,6 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Added Solr `9` support [#362](https://github.com/lando/pantheon/pull/362)
 * Added PHP `8.5` support with Terminus `4.2.0`
 * Added warning when `pantheon.yml` sets a `drush_version` below `8` [#354](https://github.com/lando/pantheon/issues/354)
 

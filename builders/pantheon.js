@@ -74,6 +74,7 @@ const getServices = options => ({
     xdebug: options.xdebug,
     webroot: options.webroot,
     solrTag: options.solrTag,
+    search: options.search,
     php: options.php,
     php_version: options.php_version,
     version: options.php,
@@ -170,8 +171,9 @@ module.exports = {
       const dbService = isArmed ? 'pantheon-mariadb-arm' : 'pantheon-mariadb';
       // Set the search version
       const searchVersion = _.toString(_.get(options, 'search.version', '3'));
-      // Set solrtag if search is set to solr8.
+      // Set solrtag based on search version
       if (searchVersion === '8') options.solrTag = '8.8-4';
+      if (searchVersion === '9') options.solrTag = '9.10-1';
       options.database = `${dbService}:${dbVersion}`;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;

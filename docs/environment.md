@@ -37,7 +37,12 @@ DB_USER: pantheon
 
 # Index connection info
 PANTHEON_INDEX_HOST: index
-PANTHEON_INDEX_PORT: 449
+PANTHEON_INDEX_PORT: 8983 (Solr 8/9) or 449 (Solr 3)
+PANTHEON_INDEX_PATH: (empty)
+PANTHEON_INDEX_CORE: lando
+PANTHEON_INDEX_SCHEME: http
+PANTHEON_INDEX_SCHEMA: solr/#/lando/schema
+PANTHEON_SEARCH_VERSION: The Solr version from pantheon.yml (e.g. 8 or 9)
 
 # WordPress things
 AUTH_KEY: Needed for Wordpress. We set this automatically.

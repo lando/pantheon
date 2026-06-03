@@ -50,6 +50,8 @@ search:
   version: 8
 ```
 
+Supported Solr versions: `8` and `9`.
+
 ## Choosing a nested webroot
 
 Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml) (and/or `pantheon.upstream.yml`) in your app's root directory and use whatever `web_docroot` you've specified there.
