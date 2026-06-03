@@ -2,6 +2,7 @@
 
 * Added Solr `9` support [#362](https://github.com/lando/pantheon/pull/362)
 * Added PHP `8.5` support with Terminus `4.2.0`
+* Added warning when `pantheon.yml` sets a `drush_version` below `8` [#354](https://github.com/lando/pantheon/issues/354)
 
 ## v1.13.0 - [March 11, 2026](https://github.com/lando/pantheon/releases/tag/v1.13.0)
 
