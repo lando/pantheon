@@ -16,7 +16,7 @@ RUN mkdir -p /etc/apt/keyrings \
 # Install the additional things that make the pantheon
 RUN mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
-    openjdk-11-jdk \
+    openjdk-11-jre-headless \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
   && mkdir -p /var/www/.drush \
   && mkdir -p /var/www/.backdrush \
