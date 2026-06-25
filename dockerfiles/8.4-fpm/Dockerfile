@@ -5,7 +5,7 @@ FROM devwithlando/php:8.4-fpm-5
 # Version information
 ENV LANDO_TERMINUS_VERSION=4.1.1
 ENV TIKA_VERSION=1.18
-ENV IMAGEMAGICK_VERSION=7.1.1-43
+ENV IMAGEMAGICK_VERSION=7.1.2-7
 
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
