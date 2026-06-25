@@ -5,7 +5,7 @@ FROM devwithlando/php:8.4-fpm-5
 # Version information
 ENV LANDO_TERMINUS_VERSION=4.1.1
 ENV TIKA_VERSION=1.18
-ENV IMAGEMAGICK_VERSION=7.1.1-43
+ENV IMAGEMAGICK_VERSION=7.1.2-7
 
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
@@ -43,7 +43,7 @@ RUN rm -f /usr/local/etc/php/conf.d/*imagick* \
 # Install the additional things that make the pantheon
 RUN mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
-    openjdk-17-jdk \
+    openjdk-17-jre-headless \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
   && mkdir -p /var/www/.drush \
   && mkdir -p /var/www/.backdrush \

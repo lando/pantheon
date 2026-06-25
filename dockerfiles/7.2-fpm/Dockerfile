@@ -14,7 +14,7 @@ RUN \
   && rm -rf /etc/apt/sources.list.d/pgdg.list \
   && mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
-    openjdk-8-jdk \
+    openjdk-8-jre-headless \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
   && mkdir -p /var/www/.drush \
   && mkdir -p /var/www/.backdrush \
