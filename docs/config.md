@@ -66,7 +66,7 @@ frontend_build:
 * Node `22`, `24`, and `26` (default `26`). Mixed majors across paths are refused.
 * Package manager comes from the lockfile in each path, in Pantheon order: bun, pnpm, yarn, npm. No lockfile fails that path.
 * Builds run on `lando start` / `lando rebuild`. Use `lando frontend-build` to run them again.
-* `lando npm`, `lando yarn`, `lando pnpm`, `lando bun`, and `lando node` run in your current directory, same as other Lando tooling. `cd` into the theme and run `lando npm run watch`.
+* `lando node` plus the package managers your lockfiles need (`lando npm`, `lando yarn`, `lando pnpm`, and/or `lando bun`) show up only when `frontend_build` is configured. They run in your current directory.
 
 Supported Solr versions: `8` and `9`.
 

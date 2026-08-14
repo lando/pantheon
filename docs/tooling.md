@@ -19,16 +19,25 @@ lando pull              Pull code, database and/or files from Pantheon
 lando push              Push code, database and/or files to Pantheon
 lando switch            Switch to a different multidev environment
 lando terminus          Runs terminus commands
-lando frontend-build    Builds pantheon.yml frontend_build paths
-lando npm               Runs npm in the current directory
-lando yarn              Runs yarn in the current directory
-lando pnpm              Runs pnpm in the current directory
-lando bun               Runs bun in the current directory
-lando node              Runs node in the current directory
 lando version           Displays the lando version
 ```
 
 **Note that the above commands can differ by your recipes `framework`.** The above are for `framework: drupal8`. We recommend you run `lando` in your app for a complete and up to date listing of your tooling.
+
+## Frontend builds
+
+These commands are **not** part of every Pantheon app. They only appear when `pantheon.yml` has a `frontend_build` block, and only for the package managers your lockfiles actually use.
+
+```bash
+lando frontend-build    Builds every frontend_build path
+lando node              Runs node in the current directory
+lando npm               Present when a path uses package-lock.json
+lando yarn              Present when a path uses yarn.lock
+lando pnpm              Present when a path uses pnpm-lock.yaml
+lando bun               Present when a path uses bun.lock or bun.lockb
+```
+
+They run in your current directory. `cd` into the theme and use `lando npm run watch`, or whichever command your lockfile enabled.
 
 ```bash
 # Login to terminus with a machine token

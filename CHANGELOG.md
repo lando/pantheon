@@ -1,6 +1,6 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
-* Added support for Pantheon `frontend_build` via a Node sidecar, lockfile-based installs, and `lando frontend-build` / `lando npm` / `yarn` / `pnpm` / `bun` tooling
+* Added support for Pantheon `frontend_build` via a Node sidecar, lockfile-based installs, `lando frontend-build`, and package-manager tooling that appears only for configured lockfiles
 
 ## v1.14.0 - [June 4, 2026](https://github.com/lando/pantheon/releases/tag/v1.14.0)
 

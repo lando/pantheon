@@ -184,7 +184,9 @@ describe('frontend_build', () => {
 
       extra.services.frontend.type.should.equal('pantheon-node:26');
       extra.tooling.pnpm.service.should.equal('frontend');
-      chai.expect(extra.tooling.pnpm.dir).to.equal(undefined);
+      chai.expect(extra.tooling.npm).to.equal(undefined);
+      chai.expect(extra.tooling.yarn).to.equal(undefined);
+      chai.expect(extra.tooling.bun).to.equal(undefined);
       extra.tooling['frontend-build'].cmd.should.include('pnpm run');
     });
   });
