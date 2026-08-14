@@ -25,13 +25,13 @@ Run the following commands to validate things are rolling as they should.
 cat web/themes/custom/demo/dist/built.txt | grep built
 
 # Should expose frontend-build tooling
-lando | grep frontend-build
+lando frontend-build --help
 
 # Should expose npm because this path has package-lock.json
-lando | grep "lando npm"
+lando npm --version
 
 # Should expose node
-lando | grep "lando node"
+lando node --version
 
 # Should rebuild the theme without a full rebuild
 rm -rf web/themes/custom/demo/dist
