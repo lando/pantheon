@@ -10,6 +10,7 @@ const push = require('../lib/push');
 const change = require('../lib/switch');
 const mysql = require('../lib/mysql');
 const utils = require('../lib/utils');
+const frontendBuild = require('../lib/frontend-build');
 
 const setTooling = (options, tokens) => {
   const metaToken = _.get(
@@ -195,6 +196,13 @@ module.exports = {
 
       options = setTooling(options, tokens);
       options = setBuildSteps(options);
+
+      if (options.frontendBuild) {
+        const plan = frontendBuild.resolveFrontendBuild(options.frontendBuild, options.root);
+        const extra = frontendBuild.getPantheonFrontend(plan);
+        options.services = _.merge({}, options.services, extra.services);
+        options.tooling = _.merge({}, options.tooling, extra.tooling);
+      }
 
       // Add appserver and database services.
       options.services = _.merge({}, getServices(options), options.services);
