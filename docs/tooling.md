@@ -43,6 +43,21 @@ lando composer require "drupal/search_api_pantheon ~1.0" --prefer-dist
 lando drush dl webform
 ```
 
+## Frontend builds
+
+These commands are **not** part of every Pantheon app. They only appear when `pantheon.yml` has a `frontend_build` block, and only for the package managers your lockfiles actually use.
+
+```bash
+lando frontend-build    Builds every frontend_build path
+lando node              Runs node in the current directory
+lando npm               Present when a path uses package-lock.json
+lando yarn              Present when a path uses yarn.lock
+lando pnpm              Present when a path uses pnpm-lock.yaml
+lando bun               Present when a path uses bun.lock or bun.lockb
+```
+
+They run in your current directory. `cd` into the theme and use `lando npm run watch`, or whichever command your lockfile enabled.
+
 ## Customizing Pantheon tooling
 
 If you would like to customize `lando pull`, `lando push` or `lando switch` you can do so using [tooling](https://docs.lando.dev/landofile/tooling.html) or [tooling overrides](https://docs.lando.dev/landofile/tooling.html#overriding) directly to achieve your specific use case. This should allow you to:

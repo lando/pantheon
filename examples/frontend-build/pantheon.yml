@@ -1,0 +1,7 @@
+api_version: 1
+php_version: 8.3
+frontend_build:
+  paths:
+    - path: web/themes/custom/demo
+      node_version: 26
+      build_command: build

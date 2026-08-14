@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Added support for Pantheon `frontend_build`
+
 ## v1.14.0 - [June 4, 2026](https://github.com/lando/pantheon/releases/tag/v1.14.0)
 
 * Added Solr `9` support [#362](https://github.com/lando/pantheon/pull/362)
