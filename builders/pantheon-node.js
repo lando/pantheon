@@ -3,8 +3,8 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
-const landoNodePath = path.join(__dirname, '../node_modules/@lando/node');
-const LandoNode = require(`${landoNodePath}/builders/node.js`);
+const LandoNode = require('@lando/node/builders/node.js');
+const landoNodePath = path.resolve(path.dirname(require.resolve('@lando/node/builders/node.js')), '..');
 
 const EXTRA_VERSIONS = [
   '26', '26.7', '26.6', '26.5', '26.4', '26.3', '26.2', '26.1',

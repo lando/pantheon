@@ -24,21 +24,6 @@ lando version           Displays the lando version
 
 **Note that the above commands can differ by your recipes `framework`.** The above are for `framework: drupal8`. We recommend you run `lando` in your app for a complete and up to date listing of your tooling.
 
-## Frontend builds
-
-These commands are **not** part of every Pantheon app. They only appear when `pantheon.yml` has a `frontend_build` block, and only for the package managers your lockfiles actually use.
-
-```bash
-lando frontend-build    Builds every frontend_build path
-lando node              Runs node in the current directory
-lando npm               Present when a path uses package-lock.json
-lando yarn              Present when a path uses yarn.lock
-lando pnpm              Present when a path uses pnpm-lock.yaml
-lando bun               Present when a path uses bun.lock or bun.lockb
-```
-
-They run in your current directory. `cd` into the theme and use `lando npm run watch`, or whichever command your lockfile enabled.
-
 ```bash
 # Login to terminus with a machine token
 lando terminus auth:login --machine-token=MYSPECIALTOKEN
@@ -57,6 +42,21 @@ lando composer require "drupal/search_api_pantheon ~1.0" --prefer-dist
 # Download a backdrop dependency
 lando drush dl webform
 ```
+
+## Frontend builds
+
+These commands are **not** part of every Pantheon app. They only appear when `pantheon.yml` has a `frontend_build` block, and only for the package managers your lockfiles actually use.
+
+```bash
+lando frontend-build    Builds every frontend_build path
+lando node              Runs node in the current directory
+lando npm               Present when a path uses package-lock.json
+lando yarn              Present when a path uses yarn.lock
+lando pnpm              Present when a path uses pnpm-lock.yaml
+lando bun               Present when a path uses bun.lock or bun.lockb
+```
+
+They run in your current directory. `cd` into the theme and use `lando npm run watch`, or whichever command your lockfile enabled.
 
 ## Customizing Pantheon tooling
 
