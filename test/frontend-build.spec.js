@@ -184,7 +184,7 @@ describe('frontend_build', () => {
 
       extra.services.frontend.type.should.equal('pantheon-node:26');
       extra.tooling.pnpm.service.should.equal('frontend');
-      extra.tooling.pnpm.dir.should.equal('/app/web/themes/custom/foo');
+      chai.expect(extra.tooling.pnpm.dir).to.equal(undefined);
       extra.tooling['frontend-build'].cmd.should.include('pnpm run');
     });
   });

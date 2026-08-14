@@ -20,11 +20,11 @@ lando push              Push code, database and/or files to Pantheon
 lando switch            Switch to a different multidev environment
 lando terminus          Runs terminus commands
 lando frontend-build    Builds pantheon.yml frontend_build paths
-lando npm               Runs npm in the first frontend_build path
-lando yarn              Runs yarn in the first frontend_build path
-lando pnpm              Runs pnpm in the first frontend_build path
-lando bun               Runs bun in the first frontend_build path
-lando node              Runs node in the first frontend_build path
+lando npm               Runs npm in the current directory
+lando yarn              Runs yarn in the current directory
+lando pnpm              Runs pnpm in the current directory
+lando bun               Runs bun in the current directory
+lando node              Runs node in the current directory
 lando version           Displays the lando version
 ```
 
