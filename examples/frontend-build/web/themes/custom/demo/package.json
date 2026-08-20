@@ -1,0 +1,7 @@
+{
+  "name": "lando-pantheon-frontend-demo",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  }
+}

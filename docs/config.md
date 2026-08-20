@@ -52,6 +52,24 @@ search:
 
 Supported Solr versions: `8` and `9`.
 
+## Frontend builds
+
+If your `pantheon.yml` has a [`frontend_build`](https://docs.pantheon.io/frontend-builds) block, Lando starts an invisible Node sidecar and runs the same install + build as Pantheon. You do not need extra Node config in your Landofile.
+
+```yaml
+api_version: 1
+frontend_build:
+  paths:
+    - path: web/themes/custom/mytheme
+      node_version: 26
+      build_command: build
+```
+
+* Node `22`, `24`, and `26` (default `26`). Mixed majors across paths are refused.
+* Package manager comes from the lockfile in each path, in Pantheon order: bun, pnpm, yarn, npm. No lockfile fails that path.
+* Builds run on `lando start` / `lando rebuild`. Use `lando frontend-build` to run them again.
+* `lando node` plus the package managers your lockfiles need (`lando npm`, `lando yarn`, `lando pnpm`, and/or `lando bun`) show up only when `frontend_build` is configured. They run in your current directory.
+
 ## Choosing a nested webroot
 
 Lando will look for a [`pantheon.yml`](https://docs.pantheon.io/pantheon-yml) (and/or `pantheon.upstream.yml`) in your app's root directory and use whatever `web_docroot` you've specified there.

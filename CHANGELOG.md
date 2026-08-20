@@ -1,5 +1,8 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Added support for Pantheon `frontend_build`
+* Updated PHP `8.2`, `8.3`, `8.4`, and `8.5` images to Terminus `4.3.2` [#360](https://github.com/lando/pantheon/issues/360)
+
 ## v1.14.0 - [June 4, 2026](https://github.com/lando/pantheon/releases/tag/v1.14.0)
 
 * Added Solr `9` support [#362](https://github.com/lando/pantheon/pull/362)

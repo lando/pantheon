@@ -1,0 +1,15 @@
+name: lando-pantheon-frontend-build
+recipe: pantheon
+config:
+  framework: drupal
+  site: fake-site
+  id: fake-id
+  cache: false
+  edge: false
+  index: false
+
+# do not remove this
+plugins:
+  "@lando/pantheon": ../..
+  "@lando/mariadb": ../../node_modules/@lando/mariadb
+  "@lando/node": ../../node_modules/@lando/node
