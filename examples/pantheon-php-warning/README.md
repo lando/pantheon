@@ -29,7 +29,7 @@ Run the following commands to validate things are rolling as they should.
 lando exec appserver -- php -v | grep "PHP 7.1"
 
 # Should have started the 7.1-4 appserver image
-lando info --format json | grep "pantheon-appserver:7.1-4"
+docker ps --format '{{.Image}}' | grep 'devwithlando/pantheon-appserver:7.1-4'
 ```
 
 ## Destroy tests
