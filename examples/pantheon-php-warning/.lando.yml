@@ -1,0 +1,14 @@
+name: pantheon-php-warning
+recipe: pantheon
+config:
+  framework: drupal
+  site: fake-site
+  id: fake-id
+  cache: false
+  edge: false
+  index: false
+
+# do not remove this
+plugins:
+  "@lando/pantheon": ../..
+  "@lando/mariadb": ../../node_modules/@lando/mariadb

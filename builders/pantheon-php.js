@@ -17,13 +17,19 @@ module.exports = {
       // rebase option on defaults
       options = _.merge({}, defaults, options);
 
-      // Normalize because 7.0/8.0 right away gets handled strangely by js-yaml
-      if (options.php === '7' || options.php === 7) options.php = '7.0';
-      if (options.php === '8' || options.php === 8) options.php = '8.0';
+      // js-yaml parses unquoted x.0 PHP versions as the integer x.
+      options.php = String(options.php);
+      if (/^\d+$/.test(options.php)) options.php = `${options.php}.0`;
+
+      // getPantheonConfig already warns and falls back. This is a silent
+      // second line of defense if the builder is invoked without it.
+      const resolvedGen = utils.resolveGeneration(String(options.php), String(options.generation));
+      if (resolvedGen !== null) options.generation = resolvedGen;
 
       // main event
       options.version = options.php;
       options.image = `devwithlando/pantheon-appserver:${options.php}-${options.generation}`;
+
       options.via = 'nginx:1.25';
 
       // Add in the prepend.php

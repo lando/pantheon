@@ -1,0 +1,6 @@
+# php_version 7.1 has no generation 5 image. The plugin should warn and
+# start against 7.1-4 instead of failing with Docker "manifest unknown".
+api_version: 1
+php_version: 7.1
+database:
+  version: 10.6
