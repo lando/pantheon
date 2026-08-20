@@ -35,6 +35,7 @@ lib/        # Core library code (auth, client, utils)
 scripts/    # Shell scripts for containers
 test/       # Unit tests (*.spec.js)
 utils/      # Utility modules
+examples/   # Leia fixtures. See examples/AGENTS.md — remote landobot sites use master, not main.
 ```
 
 ## Code Style Guidelines
