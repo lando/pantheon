@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+## v1.15.0 - [August 20, 2026](https://github.com/lando/pantheon/releases/tag/v1.15.0)
+
 * Added support for Pantheon `frontend_build`
 * Updated PHP `8.2`, `8.3`, `8.4`, and `8.5` images to Terminus `4.3.2` [#360](https://github.com/lando/pantheon/issues/360)
 * Fixed `manifest unknown` Docker error by validating `php_version` and `php_runtime_generation` against published images and falling back to a working generation when needed [#347](https://github.com/lando/pantheon/issues/347)
