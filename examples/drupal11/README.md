@@ -75,15 +75,15 @@ lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEMA | grep "solr\/#\/land
 lando exec appserver -- "env" | grep PANTHEON_INDEX_SCHEME | grep http
 lando exec appserver -- "env" | grep PANTHEON_SITE | grep c354aed8-76eb-44d7-8f54-57b9ea3079be
 lando exec appserver -- "env" | grep PANTHEON_SITE_NAME | grep landobot-drupal11
-lando exec appserver -- "env" | grep php_version | grep "8.4"
+lando exec appserver -- "env" | grep php_version | grep "8.5"
 lando exec appserver -- "env" | grep PRESSFLOW_SETTINGS | grep pantheon
 lando exec appserver -- "env" | grep TERMINUS_ENV | grep dev
 lando exec appserver -- "env" | grep TERMINUS_SITE | grep landobot-drupal11
 lando exec appserver -- "env" | grep -E "TERMINUS_USER=.+@.+"
 
-# Should use php 8.4 in pantheon.yml
+# Should use php 8.5 in pantheon.yml
 cd drupal11
-lando php -v | grep "PHP 8.4"
+lando php -v | grep "PHP 8.5"
 
 # Should use the database version in pantheon.yml
 cd drupal11
@@ -127,7 +127,7 @@ lando php -m | grep xdebug || echo $? | grep 1
 cd drupal11
 lando php -m | grep imagick
 
-# Should have ImageMagick 7 for PHP 8.4
+# Should have ImageMagick 7 for PHP 8.5
 cd drupal11
 lando php -r 'echo Imagick::getVersion()["versionString"];' | grep "ImageMagick 7\."
 
