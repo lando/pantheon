@@ -2,6 +2,13 @@
 
 FROM devwithlando/php:7.4-fpm-5
 
+# Debian 11 (bullseye) is end-of-life: security.debian.org no longer serves its package pool
+# and the release now lives on archive.debian.org.
+RUN sed -i \
+    -e '/bullseye-security/d' \
+    -e 's|http://deb.debian.org/debian|http://archive.debian.org/debian|' \
+    /etc/apt/sources.list
+
 # Version information
 ENV LANDO_TERMINUS_VERSION=3.6.2
 ENV TIKA_VERSION=1.18

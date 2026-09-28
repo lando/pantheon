@@ -2,7 +2,7 @@
 set -e
 
 # Get the lando logger
-. /helpers/log.sh
+. "${LANDO_LOG_HELPER:-/helpers/log.sh}"
 
 # Set the module
 LANDO_MODULE="pantheon"
@@ -71,7 +71,7 @@ FILES=${NO_FILES:-${ENV:-dev}}
 DATABASE=${NO_DB:-${ENV:-dev}}
 
 # Auth procedure
-/helpers/auth.sh "$AUTH" "$SITE" "$ENV"
+"${PANTHEON_AUTH_SCRIPT:-/helpers/auth.sh}" "$AUTH" "$SITE" "$ENV"
 
 # LOGZ
 lando_pink "Switching to $ENV..."
@@ -81,9 +81,8 @@ CURRENT_LANDO_YML="$LANDO_MOUNT/.lando.yml"
 STASHED_LANDO_YML="/tmp/.lando.yml.$ENV"
 cp -rf "$CURRENT_LANDO_YML" "$STASHED_LANDO_YML"
 
-# Build out our switch command by piggybacking off of pull
-SWITCH_ENV="/helpers/pull.sh --code=$ENV --files=$FILES --database=$DATABASE --rsync --no-auth"
-eval "$SWITCH_ENV"
+# Piggyback off of pull
+"${PANTHEON_PULL_SCRIPT:-/helpers/pull.sh}" --code="$ENV" --files="$FILES" --database="$DATABASE" --rsync --no-auth
 
 # Move in the .lando.yml if the branch we switched to does not have one
 if [ ! -f "$CURRENT_LANDO_YML" ]; then

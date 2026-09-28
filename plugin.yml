@@ -7,8 +7,8 @@ legacy: true
 
 # This is just metadata that something else can use to understand how the docs are organized
 docs:
-  # This is the tag we should use when connecting platform.sh content together eg showing guides on the main
-  # platform.sh recipe docs
+  # This is the tag we should use when connecting Pantheon content together eg showing guides on the main
+  # Pantheon recipe docs
   tag: pantheon
 
   # This gets added to the lando/lando docs guides.json

@@ -1,5 +1,8 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Replaced `axios` with native `fetch` for Pantheon API requests
+* Added architecture and lifecycle documentation
+
 ## v1.15.0 - [August 20, 2026](https://github.com/lando/pantheon/releases/tag/v1.15.0)
 
 * Added support for Pantheon `frontend_build`

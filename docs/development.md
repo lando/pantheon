@@ -70,21 +70,20 @@ It's best to familiarize yourself with how Lando [does testing](https://docs.lan
 
 ### Unit Tests
 
-Generally, unit testable code should be placed in `utils` and then the associated test in `tests` in the form `FILE-BEING-TESTED.spec.js`. Here is an example:
+Unit tests live in `test/` as `FILE-BEING-TESTED.spec.js` (Mocha + Chai). They come in three layers:
+
+* **Pure modules**: `lib/recipe.js`, `lib/config.js`, `lib/pull.js` and friends are called directly with plain option objects (`test/recipe.spec.js`, `test/config.spec.js`, ...).
+* **Builder characterization**: `test/builder.spec.js` hands `builders/pantheon.js` a `MockParent` and asserts on what the recipe passes to `super()`.
+* **Bash harness**: `test/scripts.spec.js` runs `scripts/pull.sh`, `push.sh` and `switch.sh` under a mock `PATH` using the helpers in `test/fixtures/`, so no container or Pantheon account is needed.
+
+Coverage is collected for `builders/`, `inits/`, `lib/` and `utils/`. See [Architecture](./architecture.md#testing) for which spec covers which module.
 
 ```bash
-./
-|-- utils
-    |-- stuff.js
-|-- test
-    |-- stuff.spec.js
-```
-
-And then you can run the tests with the below.
-
-```bash
-# Run unit tests
+# Run all unit tests with coverage
 npm run test:unit
+
+# Run one spec
+npx mocha --timeout 5000 test/recipe.spec.js
 ```
 
 ### Leia Tests
