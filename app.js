@@ -9,8 +9,8 @@ const utils = require('./lib/utils');
  * Pantheon plugin for Lando that handles authentication and token management
  * between Lando and Pantheon hosting platform.
  *
- * @param {Object} app - The Lando app object
- * @param {Object} lando - The Lando config object
+ * @param {object} app - The Lando app object
+ * @param {object} lando - The Lando config object
  * @return {void}
  */
 module.exports = async (app, lando) => {
@@ -25,8 +25,8 @@ module.exports = async (app, lando) => {
        * Post-command handler for Pantheon authentication
        * Validates and updates Pantheon machine tokens after certain commands
        *
-       * @param {Object} config - Command configuration
-       * @param {Object} answers - User provided answers/input
+       * @param {object} config - Command configuration
+       * @param {object} answers - User provided answers/input
        * @return {Promise} Resolves when token validation and caching is complete
        */
       app.events.on(`post-${command}`, async (config, answers) => {
@@ -35,24 +35,16 @@ module.exports = async (app, lando) => {
         // Only run if answer.auth is set, the tokens are different or the email is blank
         // this allows these commands to all be overriden without causing a failure here
         if (answers.auth && (answers.auth !== token || !email)) {
-         const api = new PantheonApiClient(answers.auth, app.log);
-
-          try {
-            await api.auth();
-            const results = await api.getUser();
-            const cache = {token: answers.auth, email: results.email, date: _.toInteger(_.now() / 1000)};
-            // Reset this apps metacache
-            lando.cache.set(app.metaCache, _.merge({}, app.meta, cache), {persist: true});
-            // Set lando's store of pantheon machine tokens
-            lando.cache.set(app.pantheonTokenCache, utils.sortTokens(app.pantheonTokens, [cache]), {persist: true});
-            // Wipe out the apps tooling cache to reset with the new MT
-            lando.cache.remove(`${app.name}.tooling.cache`);
-
-          // Throw some sort of error
-          // NOTE: this provides some error handling when we are completely non-interactive
-          } catch (error) {
-            throw (_.has(error, 'response.data')) ? new Error(error.response.data) : error;
-          }
+          const api = new PantheonApiClient(answers.auth, app.log);
+          await api.auth();
+          const results = await api.getUser();
+          const cache = {token: answers.auth, email: results.email, date: _.toInteger(_.now() / 1000)};
+          // Reset this apps metacache
+          lando.cache.set(app.metaCache, _.merge({}, app.meta, cache), {persist: true});
+          // Set lando's store of pantheon machine tokens
+          lando.cache.set(app.pantheonTokenCache, utils.sortTokens(app.pantheonTokens, [cache]), {persist: true});
+          // Wipe out the apps tooling cache to reset with the new MT
+          lando.cache.remove(`${app.name}.tooling.cache`);
         }
       });
     });
