@@ -87,6 +87,8 @@ jobs:
       - name: Run Leia Tests
         uses: lando/run-leia-action@v2
         with:
+          # run-leia-action@v2 installs Node 18, and Leia 2.x needs require(esm) (Node 20.19+)
+          version: "1.0.0-beta.4"
           leia-test: "./${{ matrix.leia-test }}/README.md"
           cleanup-header: "Destroy tests"
           retry: 3
