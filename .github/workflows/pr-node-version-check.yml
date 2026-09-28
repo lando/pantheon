@@ -1,0 +1,24 @@
+name: Check Node.js Versions
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check-node-versions:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install yaml
+
+      - name: Check Node.js versions
+        run: .github/scripts/check-node-versions.js
