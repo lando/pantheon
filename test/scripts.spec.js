@@ -6,10 +6,14 @@ const path = require('path');
 const {execFileSync, spawnSync} = require('child_process');
 const {expect} = require('chai');
 
+// These scripts run inside the Linux appserver as /helpers/*.sh; Windows runners only have Git Bash,
+// which rewrites /tmp and quotes paths differently, so the harness runs on Linux only.
+const describeLinux = process.platform === 'linux' ? describe : describe.skip;
+
 const fixtures = path.join(__dirname, 'fixtures');
 const skipAll = ['--code=none', '--database=none', '--files=none'];
 
-describe('container sync scripts', () => {
+describeLinux('container sync scripts', () => {
   let root;
   let binDir;
   let mount;
