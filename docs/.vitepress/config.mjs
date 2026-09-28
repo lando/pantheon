@@ -26,6 +26,10 @@ export default defineConfig({
   },
 });
 
+/**
+ * Build the docs sidebar.
+ * @return {object[]} VitePress sidebar groups
+ */
 function sidebar() {
   return [
     {
@@ -38,6 +42,7 @@ function sidebar() {
         {text: 'Configuration', link: '/config'},
         {text: 'Tooling', link: '/tooling'},
         {text: 'Syncing', link: '/sync'},
+        {text: 'Lifecycle', link: '/lifecycle'},
         {text: 'Environment', link: '/environment'},
         {text: 'Libraries', link: '/libraries'},
       ],
@@ -47,6 +52,7 @@ function sidebar() {
       collapsed: false,
       items: [
         {text: 'Development', link: '/development'},
+        {text: 'Architecture', link: '/architecture'},
         {text: 'Team', link: '/team'},
       ],
     },
