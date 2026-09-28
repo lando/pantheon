@@ -3,7 +3,7 @@
 set -e
 
 # Get the lando logger
-. /helpers/log.sh
+. "${LANDO_LOG_HELPER:-/helpers/log.sh}"
 
 # Set the module
 LANDO_MODULE="pantheon"
@@ -116,7 +116,7 @@ if [ "$FILES" == "test" ] || [ "$FILES" == "live" ]; then
 fi
 
 # Go through the auth procedure
-/helpers/auth.sh "$AUTH" "$SITE"
+"${PANTHEON_AUTH_SCRIPT:-/helpers/auth.sh}" "$AUTH" "$SITE"
 
 # Push the codez
 if [ "$CODE" != "none" ]; then
