@@ -28,15 +28,19 @@ jobs:
           - image: pantheon-appserver
             tag: 8.5-5
             context: dockerfiles/8.5-fpm
+            min_php: 8.5.12
           - image: pantheon-appserver
             tag: 8.4-5
             context: dockerfiles/8.4-fpm
+            min_php: 8.4.27
           - image: pantheon-appserver
             tag: 8.3-5
             context: dockerfiles/8.3-fpm
+            min_php: 8.3.36
           - image: pantheon-appserver
             tag: 8.2-5
             context: dockerfiles/8.2-fpm
+            min_php: 8.2.35
           - image: pantheon-appserver
             tag: 8.1-5
             context: dockerfiles/8.1-fpm
@@ -81,5 +85,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: devwithlando/${{ matrix.image }}:${{ matrix.tag }}${{ steps.pr.outputs.tag-suffix }}
+          pull: true
+          build-args: MIN_PHP=${{ matrix.min_php }}
           cache-from: type=gha,scope=${{ matrix.image }}-${{ matrix.tag }}
           cache-to: type=gha,mode=max,scope=${{ matrix.image }}-${{ matrix.tag }}
