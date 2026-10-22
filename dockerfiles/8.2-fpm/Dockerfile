@@ -1,6 +1,9 @@
 # docker build -t devwithlando/pantheon-appserver:8.2-5 .
 
-FROM devwithlando/php:8.2-fpm-5
+FROM devwithlando/php:8.2-fpm-7
+
+ARG MIN_PHP=
+RUN [ -z "$MIN_PHP" ] || dpkg --compare-versions "$PHP_VERSION" ge "$MIN_PHP" || { echo "PHP $PHP_VERSION < $MIN_PHP"; exit 1; }
 
 # Version information
 ENV LANDO_TERMINUS_VERSION=4.3.2
