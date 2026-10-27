@@ -16,6 +16,10 @@ default-storage-engine = innodb
 character-set-server = utf8mb4
 collation-server = utf8mb4_0900_ai_ci
 
+# Same isolation as config/mysql.cnf. MySQL 8.4 defaults to REPEATABLE-READ,
+# which makes Drupal 10+ warn. The [mariadb] group in that file does not apply here.
+transaction_isolation = READ-COMMITTED
+
 bind-address = 0.0.0.0
 max_allowed_packet = 32M
 innodb_file_per_table = 1

@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const chai = require('chai');
 const yaml = require('js-yaml');
 const {getPantheonDatabase} = require('../lib/utils');
@@ -45,6 +47,11 @@ describe('database', () => {
 
     it('should throw for an unknown type', () => {
       expect(() => getPantheonDatabase({type: 'postgres', version: 16})).to.throw(/postgres is not supported/);
+    });
+
+    it('should set READ-COMMITTED in the mysql 8.4 server cnf', () => {
+      const cnf = fs.readFileSync(path.join(__dirname, '..', 'config', 'mysql84.cnf'), 'utf8');
+      cnf.should.match(/transaction_isolation\s*=\s*READ-COMMITTED/);
     });
   });
 });
