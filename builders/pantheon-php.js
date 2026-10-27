@@ -37,6 +37,12 @@ module.exports = {
       // So we are doing this a little weirdly to avoid hat until we can track things down better
       options.volumes.push(`${options.confDest}/prepend.php:/srv/includes/prepend.php`);
 
+      // MariaDB 11.4+ clients refuse the self-signed cert MySQL 8.4 generates, which breaks
+      // `lando pull` and `lando push`. Only MariaDB clients read [client-mariadb].
+      if (options.database_engine === 'mysql') {
+        options.volumes.push(`${options.confDest}/mysql84-client.cnf:/etc/mysql/conf.d/zz-lando-pantheon-mysql84.cnf`);
+      }
+
       // Add in our environment
       options.environment = utils.getPantheonEnvironment(options);
       options.confSrc = path.resolve(__dirname, '..', 'config');

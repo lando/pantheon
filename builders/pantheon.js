@@ -85,6 +85,7 @@ const getServices = options => ({
     drush_version: options.drush_version,
     root: options.root,
     generation: options.generation,
+    database_engine: options.databaseEngine,
   },
   database: {
     type: options.database,
@@ -167,15 +168,16 @@ module.exports = {
         options.drush_version = _.get(composerConfig, `require['drush/drush']`, options.drush);
       }
 
-      // Pantheon has begun specifying the database version in the pantheon.yml via this key.
-      const dbVersion = _.get(options, 'database.version', '10.3');
-      const dbService = isArmed ? 'pantheon-mariadb-arm' : 'pantheon-mariadb';
+      // Pantheon specifies the database engine and version in the pantheon.yml via this key.
+      const database = utils.getPantheonDatabase(options.database, isArmed);
       // Set the search version
       const searchVersion = _.toString(_.get(options, 'search.version', '3'));
       // Set solrtag based on search version
       if (searchVersion === '8') options.solrTag = '8.8-4';
       if (searchVersion === '9') options.solrTag = '9.10-1';
-      options.database = `${dbService}:${dbVersion}`;
+      options.database = database.type;
+      options.databaseEngine = database.engine;
+      options.defaultFiles.database = database.cnf;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
 

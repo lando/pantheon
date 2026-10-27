@@ -1,5 +1,7 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Added MySQL `8.4` support via `database.type: mysql` in `pantheon.yml` [#374](https://github.com/lando/pantheon/issues/374)
+
 ## v1.15.0 - [August 20, 2026](https://github.com/lando/pantheon/releases/tag/v1.15.0)
 
 * Added support for Pantheon `frontend_build`

@@ -1,0 +1,8 @@
+#
+# MariaDB client configuration for the Lando Pantheon appserver on MySQL 8.4
+#
+# LANDOPANTHEONMYSQL84CLIENTCNF
+
+[client-mariadb]
+# MySQL 8.4 serves a self-signed cert and MariaDB 11.4+ clients verify it by default
+ssl-verify-server-cert=0

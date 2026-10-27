@@ -1,0 +1,29 @@
+#
+# The MySQL 8.4 database server configuration file for Lando
+#
+# LANDOPANTHEONMYSQL84CNF
+
+[client]
+default-character-set=utf8mb4
+
+[mysqld]
+default-storage-engine = innodb
+
+#
+# * Character sets
+#
+# Pantheon uses utf8mb4_0900_ai_ci for tables created after the MySQL 8.4 migration
+character-set-server = utf8mb4
+collation-server = utf8mb4_0900_ai_ci
+
+bind-address = 0.0.0.0
+max_allowed_packet = 32M
+innodb_file_per_table = 1
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet = 32M
+
+[mysql]
+default-character-set=utf8mb4

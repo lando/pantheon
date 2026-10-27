@@ -52,6 +52,22 @@ search:
 
 Supported Solr versions: `8` and `9`.
 
+### MySQL 8.4
+
+Lando uses MariaDB unless your `pantheon.yml` asks for [MySQL 8.4](https://docs.pantheon.io/guides/mariadb-mysql/mysql-84):
+
+```yaml
+database:
+  type: mysql
+  version: 8.4
+```
+
+* Lando runs a `mysql:8.4` database service with the same `pantheon` user, password, and database. It works on ARM too.
+* MySQL only allows version `8.4`. Any other version with `type: mysql`, or `version: 8.4` without it, stops `lando start` with an error.
+* New tables use `utf8mb4` and `utf8mb4_0900_ai_ci`, like Pantheon after the migration.
+* The appserver gets a MariaDB client config that skips checking MySQL's self-signed cert, so `lando pull` and `lando push` work. Tools that pass their own `--defaults-file` skip it too. If one of them fails with `TLS/SSL error: self-signed certificate`, pass `--ssl-verify-server-cert=0` to it.
+* MariaDB keeps data in `/bitnami/mariadb` and MySQL keeps it in `/bitnami/mysql/data`. Lando does not migrate your local database. When you switch engines, destroy the app (`lando destroy`) or remove its database volume, then `lando start` and `lando pull --code=none --files=none`.
+
 ## Frontend builds
 
 If your `pantheon.yml` has a [`frontend_build`](https://docs.pantheon.io/frontend-builds) block, Lando starts an invisible Node sidecar and runs the same install + build as Pantheon. You do not need extra Node config in your Landofile.
@@ -90,7 +106,7 @@ web_docroot: true
 By default, Lando will spin up a **very close** approximation of the Pantheon stack:
 
 * [php appserver served by nginx](https://docs.pantheon.io/application-containers)
-* [mariadb database](https://pantheon.io/blog/using-mariadb-mysql-replacement)
+* [mariadb database](https://pantheon.io/blog/using-mariadb-mysql-replacement), or [mysql 8.4](https://docs.pantheon.io/guides/mariadb-mysql/mysql-84) if your `pantheon.yml` asks for it
 * [redis cache](https://docs.pantheon.io/object-cache)
 * [solr index](https://docs.pantheon.io/pantheon-search/solr)
 * [varnish edge](https://docs.pantheon.io/caching-advanced-topics)
