@@ -29,6 +29,7 @@ jobs:
           - examples/pantheon-downstreamer-2
           - examples/pantheon-drush-uri
           - examples/pantheon-php-warning
+          - examples/pantheon-mysql84
           - examples/frontend-build
           - examples/wordpress
           - examples/wordpressnetworkdomain
@@ -67,7 +68,12 @@ jobs:
             setup.skipCommonPlugins=true
             setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
           telemetry: false
+      # Not bundled under Pantheon; common plugins are deliberately skipped above.
+      - name: Install MySQL service for the local MySQL 8.4 example
+        if: matrix.leia-test == 'examples/pantheon-mysql84'
+        run: lando plugin-add @lando/mysql@1.6.0
       - name: Stagger start to avoid Pantheon API burst
+        if: matrix.leia-test != 'examples/pantheon-mysql84'
         shell: bash
         run: |
           # Deterministic per-cell delay. Separate windows per lando-version
