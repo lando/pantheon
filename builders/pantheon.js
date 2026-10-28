@@ -22,6 +22,9 @@ const setTooling = (options, tokens) => {
     {LANDO_TERMINUS_TOKEN: metaToken}
     : {};
 
+  // Landofile services override recipe services when core merges the recipe.
+  const databaseType = _.get(options, '_app.config.services.database.type', _.get(options, 'services.database.type', options.database));
+
   // Add in push/pull/switch
   options.tooling.pull = pull.getPantheonPull(options, tokens);
   options.tooling.push = push.getPantheonPush(options, tokens);
@@ -36,7 +39,7 @@ const setTooling = (options, tokens) => {
   options.tooling = _.merge({}, options.tooling, utils.getPantheonTooling(options.framework));
   // Inject token into the environment for all relevant tooling defined by recipe.
   ['push', 'pull', 'switch'].forEach(command => {
-    options.tooling[command].env = _.merge({}, tokenEnv, options.tooling[command].env);
+    options.tooling[command].env = _.merge({}, tokenEnv, {LANDO_DB_SERVICE_TYPE: databaseType}, options.tooling[command].env);
   });
   return options;
 };
@@ -85,7 +88,6 @@ const getServices = options => ({
     drush_version: options.drush_version,
     root: options.root,
     generation: options.generation,
-    database_engine: options.databaseEngine,
   },
   database: {
     type: options.database,
@@ -176,7 +178,6 @@ module.exports = {
       if (searchVersion === '8') options.solrTag = '8.8-4';
       if (searchVersion === '9') options.solrTag = '9.10-1';
       options.database = database.type;
-      options.databaseEngine = database.engine;
       options.defaultFiles.database = database.cnf;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;

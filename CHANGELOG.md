@@ -1,6 +1,6 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
-* Added MySQL `8.4` support via `database.type: mysql` in `pantheon.yml` [#374](https://github.com/lando/pantheon/issues/374)
+* Added MySQL `8.4` service selection via `database.type: mysql` in `pantheon.yml`, with local-client compatibility for `lando pull` and `lando push` [#374](https://github.com/lando/pantheon/issues/374)
 
 ## v1.15.0 - [August 20, 2026](https://github.com/lando/pantheon/releases/tag/v1.15.0)
 

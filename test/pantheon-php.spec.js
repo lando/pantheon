@@ -64,10 +64,4 @@ describe('pantheon-php', () => {
 
     service.options.image.should.equal('devwithlando/pantheon-appserver:8.0-5');
   });
-
-  it('should mount the MySQL 8.4 client cnf only when the database engine is mysql', () => {
-    const mount = '/tmp/lando/config/mysql84-client.cnf:/etc/mysql/conf.d/zz-lando-pantheon-mysql84.cnf';
-    buildService({php: '8.3', database_engine: 'mysql'}).options.volumes.should.include(mount);
-    buildService({php: '8.3', database_engine: 'mariadb'}).options.volumes.should.not.include(mount);
-  });
 });

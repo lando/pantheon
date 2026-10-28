@@ -65,7 +65,9 @@ database:
 * Lando runs a `mysql:8.4` database service with the same `pantheon` user, password, and database. It works on ARM too.
 * MySQL only allows version `8.4`. Any other version with `type: mysql`, or `version: 8.4` without it, stops `lando start` with an error.
 * New tables use `utf8mb4` and `utf8mb4_0900_ai_ci`, like Pantheon after the migration. Isolation is `READ-COMMITTED`, same as the MariaDB config, so Drupal 10+ does not warn.
-* The appserver gets a MariaDB client config that skips checking MySQL's self-signed cert, so `lando pull` and `lando push` work. Tools that pass their own `--defaults-file` skip it too. If one of them fails with `TLS/SSL error: self-signed certificate`, pass `--ssl-verify-server-cert=0` to it.
+* `lando pull` and `lando push` handle MariaDB clients connecting to local MySQL 8.4: they disable certificate verification for that local connection only, when the client supports it. Local dumps skip tablespace metadata. Remote connection and TLS options from Terminus are unchanged.
+* These commands finish the source dump before importing it and need temporary disk space for that dump. Pull retries a failed source dump with the remote dump fallback. Unrecoverable dump or import failures stop the sync.
+* This compatibility handling does not apply to Drush or other appserver commands. Older clients may still lack support for MySQL 8.4 authentication or collations; selecting MySQL does not upgrade the appserver's client binaries.
 * MariaDB keeps data in `/bitnami/mariadb` and MySQL keeps it in `/bitnami/mysql/data`. Lando does not migrate your local database. When you switch engines, destroy the app (`lando destroy`) or remove its database volume, then `lando start` and `lando pull --code=none --files=none`.
 
 ## Frontend builds
