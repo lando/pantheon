@@ -16,7 +16,7 @@ pantheon_local_database_args() {
     help=$("$client" --no-defaults --help) || return
     # Capability detection also keeps older PHP images/clients working. Oracle
     # clients must not receive this MariaDB-only option; their TLS defaults work.
-    if grep -Eq '^[[:space:]]+--ssl-verify-server-cert([=[:space:]]|$)' <<< "$help"; then
+    if grep -Eq '^[[:space:]]+--ssl-verify-server-cert([=[:space:]]|\[|$)' <<< "$help"; then
       PANTHEON_LOCAL_DATABASE_ARGS+=(--ssl-verify-server-cert=0)
     fi
   fi

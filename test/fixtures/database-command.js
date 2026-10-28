@@ -16,9 +16,10 @@ if (args.includes('--version')) {
   process.exitCode = fail('TEST_VERSION_FAIL');
 } else if (args.includes('--help')) {
   log({probe: true});
-  console.log(env.TEST_CLIENT_SSL === 'false' ? '  --ssl' : '  --ssl-verify-server-cert');
+  console.log(env.TEST_CLIENT_HELP || (env.TEST_CLIENT_SSL === 'false' ? '  --ssl' : '  --ssl-verify-server-cert'));
   process.exitCode = fail('TEST_HELP_FAIL');
 } else if (command === 'git') {
+  log({});
   console.log('* master');
 } else if (command === 'auth.sh') {
   log({});

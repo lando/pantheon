@@ -14,12 +14,16 @@ describe('database sync', () => {
   let env;
   const calls = () => fs.existsSync(env.TEST_LOG) ?
     fs.readFileSync(env.TEST_LOG, 'utf8').trim().split('\n').filter(Boolean).map(line => JSON.parse(line)) : [];
+  // Git Bash adds its own bin directories on Windows startup. Prepend the fixture
+  // directory inside Bash, using pwd to turn a native Windows path into a shell path.
+  const bash = (args, overrides = {}) => spawnSync('bash', [
+    '-c', 'fixture_bin=$(cd "$TEST_BIN" && pwd) || exit; export PATH="$fixture_bin:$PATH"; exec bash "$@"', 'test', ...args,
+  ], {env: {...env, ...overrides}, encoding: 'utf8', timeout: 4000});
   const run = (direction, overrides = {}) => {
-    const result = spawnSync('bash', [path.join(scripts, `${direction}.sh`), '--code=none', '--files=none', '--database=dev'], {
-      env: {...env, ...overrides}, encoding: 'utf8', timeout: 4000,
-    });
+    const result = bash([path.join(scripts, `${direction}.sh`), '--code=none', '--files=none', '--database=dev'], overrides);
     expect(result.error).to.equal(undefined);
     expect(fs.readdirSync(env.TMPDIR)).to.deep.equal([]);
+    expect(calls().filter(call => call.command === 'git').map(call => call.args)).to.deep.include(['branch']);
     return result;
   };
   const unsuccessful = result => {
@@ -37,7 +41,10 @@ describe('database sync', () => {
     fs.writeFileSync(path.join(directory, 'log.sh'),
       'lando_pink() { echo "$@"; }; lando_green() { echo "$@"; }; lando_red() { echo "$@"; }');
     env = {
-      ...process.env, PATH: `${directory}:${process.env.PATH}`, LANDO_PANTHEON_HELPERS_DIR: directory,
+      ...process.env, TEST_BIN: directory.replace(/\\/g, '/'), LANDO_PANTHEON_HELPERS_DIR: directory,
+      // Keep the mock remote CA path literal when Git Bash launches native Node.
+      // Other arguments (notably real temp-file paths) still need MSYS conversion.
+      MSYS2_ARG_CONV_EXCL: '--ssl-ca=',
       LANDO_MOUNT: directory, LANDO_DB_SERVICE_TYPE: 'mysql:8.4', LANDO_DB_PULL_COMMAND: 'test-source',
       LANDO_DB_PULL_COMMAND_OPTIONS: '', LANDO_DB_USER_TABLE: 'users', PANTHEON_SITE_NAME: 'fixture',
       TMPDIR: path.join(directory, 'tmp'), TEST_LOG: path.join(directory, 'calls.jsonl'), FRAMEWORK: 'drupal',
@@ -87,6 +94,31 @@ describe('database sync', () => {
 
   describe('client capabilities', () => {
     [
+      ['  --ssl-verify-server-cert[=#]\n                      Verify server certificate (enabled by default).', true],
+      ['  --ssl-verify-server-cert=TRUE', true],
+      ['  --ssl-verify-server-cert Verify server certificate', true],
+      ['  --ssl-verify-server-cert', true],
+      ['  --ssl-verify-server-cert-extra', false],
+      ['  --ssl-verify-server-certificate', false],
+      ['  --ssl-verify-server-cert_extra', false],
+      ['  --ssl-verify-server-cert0', false],
+      ['  ssl-verify-server-cert TRUE', false],
+      ['See also --ssl-verify-server-cert', false],
+    ].forEach(([help, supported]) => {
+      ['mysql', 'mysqldump'].forEach(client => {
+        it(`recognizes only exact ${client} verification options in help: ${JSON.stringify(help)}`, () => {
+          const command = '. "$1/pantheon-local-database.sh"; pantheon_local_database_args "$2"; ' +
+            'printf "<%s>" "${PANTHEON_LOCAL_DATABASE_ARGS[@]}"';
+          const result = bash(['-c', command, 'test', scripts, client], {TEST_CLIENT_HELP: help});
+          expect(result.status, result.stderr).to.equal(0);
+          const flags = [...(supported ? ['--ssl-verify-server-cert=0'] : []), ...(client === 'mysqldump' ? ['--no-tablespaces'] : [])];
+          expect(result.stdout).to.equal(flags.length ? flags.map(flag => `<${flag}>`).join('') : '<>');
+          expect(calls().filter(call => call.command === client && call.probe)).to.have.length(2);
+        });
+      });
+    });
+
+    [
       ['mysql from 11.4.9-MariaDB, client 15.2', 'true', true],
       ['mysql  Ver 15.1 Distrib 10.11.11-MariaDB', 'true', true],
       ['mysql  Ver 15.1 Distrib 10.6.20-MariaDB', 'true', true],
@@ -98,8 +130,8 @@ describe('database sync', () => {
         it(`selects only supported local flags for ${client}: ${version}`, () => {
           const command = '. "$1/pantheon-local-database.sh"; pantheon_local_database_args "$2"; ' +
             'printf "<%s>" "${PANTHEON_LOCAL_DATABASE_ARGS[@]}"';
-          const result = spawnSync('bash', ['-c', command, 'test', scripts, client], {
-            env: {...env, TEST_CLIENT_VERSION: version, TEST_CLIENT_SSL: supported}, encoding: 'utf8',
+          const result = bash(['-c', command, 'test', scripts, client], {
+            TEST_CLIENT_VERSION: version, TEST_CLIENT_SSL: supported,
           });
           expect(result.status).to.equal(0);
           const flags = [...(bypass ? ['--ssl-verify-server-cert=0'] : []), ...(client === 'mysqldump' ? ['--no-tablespaces'] : [])];
@@ -135,7 +167,15 @@ describe('database sync', () => {
       calls().forEach(call => expect(call.args).not.to.include('--ssl-verify-server-cert=0'));
     });
 
-    ['TEST_IMPORT_FAIL', 'TEST_PIPE_FAIL', 'TEST_CONNECTION_FAIL', 'TEST_VERSION_FAIL', 'TEST_HELP_FAIL'].forEach(failure => {
+    it(`${direction}: intercepts the dump reader and propagates its failure without reporting success`, () => {
+      const result = run(direction, {TEST_PIPE_FAIL: '7'});
+      const reader = direction === 'pull' ? 'pv' : 'cat';
+      expect(calls().filter(call => call.command === reader)).to.have.length(1);
+      expect(result.status, result.stdout + result.stderr).to.equal(7);
+      unsuccessful(result);
+    });
+
+    ['TEST_IMPORT_FAIL', 'TEST_CONNECTION_FAIL', 'TEST_VERSION_FAIL', 'TEST_HELP_FAIL'].forEach(failure => {
       it(`${direction}: propagates ${failure} without reporting success`, () => unsuccessful(run(direction, {[failure]: '7'})));
     });
   });

@@ -93,6 +93,8 @@ jobs:
       - name: Run Leia Tests
         uses: lando/run-leia-action@v2
         with:
+          # Match the lockfile when the production-only install omits local Leia.
+          version: 1.0.0-beta.4
           leia-test: "./${{ matrix.leia-test }}/README.md"
           cleanup-header: "Destroy tests"
           retry: 3
