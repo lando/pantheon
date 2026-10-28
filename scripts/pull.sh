@@ -3,7 +3,9 @@
 set -e
 
 # Get the lando logger
-. /helpers/log.sh
+PANTHEON_HELPERS_DIR=${LANDO_PANTHEON_HELPERS_DIR:-/helpers}
+. "$PANTHEON_HELPERS_DIR/log.sh"
+. "$(dirname "${BASH_SOURCE[0]}")/pantheon-local-database.sh"
 
 # Set the module
 LANDO_MODULE="pantheon"
@@ -102,7 +104,7 @@ done
 
 # Go through the auth procedure
 if [ "$NO_AUTH" == "false" ]; then
-  /helpers/auth.sh "$AUTH" "$SITE"
+  "$PANTHEON_HELPERS_DIR/auth.sh" "$AUTH" "$SITE"
 fi
 
 # Get the codez
@@ -133,10 +135,16 @@ fi
 
 
 # Get the database
-if [ "$DATABASE" != "none" ]; then
-  # Holla at @uberhacker for this fu
-  FALLBACK_PULL_DB="$(echo $(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command) | sed 's,^mysql,mysqldump --no-autocommit --single-transaction --opt -Q,')"
-  LOCAL_MYSQL_CONNECT_STRING="mysql --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306"
+if [ "$DATABASE" != "none" ]; then (
+  # Keep pipeline failure handling and temporary-file cleanup scoped to DB sync.
+  set -o pipefail
+  DB_DUMP=$(mktemp)
+  trap 'rm -f "$DB_DUMP"' EXIT
+  # Leave remote connection/TLS options exactly as Terminus supplies them.
+  REMOTE_CONNECTION="$(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command)"
+  FALLBACK_PULL_DB="${REMOTE_CONNECTION/#mysql/mysqldump --no-autocommit --single-transaction --opt -Q}"
+  pantheon_local_database_args mysql
+  LOCAL_MYSQL=(mysql "${PANTHEON_LOCAL_DATABASE_ARGS[@]}" --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306)
 
   # Make sure the terminus command returned from buildDbPullCommand() has the
   # correct <site.env> specified.
@@ -147,31 +155,35 @@ if [ "$DATABASE" != "none" ]; then
   terminus env:info $VERBOSITY $SITE.$DATABASE
   lando_green "Confirmed!"
 
+  # Finish downloading before touching the local DB. A failed primary dump may
+  # contain valid SQL, so truncate it before retrying the remote dump fallback.
+  lando_pink "Making sure your site is awake..."
+  terminus env:wake $VERBOSITY $SITE.$DATABASE
+  echo "Pulling your database... This miiiiight take a minute"
+  if ! $PULL_DB > "$DB_DUMP"; then
+    eval "$FALLBACK_PULL_DB" > "$DB_DUMP"
+  fi
+
   # Destroy existing tables
   # NOTE: We do this so the source DB **EXACTLY MATCHES** the target DB
-  TABLES=$(mysql --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 -e 'SHOW TABLES' | awk '{ print $1}' | grep -v '^Tables' ) || true
+  TABLES=$("${LOCAL_MYSQL[@]}" --batch --skip-column-names -e 'SHOW TABLES')
   echo "Destroying all current tables in database if needed... "
   for t in $TABLES; do
     echo "Dropping $t from local pantheon database..."
-    mysql --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 <<-EOF
+    "${LOCAL_MYSQL[@]}" <<-EOF
       SET FOREIGN_KEY_CHECKS=0;
       DROP VIEW IF EXISTS \`$t\`;
       DROP TABLE IF EXISTS \`$t\`;
 EOF
   done
 
-  # Wake up the database so we can actually connect
-  lando_pink "Making sure your site is awake..."
-  terminus env:wake $VERBOSITY $SITE.$DATABASE
-
-  # Importing database
-  echo "Pulling your database... This miiiiight take a minute"
-  $PULL_DB | pv | $LOCAL_MYSQL_CONNECT_STRING || $FALLBACK_PULL_DB | pv | $LOCAL_MYSQL_CONNECT_STRING
+  # Import only a complete dump; pipefail also catches a failed reader/import.
+  pv "$DB_DUMP" | "${LOCAL_MYSQL[@]}"
 
   # Weak check that we got tables
   PULL_DB_CHECK_TABLE=${LANDO_DB_USER_TABLE:-users}
   lando_pink "Checking db pull for expected tables..."
-  if ! mysql --user=pantheon --password=pantheon --database=pantheon --host=database --port=3306 -e "SHOW TABLES;" | grep $PULL_DB_CHECK_TABLE; then
+  if ! "${LOCAL_MYSQL[@]}" -e "SHOW TABLES;" | grep $PULL_DB_CHECK_TABLE; then
     lando_red "Couldn't find expected tables ($PULL_DB_CHECK_TABLE)"
     exit 1
   fi
@@ -186,7 +198,7 @@ EOF
     echo "Doing the ole post-migration search-replace on Wordpress ... Network Style! The --url param will be $ENV-$SITE.pantheonsite.io"
     cd /app && wp search-replace "${ENV}-${SITE}.pantheonsite.io" "${LANDO_APP_NAME}.${LANDO_DOMAIN}" --url="http://${ENV}-${SITE}.pantheonsite.io" --network --skip-plugins --skip-themes
   fi
-fi
+) fi
 
 # Get the files
 if [ "$FILES" != "none" ]; then

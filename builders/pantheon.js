@@ -22,6 +22,9 @@ const setTooling = (options, tokens) => {
     {LANDO_TERMINUS_TOKEN: metaToken}
     : {};
 
+  // Landofile services override recipe services when core merges the recipe.
+  const databaseType = _.get(options, '_app.config.services.database.type', _.get(options, 'services.database.type', options.database));
+
   // Add in push/pull/switch
   options.tooling.pull = pull.getPantheonPull(options, tokens);
   options.tooling.push = push.getPantheonPush(options, tokens);
@@ -36,7 +39,7 @@ const setTooling = (options, tokens) => {
   options.tooling = _.merge({}, options.tooling, utils.getPantheonTooling(options.framework));
   // Inject token into the environment for all relevant tooling defined by recipe.
   ['push', 'pull', 'switch'].forEach(command => {
-    options.tooling[command].env = _.merge({}, tokenEnv, options.tooling[command].env);
+    options.tooling[command].env = _.merge({}, tokenEnv, {LANDO_DB_SERVICE_TYPE: databaseType}, options.tooling[command].env);
   });
   return options;
 };
@@ -167,15 +170,15 @@ module.exports = {
         options.drush_version = _.get(composerConfig, `require['drush/drush']`, options.drush);
       }
 
-      // Pantheon has begun specifying the database version in the pantheon.yml via this key.
-      const dbVersion = _.get(options, 'database.version', '10.3');
-      const dbService = isArmed ? 'pantheon-mariadb-arm' : 'pantheon-mariadb';
+      // Pantheon specifies the database engine and version in the pantheon.yml via this key.
+      const database = utils.getPantheonDatabase(options.database, isArmed);
       // Set the search version
       const searchVersion = _.toString(_.get(options, 'search.version', '3'));
       // Set solrtag based on search version
       if (searchVersion === '8') options.solrTag = '8.8-4';
       if (searchVersion === '9') options.solrTag = '9.10-1';
-      options.database = `${dbService}:${dbVersion}`;
+      options.database = database.type;
+      options.defaultFiles.database = database.cnf;
       // Set correct things based on framework
       options.defaultFiles.vhosts = `${options.framework}.conf.tpl`;
 

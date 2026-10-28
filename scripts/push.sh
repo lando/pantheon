@@ -3,7 +3,9 @@
 set -e
 
 # Get the lando logger
-. /helpers/log.sh
+PANTHEON_HELPERS_DIR=${LANDO_PANTHEON_HELPERS_DIR:-/helpers}
+. "$PANTHEON_HELPERS_DIR/log.sh"
+. "$(dirname "${BASH_SOURCE[0]}")/pantheon-local-database.sh"
 
 # Set the module
 LANDO_MODULE="pantheon"
@@ -29,7 +31,6 @@ FRAMEWORK=${FRAMEWORK:-drupal}
 SITE=${PANTHEON_SITE_NAME:-${TERMINUS_SITE:-whoops}}
 ENV=${TERMINUS_ENV:-dev}
 PV=""
-PUSH_DB=""
 PUSH_FILES=""
 
 # PARSE THE ARGZZ
@@ -116,7 +117,7 @@ if [ "$FILES" == "test" ] || [ "$FILES" == "live" ]; then
 fi
 
 # Go through the auth procedure
-/helpers/auth.sh "$AUTH" "$SITE"
+"$PANTHEON_HELPERS_DIR/auth.sh" "$AUTH" "$SITE"
 
 # Push the codez
 if [ "$CODE" != "none" ]; then
@@ -173,7 +174,11 @@ if [ "$CODE" != "none" ]; then
 fi
 
 # Push the database
-if [ "$DATABASE" != "none" ]; then
+if [ "$DATABASE" != "none" ]; then (
+  # Keep pipeline failure handling and temporary-file cleanup scoped to DB sync.
+  set -o pipefail
+  DB_DUMP=$(mktemp)
+  trap 'rm -f "$DB_DUMP"' EXIT
   # Validate before we begin
   lando_pink "Validating you can push data to $DATABASE..."
   terminus env:info $VERBOSITY $SITE.$DATABASE
@@ -187,9 +192,11 @@ if [ "$DATABASE" != "none" ]; then
   # And push
   echo "Pushing your database... This miiiiight take a minute"
   REMOTE_CONNECTION="$(terminus connection:info $VERBOSITY $SITE.$DATABASE --field=mysql_command)"
-  PUSH_DB="mysqldump -u pantheon -ppantheon -h database --no-autocommit --single-transaction --opt -Q pantheon | $REMOTE_CONNECTION"
-  eval "$PUSH_DB"
-fi
+  pantheon_local_database_args mysqldump
+  # Do not send a partial local dump to Pantheon if mysqldump fails.
+  mysqldump "${PANTHEON_LOCAL_DATABASE_ARGS[@]}" -u pantheon -ppantheon -h database --no-autocommit --single-transaction --opt -Q pantheon > "$DB_DUMP"
+  cat "$DB_DUMP" | eval "$REMOTE_CONNECTION"
+) fi
 
 # Push the files
 if [ "$FILES" != "none" ]; then

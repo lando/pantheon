@@ -1,0 +1,14 @@
+name: pantheon-mysql84
+recipe: pantheon
+config:
+  framework: drupal
+  site: fake-mysql84-site
+  id: fake-mysql84-id
+  cache: false
+  edge: false
+  index: false
+
+# Always exercise this checkout, not an installed Pantheon plugin.
+plugins:
+  "@lando/pantheon": ../..
+  "@lando/mariadb": ../../node_modules/@lando/mariadb
