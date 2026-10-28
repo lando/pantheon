@@ -12,11 +12,12 @@ CI/setup prerequisite, not an extra Pantheon production dependency. The Landofil
 loads Pantheon and MariaDB from this checkout, while MySQL comes from that explicit
 installation. CI installs it even though `setup.skipCommonPlugins=true`.
 
-**Release gate:** the MySQL plugin must contain the 8.4 authentication fix that
-omits `MYSQL_AUTHENTICATION_PLUGIN` unless explicitly configured. The [upstream fix](https://github.com/lando/mysql/commit/09954c0925e2c63b7cc84fcad8595a02cfa31dcd)
-is not yet in the published 1.6.0 tarball; update the CI/setup version to the
-fixed release when published. Do not work around it with a custom database image,
-Compose environment overrides, or a stale externally installed service plugin.
+Verified locally with MySQL plugin 1.6.0 and core 3.26.9, which omits the unset
+`MYSQL_AUTHENTICATION_PLUGIN` variable when writing Compose YAML. The [upstream fix](https://github.com/lando/mysql/commit/09954c0925e2c63b7cc84fcad8595a02cfa31dcd)
+makes that omission explicit in the service plugin. Both stable/edge CI cells
+are configured below; this local run does not establish their CI results. Do not
+substitute a custom database image, Compose authentication overrides, or a stale
+externally installed service plugin.
 
 Execute just this fixture with `leia examples/pantheon-mysql84/README.md
 -c 'Destroy tests' --shell bash --stdin` from the repository root.
