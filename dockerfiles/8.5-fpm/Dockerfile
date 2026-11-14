@@ -1,6 +1,9 @@
 # docker build -t devwithlando/pantheon-appserver:8.5-5 .
 
-FROM devwithlando/php:8.5-fpm-5
+FROM devwithlando/php:8.5-fpm-7
+
+ARG MIN_PHP=
+RUN [ -z "$MIN_PHP" ] || dpkg --compare-versions "$PHP_VERSION" ge "$MIN_PHP" || { echo "PHP $PHP_VERSION < $MIN_PHP"; exit 1; }
 
 # Version information
 ENV LANDO_TERMINUS_VERSION=4.3.2
@@ -43,7 +46,7 @@ RUN rm -f /usr/local/etc/php/conf.d/*imagick* \
 # Install the additional things that make the pantheon
 RUN mkdir -p /usr/share/man/man1 \
   && apt-get update && apt-get install -y \
-    openjdk-17-jre-headless \
+    openjdk-21-jre-headless \
   && rm -f /usr/local/etc/php/conf.d/*-memcached.ini \
   && mkdir -p /var/www/.drush \
   && mkdir -p /var/www/.backdrush \

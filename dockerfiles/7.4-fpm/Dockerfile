@@ -2,6 +2,12 @@
 
 FROM devwithlando/php:7.4-fpm-5
 
+RUN sed -i -e 's|security.debian.org/debian-security|archive.debian.org/debian-security|g' \
+  -e 's|deb.debian.org/debian-security|archive.debian.org/debian-security|g' /etc/apt/sources.list \
+  && find /etc/apt/sources.list.d -name '*.list' -exec sed -i \
+    's|mirror.mariadb.org/repo/|archive.mariadb.org/repo/|g' {} + \
+  && echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99ignore-release-date
+
 # Version information
 ENV LANDO_TERMINUS_VERSION=3.6.2
 ENV TIKA_VERSION=1.18

@@ -1,5 +1,8 @@
 ## {{ UNRELEASED_VERSION }} - [{{ UNRELEASED_DATE }}]({{ UNRELEASED_LINK }})
 
+* Updated PHP `8.2`–`8.5` appserver bases to `fpm-7` and added minimum PHP version build checks [#373](https://github.com/lando/pantheon/pull/373)
+* Changed PHP `8.3`–`8.5` appservers to OpenJDK `21` for Debian trixie; hosted Pantheon runtime compatibility remained unverified [#373](https://github.com/lando/pantheon/pull/373)
+
 ## v1.15.0 - [August 20, 2026](https://github.com/lando/pantheon/releases/tag/v1.15.0)
 
 * Added support for Pantheon `frontend_build`
