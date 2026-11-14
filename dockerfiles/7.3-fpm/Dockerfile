@@ -2,6 +2,10 @@
 
 FROM devwithlando/php:7.3-fpm-5
 
+RUN sed -i -e 's|security.debian.org/debian-security|archive.debian.org/debian-security|g' \
+  -e 's|deb.debian.org/debian-security|archive.debian.org/debian-security|g' /etc/apt/sources.list \
+  && echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99ignore-release-date
+
 # Version information
 ENV LANDO_TERMINUS_VERSION=2.5.0
 ENV TIKA_VERSION=1.18
