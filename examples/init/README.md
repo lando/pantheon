@@ -35,7 +35,8 @@ Run the following commands to validate things are rolling as they should.
 ```bash
 # Should be able to bootstrap drupal9
 cd drupal9
-lando drush status | grep "Connected"
+lando drush status | tee /tmp/pantheon-init-drush-status.txt
+grep "Connected" /tmp/pantheon-init-drush-status.txt
 
 # Should use the drush in pantheon.yml
 cd drupal9
@@ -98,3 +99,14 @@ cd drupal9
 lando php -m | grep xdebug || echo $? | grep 1
 ```
 
+## Destroy tests
+
+Destroy the app before another Lando version initializes the same site. Poweroff
+alone stops containers but retains the database volume and app registration.
+
+```bash
+# Should be able to destroy our drupal9 site with success
+cd drupal9
+lando destroy -y
+lando poweroff
+```

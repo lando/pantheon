@@ -173,3 +173,7 @@ builder: (parent, config) => class LandoPantheon extends parent {
   }
 }
 ```
+
+## Multi-version docs builds
+
+`npm run docs:mvb` temporarily checks out release tags in the current worktree. Run it only in a disposable checkout, without concurrent edits or Git operations; use `npm run docs:build` for a non-switching local docs check.

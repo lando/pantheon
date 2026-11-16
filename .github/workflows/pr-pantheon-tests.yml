@@ -13,6 +13,10 @@ on:
 jobs:
   leia-tests:
     runs-on: ${{ matrix.os }}
+    # Queue each fixture's stable/edge pair as one unit; newer pending runs may replace older pairs.
+    concurrency:
+      group: pantheon-fixture-${{ matrix.leia-test }}
+      cancel-in-progress: false
     env:
       TERM: xterm
       PANTHEON_MACHINE_TOKEN: ${{ secrets.PANTHEON_MACHINE_TOKEN }}
@@ -33,9 +37,6 @@ jobs:
           - examples/wordpress
           - examples/wordpressnetworkdomain
           # - examples/wordpressnetworkfolder
-        lando-version:
-          - 3-edge
-          - 3-stable
         os:
           - ubuntu-24.04
         node-version:
@@ -58,33 +59,29 @@ jobs:
           lando-plugin: true
           version: dev
           sync: false
-      - name: Setup lando ${{ matrix.lando-version }}
+      - name: Stagger Pantheon API requests
+        shell: bash
+        env:
+          FIXTURE: ${{ matrix.leia-test }}
+        run: |
+          HASH=$(echo -n "$FIXTURE" | cksum | cut -d' ' -f1)
+          sleep "$(( HASH % 120 ))"
+      # Each Leia invocation includes its own setup and Destroy tests sections.
+      - name: Setup Lando 3-stable
+        id: setup-stable
+        continue-on-error: true
         uses: lando/setup-lando@v3
         with:
-          lando-version: ${{ matrix.lando-version }}
+          lando-version: 3-stable
           lando-version-file: ''
           config: |
             setup.skipCommonPlugins=true
             setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
           telemetry: false
-      - name: Stagger start to avoid Pantheon API burst
-        shell: bash
-        run: |
-          # Deterministic per-cell delay. Separate windows per lando-version
-          # keep the 3-stable variant from racing the 3-edge variant of the
-          # same example on shared Pantheon SSH-key cleanup:
-          #   3-stable -> 0-119s   (finishes well before edge starts)
-          #   3-edge   -> 300-419s (starts after stable has torn down)
-          KEY="${{ matrix.leia-test }}-${{ matrix.lando-version }}"
-          HASH=$(echo -n "$KEY" | cksum | cut -d' ' -f1)
-          if [ "${{ matrix.lando-version }}" = "3-stable" ]; then
-            DELAY=$(( HASH % 120 ))
-          else
-            DELAY=$(( 300 + (HASH % 120) ))
-          fi
-          echo "Sleeping ${DELAY}s before starting (key: $KEY)"
-          sleep "$DELAY"
-      - name: Run Leia Tests
+      - name: Run Leia Tests (3-stable)
+        id: tests-stable
+        if: steps.setup-stable.outcome == 'success'
+        continue-on-error: true
         uses: lando/run-leia-action@v2
         with:
           leia-test: "./${{ matrix.leia-test }}/README.md"
@@ -92,3 +89,35 @@ jobs:
           retry: 3
           shell: bash
           stdin: true
+          # npm ci --production skips the local dev Leia; pin the global fallback to the lockfile version (latest needs Node >=24).
+          version: '1.0.0-beta.4'
+      - name: Setup Lando 3-edge
+        id: setup-edge
+        continue-on-error: true
+        uses: lando/setup-lando@v3
+        with:
+          lando-version: 3-edge
+          lando-version-file: ''
+          config: |
+            setup.skipCommonPlugins=true
+            setup.plugins.@lando/pantheon=/home/runner/work/pantheon/pantheon
+          telemetry: false
+      - name: Run Leia Tests (3-edge)
+        id: tests-edge
+        if: steps.setup-edge.outcome == 'success'
+        continue-on-error: true
+        uses: lando/run-leia-action@v2
+        with:
+          leia-test: "./${{ matrix.leia-test }}/README.md"
+          cleanup-header: "Destroy tests"
+          retry: 3
+          shell: bash
+          stdin: true
+          # npm ci --production skips the local dev Leia; pin the global fallback to the lockfile version (latest needs Node >=24).
+          version: '1.0.0-beta.4'
+      - name: Require both Lando variants
+        if: ${{ !cancelled() }}
+        env:
+          STABLE: ${{ steps.tests-stable.outcome }}
+          EDGE: ${{ steps.tests-edge.outcome }}
+        run: test "$STABLE" = success && test "$EDGE" = success
